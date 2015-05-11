@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Grupo */
 
-$this->title = 'Create Grupo';
+$this->title = 'Crear Grupo';
 $this->params['breadcrumbs'][] = ['label' => 'Grupos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

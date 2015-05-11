@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\AccionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Accions';
+$this->title = 'Acciones';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="accion-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Accion', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Accion', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,11 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'accion_id',
+            /*'accion_id',*/
             'controlador_id',
             'accion_nombre',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{view}'],
         ],
     ]); ?>
 

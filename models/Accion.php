@@ -44,9 +44,9 @@ class Accion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'accion_id' => 'Accion ID',
-            'controlador_id' => 'Controlador ID',
-            'accion_nombre' => 'Accion Nombre',
+            'accion_id' => 'ID',
+            'controlador_id' => 'Controlador',
+            'accion_nombre' => 'Accion',
         ];
     }
 
