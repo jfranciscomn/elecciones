@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Controlador;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\AccionSearch */
@@ -26,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             /*'accion_id',*/
-            'controlador_id',
+            'controlador.controlador_nombre',
+            /*'controlador_id',*/
             'accion_nombre',
 
             ['class' => 'yii\grid\ActionColumn', 'template'=>'{view}'],

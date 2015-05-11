@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             
             'fecha',
             'REMOTE_ADDR',
-            'usuario.username',
+            /*'usuario.username',*/
+            'usuario_id',
             'accion.controlador.controlador_nombre',
             'accion.accion_nombre',
             //'datos_enviados:ntext',
