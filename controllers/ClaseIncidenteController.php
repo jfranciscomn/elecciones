@@ -3,17 +3,17 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Colonia;
+use app\models\ClaseIncidente;
 use app\models\Usuario;
-use app\models\search\ColoniaSearch;
+use app\models\search\ClaseIncidenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ColoniaController implements the CRUD actions for Colonia model.
+ * ClaseIncidenteController implements the CRUD actions for ClaseIncidente model.
  */
-class ColoniaController extends Controller
+class ClaseIncidenteController extends Controller
 {
     public function behaviors()
     {
@@ -29,12 +29,12 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Lists all Colonia models.
+     * Lists all ClaseIncidente models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ColoniaSearch();
+        $searchModel = new ClaseIncidenteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,7 +44,7 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Displays a single Colonia model.
+     * Displays a single ClaseIncidente model.
      * @param integer $id
      * @return mixed
      */
@@ -56,16 +56,16 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Creates a new Colonia model.
+     * Creates a new ClaseIncidente model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Colonia();
+        $model = new ClaseIncidente();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->colonia_id]);
+            return $this->redirect(['view', 'id' => $model->clase_incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,7 +74,7 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Updates an existing Colonia model.
+     * Updates an existing ClaseIncidente model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -84,7 +84,7 @@ class ColoniaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->colonia_id]);
+            return $this->redirect(['view', 'id' => $model->clase_incidente_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,7 +93,7 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Deletes an existing Colonia model.
+     * Deletes an existing ClaseIncidente model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -106,15 +106,15 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Finds the Colonia model based on its primary key value.
+     * Finds the ClaseIncidente model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Colonia the loaded model
+     * @return ClaseIncidente the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Colonia::findOne($id)) !== null) {
+        if (($model = ClaseIncidente::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

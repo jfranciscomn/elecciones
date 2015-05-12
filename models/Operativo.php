@@ -11,6 +11,9 @@ use Yii;
  * @property string $nombre operativo
  * @property string $fecha_inicio
  * @property string $fecha_fin
+ * @property integer $activo
+ *
+ * @property Incidente[] $incidentes
  */
 class Operativo extends \yii\db\ActiveRecord
 {
@@ -28,8 +31,9 @@ class Operativo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre operativo', 'fecha_inicio', 'fecha_fin'], 'required'],
+            [['nombre operativo', 'fecha_inicio'], 'required'],
             [['fecha_inicio', 'fecha_fin'], 'safe'],
+            [['activo'], 'integer'],
             [['nombre operativo'], 'string', 'max' => 145]
         ];
     }
@@ -44,6 +48,15 @@ class Operativo extends \yii\db\ActiveRecord
             'nombre operativo' => 'Nombre Operativo',
             'fecha_inicio' => 'Fecha Inicio',
             'fecha_fin' => 'Fecha Fin',
+            'activo' => 'Activo',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidentes()
+    {
+        return $this->hasMany(Incidente::className(), ['operativo_id' => 'operativo_id']);
     }
 }

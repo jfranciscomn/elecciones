@@ -11,6 +11,8 @@ use Yii;
  * @property string $controlador_nombre
  *
  * @property Accion[] $accions
+ * @property TipoControladorHasControlador[] $tipoControladorHasControladors
+ * @property TipoControlador[] $tipoControladors
  */
 class Controlador extends \yii\db\ActiveRecord
 {
@@ -28,7 +30,7 @@ class Controlador extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-
+            [['controlador_nombre'], 'required'],
             [['controlador_nombre'], 'string', 'max' => 145],
             [['controlador_nombre'], 'unique']
         ];
@@ -51,5 +53,21 @@ class Controlador extends \yii\db\ActiveRecord
     public function getAcciones()
     {
         return $this->hasMany(Accion::className(), ['controlador_id' => 'controlador_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoControladorHasControladores()
+    {
+        return $this->hasMany(TipoControladorHasControlador::className(), ['controlador_id' => 'controlador_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoControladores()
+    {
+        return $this->hasMany(TipoControlador::className(), ['tipo_controlador_id' => 'tipo_controlador_id'])->viaTable('tipo_controlador_has_controlador', ['controlador_id' => 'controlador_id']);
     }
 }

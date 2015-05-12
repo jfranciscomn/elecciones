@@ -14,10 +14,17 @@ use Yii;
  * @property integer $edad
  * @property integer $sexo
  * @property string $domicilio
- * @property integer $colonia_colonia_id
- * @property integer $poblacion_poblacion_id
- * @property integer $sindicatura_sindicatura_id
- * @property integer $municipio_municipio_id
+ * @property integer $colonia_id
+ * @property integer $poblacion_id
+ * @property integer $sindicatura_id
+ * @property integer $municipio_id
+ *
+ * @property Incidente $incidente
+ * @property EstadoPersona $estadoPersona
+ * @property Colonia $colonia
+ * @property Poblacion $poblacion
+ * @property Sindicatura $sindicatura
+ * @property Municipio $municipio
  */
 class Persona extends \yii\db\ActiveRecord
 {
@@ -36,7 +43,7 @@ class Persona extends \yii\db\ActiveRecord
     {
         return [
             [['incidente_id', 'estado_persona_id'], 'required'],
-            [['incidente_id', 'estado_persona_id', 'edad', 'sexo', 'colonia_colonia_id', 'poblacion_poblacion_id', 'sindicatura_sindicatura_id', 'municipio_municipio_id'], 'integer'],
+            [['incidente_id', 'estado_persona_id', 'edad', 'sexo', 'colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id'], 'integer'],
             [['persona_nombre'], 'string', 'max' => 145],
             [['domicilio'], 'string', 'max' => 256]
         ];
@@ -55,10 +62,58 @@ class Persona extends \yii\db\ActiveRecord
             'edad' => 'Edad',
             'sexo' => 'Sexo',
             'domicilio' => 'Domicilio',
-            'colonia_colonia_id' => 'Colonia Colonia ID',
-            'poblacion_poblacion_id' => 'Poblacion Poblacion ID',
-            'sindicatura_sindicatura_id' => 'Sindicatura Sindicatura ID',
-            'municipio_municipio_id' => 'Municipio Municipio ID',
+            'colonia_id' => 'Colonia ID',
+            'poblacion_id' => 'Poblacion ID',
+            'sindicatura_id' => 'Sindicatura ID',
+            'municipio_id' => 'Municipio ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidente()
+    {
+        return $this->hasOne(Incidente::className(), ['incidente_id' => 'incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstadoPersona()
+    {
+        return $this->hasOne(EstadoPersona::className(), ['estado_persona_id' => 'estado_persona_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getColonia()
+    {
+        return $this->hasOne(Colonia::className(), ['colonia_id' => 'colonia_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoblacion()
+    {
+        return $this->hasOne(Poblacion::className(), ['poblacion_id' => 'poblacion_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSindicatura()
+    {
+        return $this->hasOne(Sindicatura::className(), ['sindicatura_id' => 'sindicatura_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMunicipio()
+    {
+        return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
     }
 }

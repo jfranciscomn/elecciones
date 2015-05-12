@@ -11,7 +11,13 @@ use Yii;
  * @property integer $zona_id
  * @property string $municipio_nombre
  *
+ * @property Colonia[] $colonias
+ * @property Incidente[] $incidentes
+ * @property Lugar[] $lugars
  * @property Zona $zona
+ * @property Persona[] $personas
+ * @property Poblacion[] $poblacions
+ * @property Sindicatura[] $sindicaturas
  */
 class Municipio extends \yii\db\ActiveRecord
 {
@@ -41,10 +47,34 @@ class Municipio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'municipio_id' => 'Municipio',
-            'zona_id' => 'Zona',
-            'municipio_nombre' => 'Nombre',
+            'municipio_id' => 'Municipio ID',
+            'zona_id' => 'Zona ID',
+            'municipio_nombre' => 'Municipio Nombre',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getColonias()
+    {
+        return $this->hasMany(Colonia::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidentes()
+    {
+        return $this->hasMany(Incidente::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLugars()
+    {
+        return $this->hasMany(Lugar::className(), ['municipio_id' => 'municipio_id']);
     }
 
     /**
@@ -53,5 +83,29 @@ class Municipio extends \yii\db\ActiveRecord
     public function getZona()
     {
         return $this->hasOne(Zona::className(), ['zona_id' => 'zona_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonas()
+    {
+        return $this->hasMany(Persona::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoblacions()
+    {
+        return $this->hasMany(Poblacion::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSindicaturas()
+    {
+        return $this->hasMany(Sindicatura::className(), ['municipio_id' => 'municipio_id']);
     }
 }

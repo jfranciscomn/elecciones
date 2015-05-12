@@ -13,9 +13,11 @@ use Yii;
  * @property integer $municipio_id
  * @property string $colonia_nombre
  *
+ * @property Municipio $municipio
  * @property Poblacion $poblacion
  * @property Sindicatura $sindicatura
- * @property Municipio $municipio
+ * @property Incidente[] $incidentes
+ * @property Persona[] $personas
  */
 class Colonia extends \yii\db\ActiveRecord
 {
@@ -56,6 +58,14 @@ class Colonia extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getMunicipio()
+    {
+        return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getPoblacion()
     {
         return $this->hasOne(Poblacion::className(), ['poblacion_id' => 'poblacion_id']);
@@ -72,8 +82,16 @@ class Colonia extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMunicipio()
+    public function getIncidentes()
     {
-        return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
+        return $this->hasMany(Incidente::className(), ['colonia_id' => 'colonia_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonas()
+    {
+        return $this->hasMany(Persona::className(), ['colonia_id' => 'colonia_id']);
     }
 }

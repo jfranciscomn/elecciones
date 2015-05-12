@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Poblacion;
+use app\models\Usuario;
 use app\models\Municipio;
 use app\models\search\PoblacionSearch;
 use yii\web\Controller;
@@ -18,7 +19,9 @@ class PoblacionController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
+
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],

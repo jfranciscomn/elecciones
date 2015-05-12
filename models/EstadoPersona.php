@@ -9,6 +9,8 @@ use Yii;
  *
  * @property integer $estado_persona_id
  * @property string $estado_persona_nombre
+ *
+ * @property Persona[] $personas
  */
 class EstadoPersona extends \yii\db\ActiveRecord
 {
@@ -40,5 +42,13 @@ class EstadoPersona extends \yii\db\ActiveRecord
             'estado_persona_id' => 'Estado Persona ID',
             'estado_persona_nombre' => 'Estado Persona Nombre',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonas()
+    {
+        return $this->hasMany(Persona::className(), ['estado_persona_id' => 'estado_persona_id']);
     }
 }

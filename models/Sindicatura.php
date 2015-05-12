@@ -10,6 +10,13 @@ use Yii;
  * @property integer $sindicatura_id
  * @property integer $municipio_id
  * @property string $sindicatura_nombre
+ *
+ * @property Colonia[] $colonias
+ * @property Incidente[] $incidentes
+ * @property Lugar[] $lugars
+ * @property Persona[] $personas
+ * @property Poblacion[] $poblacions
+ * @property Municipio $municipio
  */
 class Sindicatura extends \yii\db\ActiveRecord
 {
@@ -43,5 +50,53 @@ class Sindicatura extends \yii\db\ActiveRecord
             'municipio_id' => 'Municipio ID',
             'sindicatura_nombre' => 'Sindicatura Nombre',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getColonias()
+    {
+        return $this->hasMany(Colonia::className(), ['sindicatura_id' => 'sindicatura_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidentes()
+    {
+        return $this->hasMany(Incidente::className(), ['sindicatura_id' => 'sindicatura_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLugars()
+    {
+        return $this->hasMany(Lugar::className(), ['sindicatura_id' => 'sindicatura_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonas()
+    {
+        return $this->hasMany(Persona::className(), ['sindicatura_id' => 'sindicatura_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoblacions()
+    {
+        return $this->hasMany(Poblacion::className(), ['sindicatura_id' => 'sindicatura_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMunicipio()
+    {
+        return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
     }
 }
