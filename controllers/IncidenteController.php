@@ -4,6 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Incidente;
+use app\models\Municipio;
+use app\models\Operativo;
+use app\models\ClaseIncidente;
+use app\models\Usuario;
 use app\models\search\IncidenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -17,6 +21,7 @@ class IncidenteController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -61,12 +66,23 @@ class IncidenteController extends Controller
     public function actionCreate()
     {
         $model = new Incidente();
+        $data =  Municipio::find()->all();
+        $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
+
+        $data =  Operativo::find()->all();
+        $operativos = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'operativo_id','operativo_nombre'); 
+
+        $data =  ClaseIncidente::find()->all();
+        $claseIncidente = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'municipios'=>$municipios,
+                'operativos'=>$operativos,
+                'claseIncidente'=>$claseIncidente,
             ]);
         }
     }
@@ -77,18 +93,6 @@ class IncidenteController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->incidente_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
 
     /**
      * Deletes an existing Incidente model.

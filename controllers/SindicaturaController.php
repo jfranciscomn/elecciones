@@ -116,25 +116,25 @@ class SindicaturaController extends Controller
 
 
     public function actionAutocompletar($search = null, $municipio= null, $id = null) {
-    $out = ['more' => false];
-    if (!is_null($search)) {
-        $query = new Query;
-        $query->select('sindicatura_id as id, sindicatura_nombre AS text')
-            ->from('sindicatura')
-            ->where('sindicatura_nombre LIKE "%' . $search .'%"'.' and municipio_id = '.$municipio)
-            ->limit(20);
-        $command = $query->createCommand();
-        $data = $command->queryAll();
-        $out['results'] = array_values($data);
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select('sindicatura_id as id, sindicatura_nombre AS text')
+                ->from('sindicatura')
+                ->where('sindicatura_nombre LIKE "%' . $search .'%"'.' and municipio_id = '.$municipio)
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Sindicatura::findOne($id)->sindicatura_nombre];
+        }
+        else {
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
+        }
+        echo Json::encode($out);
     }
-    elseif ($id > 0) {
-        $out['results'] = ['id' => $id, 'text' => Sindicatura::findOne($id)->sindicatura_nombre];
-    }
-    else {
-        $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
-    }
-    echo Json::encode($out);
-}
 
     /**
      * Finds the Sindicatura model based on its primary key value.

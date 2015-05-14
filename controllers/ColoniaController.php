@@ -9,6 +9,8 @@ use app\models\search\ColoniaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+use yii\helpers\Json;
 
 /**
  * ColoniaController implements the CRUD actions for Colonia model.
@@ -103,6 +105,30 @@ class ColoniaController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionAutocompletar($search = null, $municipio= null, $sindicatura=null, $poblacion=null, $id = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select('sindicatura_id, poblacion_id, colonia_nombre AS text, poblacion_id, colonia_id as id, municipio_id')
+                ->from('colonia')
+                ->where('colonia_nombre LIKE "%' . $search .'%"'.
+                   ' and municipio_id = '.$municipio.' '.
+                    ( empty($sindicatura)? ' ' :' and sindicatura_id = '.$sindicatura).' '.
+                    ( empty($poblacion)? ' ' :' and poblacion_id = '.$poblacion)
+                    )->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Sindicatura::findOne($id)->sindicatura_nombre];
+        }
+        else {
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
+        }
+        echo Json::encode($out);
     }
 
     /**

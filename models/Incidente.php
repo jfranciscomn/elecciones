@@ -18,15 +18,17 @@ use Yii;
  * @property integer $clase_incidente_id
  * @property string $fecha
  * @property integer $usuario_id
+ * @property string $direccion
+ * @property integer $lugar_id
  *
- * @property Colonia $colonia
  * @property Poblacion $poblacion
  * @property Sindicatura $sindicatura
+ * @property Subclase2Incidente $subclase2Incidente
+ * @property ClaseIncidente $claseIncidente
+ * @property Colonia $colonia
  * @property Municipio $municipio
  * @property Operativo $operativo
- * @property Subclase2Incidente $subclase2Incidente
  * @property SubclaseIncidente $subclaseIncidente
- * @property ClaseIncidente $claseIncidente
  * @property Usuario $usuario
  * @property IncidenteHasCorporacion[] $incidenteHasCorporacions
  * @property Corporacion[] $corporacions
@@ -49,9 +51,10 @@ class Incidente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id'], 'integer'],
+            [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id', 'lugar_id'], 'integer'],
             [['municipio_id', 'operativo_id', 'clase_incidente_id', 'fecha', 'usuario_id'], 'required'],
-            [['fecha'], 'safe']
+            [['fecha'], 'safe'],
+            [['direccion'], 'string']
         ];
     }
 
@@ -72,15 +75,9 @@ class Incidente extends \yii\db\ActiveRecord
             'clase_incidente_id' => 'Clase Incidente ID',
             'fecha' => 'Fecha',
             'usuario_id' => 'Usuario ID',
+            'direccion' => 'Direccion',
+            'lugar_id' => 'Lugar ID',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getColonia()
-    {
-        return $this->hasOne(Colonia::className(), ['colonia_id' => 'colonia_id']);
     }
 
     /**
@@ -102,6 +99,30 @@ class Incidente extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getSubclase2Incidente()
+    {
+        return $this->hasOne(Subclase2Incidente::className(), ['subclase2_incidente_id' => 'subclase2_incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClaseIncidente()
+    {
+        return $this->hasOne(ClaseIncidente::className(), ['clase_incidente_id' => 'clase_incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getColonia()
+    {
+        return $this->hasOne(Colonia::className(), ['colonia_id' => 'colonia_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getMunicipio()
     {
         return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
@@ -118,25 +139,9 @@ class Incidente extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubclase2Incidente()
-    {
-        return $this->hasOne(Subclase2Incidente::className(), ['subclase2_incidente_id' => 'subclase2_incidente_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getSubclaseIncidente()
     {
         return $this->hasOne(SubclaseIncidente::className(), ['subclase_incidente_id' => 'subclase_incidente_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getClaseIncidente()
-    {
-        return $this->hasOne(ClaseIncidente::className(), ['clase_incidente_id' => 'clase_incidente_id']);
     }
 
     /**
