@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Poblacion */
 
-$this->title = 'Create Poblacion';
-$this->params['breadcrumbs'][] = ['label' => 'Poblacions', 'url' => ['index']];
+$this->title = 'Crear Poblacion';
+$this->params['breadcrumbs'][] = ['label' => 'Poblaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="poblacion-create">

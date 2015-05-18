@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Poblacion */
 
 $this->title = $model->poblacion_id;
-$this->params['breadcrumbs'][] = ['label' => 'Poblacions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Poblaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="poblacion-view">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'id' => $model->poblacion_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Seguro que quieres eliminar este objeto?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,9 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'poblacion_id',
-            'sindicatura_id',
-            'municipio_id',
+            //'poblacion_id',
+            'sindicatura.sindicatura_nombre',
+            'municipio.municipio_nombre',
             'poblacion_nombre',
         ],
     ]) ?>

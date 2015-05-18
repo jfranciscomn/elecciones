@@ -12,6 +12,7 @@ use app\models\Municipio;
  */
 class MunicipioSearch extends Municipio
 {
+    public $municipioNombre;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,7 @@ class MunicipioSearch extends Municipio
         return [
             [['municipio_id', 'zona_id'], 'integer'],
             [['municipio_nombre'], 'safe'],
+            [['municipioNombre'],'safe'],
         ];
     }
 
