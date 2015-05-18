@@ -318,4 +318,13 @@ return array (
       '@kartik/icons' => $vendorDir . '/kartik-v/yii2-icons',
     ),
   ),
+  'kartik-v/yii2-popover-x' => 
+  array (
+    'name' => 'kartik-v/yii2-popover-x',
+    'version' => '1.3.0.0',
+    'alias' => 
+    array (
+      '@kartik/popover' => $vendorDir . '/kartik-v/yii2-popover-x',
+    ),
+  ),
 );

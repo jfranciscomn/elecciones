@@ -4,11 +4,14 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Poblacion;
+use app\models\Usuario;
 use app\models\Municipio;
 use app\models\search\PoblacionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+use yii\helpers\Json;
 
 /**
  * PoblacionController implements the CRUD actions for Poblacion model.
@@ -18,7 +21,9 @@ class PoblacionController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
+
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
@@ -96,6 +101,30 @@ class PoblacionController extends Controller
             ]);
         }
     }
+
+    public function actionAutocompletar($search = null, $municipio= null, $sindicatura=null, $id = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select('sindicatura_id, poblacion_nombre AS text, poblacion_id as id, municipio_id')
+                ->from('poblacion')
+                ->where('poblacion_nombre LIKE "%' . $search .'%"'.
+                    ( empty($municipio)? '' :' and municipio_id = '.$municipio).' '.
+                    ( empty($sindicatura)? '' :' and sindicatura_id = '.$sindicatura)
+                    )->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Poblacion::findOne($id)->poblacion_nombre];
+        }
+        else {
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
+        }
+        echo Json::encode($out);
+    }
+
 
     /**
      * Deletes an existing Poblacion model.

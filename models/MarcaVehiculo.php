@@ -9,6 +9,9 @@ use Yii;
  *
  * @property integer $marca_vehiculo_id
  * @property string $marca_vehiculoco_nombre
+ *
+ * @property GamaVehiculo[] $gamaVehiculos
+ * @property Vehiculo[] $vehiculos
  */
 class MarcaVehiculo extends \yii\db\ActiveRecord
 {
@@ -40,5 +43,21 @@ class MarcaVehiculo extends \yii\db\ActiveRecord
             'marca_vehiculo_id' => 'Marca Vehiculo ID',
             'marca_vehiculoco_nombre' => 'Marca Vehiculoco Nombre',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGamaVehiculos()
+    {
+        return $this->hasMany(GamaVehiculo::className(), ['marca_vehiculo_id' => 'marca_vehiculo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVehiculos()
+    {
+        return $this->hasMany(Vehiculo::className(), ['marca_vehiculo_id' => 'marca_vehiculo_id']);
     }
 }

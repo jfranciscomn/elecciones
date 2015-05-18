@@ -15,6 +15,11 @@ use Yii;
  * @property string $placas
  * @property string $modelo
  * @property string $numero_serie
+ *
+ * @property EstadoVehiculo $estadoVehiculo
+ * @property GamaVehiculo $gamaVehiculo
+ * @property MarcaVehiculo $marcaVehiculo
+ * @property Incidente $incidente
  */
 class Vehiculo extends \yii\db\ActiveRecord
 {
@@ -32,7 +37,7 @@ class Vehiculo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['incidente_id', 'estado_vehiculo_id', 'gama_vehiculo_id', 'marca_vehiculo_id', 'placas', 'modelo', 'numero_serie'], 'required'],
+            [['incidente_id', 'estado_vehiculo_id'], 'required'],
             [['incidente_id', 'estado_vehiculo_id', 'gama_vehiculo_id', 'marca_vehiculo_id'], 'integer'],
             [['placas', 'modelo', 'numero_serie'], 'string', 'max' => 145]
         ];
@@ -53,5 +58,37 @@ class Vehiculo extends \yii\db\ActiveRecord
             'modelo' => 'Modelo',
             'numero_serie' => 'Numero Serie',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstadoVehiculo()
+    {
+        return $this->hasOne(EstadoVehiculo::className(), ['estado_vehiculo_id' => 'estado_vehiculo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGamaVehiculo()
+    {
+        return $this->hasOne(GamaVehiculo::className(), ['gama_vehiculo_id' => 'gama_vehiculo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMarcaVehiculo()
+    {
+        return $this->hasOne(MarcaVehiculo::className(), ['marca_vehiculo_id' => 'marca_vehiculo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidente()
+    {
+        return $this->hasOne(Incidente::className(), ['incidente_id' => 'incidente_id']);
     }
 }

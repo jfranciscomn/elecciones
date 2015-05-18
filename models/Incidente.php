@@ -17,7 +17,24 @@ use Yii;
  * @property integer $subclase_incidente_id
  * @property integer $clase_incidente_id
  * @property string $fecha
- * @property integer $usuario_usuario_id
+ * @property integer $usuario_id
+ * @property string $direccion
+ * @property integer $lugar_id
+ * @property string $descripcion
+ *
+ * @property Colonia $colonia
+ * @property Subclase2Incidente $subclase2Incidente
+ * @property ClaseIncidente $claseIncidente
+ * @property Municipio $municipio
+ * @property Operativo $operativo
+ * @property Poblacion $poblacion
+ * @property Sindicatura $sindicatura
+ * @property SubclaseIncidente $subclaseIncidente
+ * @property Usuario $usuario
+ * @property IncidenteHasCorporacion[] $incidenteHasCorporacions
+ * @property Corporacion[] $corporacions
+ * @property Persona[] $personas
+ * @property Vehiculo[] $vehiculos
  */
 class Incidente extends \yii\db\ActiveRecord
 {
@@ -35,9 +52,10 @@ class Incidente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_usuario_id'], 'integer'],
-            [['poblacion_id', 'municipio_id', 'operativo_id', 'clase_incidente_id', 'fecha', 'usuario_usuario_id'], 'required'],
-            [['fecha'], 'safe']
+            [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id', 'lugar_id'], 'integer'],
+            [['municipio_id', 'operativo_id', 'clase_incidente_id', 'usuario_id'], 'required'],
+            [['fecha'], 'safe'],
+            [['direccion', 'descripcion'], 'string']
         ];
     }
 
@@ -57,7 +75,114 @@ class Incidente extends \yii\db\ActiveRecord
             'subclase_incidente_id' => 'Subclase Incidente ID',
             'clase_incidente_id' => 'Clase Incidente ID',
             'fecha' => 'Fecha',
-            'usuario_usuario_id' => 'Usuario Usuario ID',
+            'usuario_id' => 'Usuario ID',
+            'direccion' => 'Direccion',
+            'lugar_id' => 'Lugar ID',
+            'descripcion' => 'Descripcion',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getColonia()
+    {
+        return $this->hasOne(Colonia::className(), ['colonia_id' => 'colonia_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSubclase2Incidente()
+    {
+        return $this->hasOne(Subclase2Incidente::className(), ['subclase2_incidente_id' => 'subclase2_incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClaseIncidente()
+    {
+        return $this->hasOne(ClaseIncidente::className(), ['clase_incidente_id' => 'clase_incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMunicipio()
+    {
+        return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOperativo()
+    {
+        return $this->hasOne(Operativo::className(), ['operativo_id' => 'operativo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoblacion()
+    {
+        return $this->hasOne(Poblacion::className(), ['poblacion_id' => 'poblacion_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSindicatura()
+    {
+        return $this->hasOne(Sindicatura::className(), ['sindicatura_id' => 'sindicatura_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSubclaseIncidente()
+    {
+        return $this->hasOne(SubclaseIncidente::className(), ['subclase_incidente_id' => 'subclase_incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuario()
+    {
+        return $this->hasOne(Usuario::className(), ['usuario_id' => 'usuario_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidenteHasCorporacions()
+    {
+        return $this->hasMany(IncidenteHasCorporacion::className(), ['incidente_id' => 'incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCorporacions()
+    {
+        return $this->hasMany(Corporacion::className(), ['corporacion_id' => 'corporacion_id'])->viaTable('incidente_has_corporacion', ['incidente_id' => 'incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonas()
+    {
+        return $this->hasMany(Persona::className(), ['incidente_id' => 'incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVehiculos()
+    {
+        return $this->hasMany(Vehiculo::className(), ['incidente_id' => 'incidente_id']);
     }
 }

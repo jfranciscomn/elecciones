@@ -10,6 +10,10 @@ use Yii;
  * @property integer $subclase_incidente_id
  * @property integer $clase_incidente_id
  * @property string $subclase_incidente_nombre
+ *
+ * @property Incidente[] $incidentes
+ * @property Subclase2Incidente[] $subclase2Incidentes
+ * @property ClaseIncidente $claseIncidente
  */
 class SubclaseIncidente extends \yii\db\ActiveRecord
 {
@@ -43,5 +47,29 @@ class SubclaseIncidente extends \yii\db\ActiveRecord
             'clase_incidente_id' => 'Clase Incidente ID',
             'subclase_incidente_nombre' => 'Subclase Incidente Nombre',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidentes()
+    {
+        return $this->hasMany(Incidente::className(), ['subclase_incidente_id' => 'subclase_incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSubclase2Incidentes()
+    {
+        return $this->hasMany(Subclase2Incidente::className(), ['subclase_incidente_id' => 'subclase_incidente_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClaseIncidente()
+    {
+        return $this->hasOne(ClaseIncidente::className(), ['clase_incidente_id' => 'clase_incidente_id']);
     }
 }

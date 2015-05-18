@@ -8,9 +8,12 @@ use Yii;
  * This is the model class for table "operativo".
  *
  * @property integer $operativo_id
- * @property string $nombre operativo
+ * @property string $operativo_nombre
  * @property string $fecha_inicio
  * @property string $fecha_fin
+ * @property integer $activo
+ *
+ * @property Incidente[] $incidentes
  */
 class Operativo extends \yii\db\ActiveRecord
 {
@@ -28,9 +31,10 @@ class Operativo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre operativo', 'fecha_inicio', 'fecha_fin'], 'required'],
+            [['operativo_nombre', 'fecha_inicio'], 'required'],
             [['fecha_inicio', 'fecha_fin'], 'safe'],
-            [['nombre operativo'], 'string', 'max' => 145]
+            [['activo'], 'integer'],
+            [['operativo_nombre'], 'string', 'max' => 145]
         ];
     }
 
@@ -41,9 +45,18 @@ class Operativo extends \yii\db\ActiveRecord
     {
         return [
             'operativo_id' => 'Operativo ID',
-            'nombre operativo' => 'Nombre Operativo',
+            'operativo_nombre' => 'Operativo Nombre',
             'fecha_inicio' => 'Fecha Inicio',
             'fecha_fin' => 'Fecha Fin',
+            'activo' => 'Activo',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidentes()
+    {
+        return $this->hasMany(Incidente::className(), ['operativo_id' => 'operativo_id']);
     }
 }

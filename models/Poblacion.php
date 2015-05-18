@@ -12,7 +12,10 @@ use Yii;
  * @property integer $municipio_id
  * @property string $poblacion_nombre
  *
+ * @property Colonia[] $colonias
+ * @property Incidente[] $incidentes
  * @property Lugar[] $lugars
+ * @property Persona[] $personas
  * @property Sindicatura $sindicatura
  * @property Municipio $municipio
  */
@@ -54,9 +57,33 @@ class Poblacion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getColonias()
+    {
+        return $this->hasMany(Colonia::className(), ['poblacion_id' => 'poblacion_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidentes()
+    {
+        return $this->hasMany(Incidente::className(), ['poblacion_id' => 'poblacion_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getLugars()
     {
         return $this->hasMany(Lugar::className(), ['poblacion_id' => 'poblacion_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonas()
+    {
+        return $this->hasMany(Persona::className(), ['poblacion_id' => 'poblacion_id']);
     }
 
     /**

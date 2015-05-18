@@ -4,10 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Lugar;
+use app\models\Usuario;
 use app\models\search\LugarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+use yii\helpers\Json;
 
 /**
  * LugarController implements the CRUD actions for Lugar model.
@@ -17,6 +20,7 @@ class LugarController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -101,6 +105,33 @@ class LugarController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionAutocompletar($search = null, $municipio= null, $sindicatura=null, $poblacion=null, $colonia=null , $id = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select('sindicatura_id, poblacion_id, colonia_id, poblacion_id, colonia_id , municipio_id, lugar_id as id, lugar_nombre as text')
+                ->from('lugar')
+                ->where('lugar_nombre LIKE "%' . $search .'%"'.
+                   
+                    ( empty($municipio)? ' ' :' and municipio_id = '.$municipio).' '.
+                    ( empty($sindicatura)? ' ' :' and sindicatura_id = '.$sindicatura).' '.
+                    ( empty($poblacion)? ' ' :' and poblacion_id = '.$poblacion).' '.
+                    ( empty($colonia)? ' ' :' and colonia_id = '.$colonia)
+
+                    )->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Sindicatura::findOne($id)->sindicatura_nombre];
+        }
+        else {
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
+        }
+        echo Json::encode($out);
     }
 
     /**

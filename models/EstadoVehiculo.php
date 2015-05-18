@@ -9,6 +9,8 @@ use Yii;
  *
  * @property integer $estado_vehiculo_id
  * @property string $estado_vehiculo_nombre
+ *
+ * @property Vehiculo[] $vehiculos
  */
 class EstadoVehiculo extends \yii\db\ActiveRecord
 {
@@ -40,5 +42,13 @@ class EstadoVehiculo extends \yii\db\ActiveRecord
             'estado_vehiculo_id' => 'Estado Vehiculo ID',
             'estado_vehiculo_nombre' => 'Estado Vehiculo Nombre',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVehiculos()
+    {
+        return $this->hasMany(Vehiculo::className(), ['estado_vehiculo_id' => 'estado_vehiculo_id']);
     }
 }
