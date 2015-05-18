@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Lugar;
 use app\models\Usuario;
+use app\models\Municipio;
 use app\models\search\LugarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,12 +66,14 @@ class LugarController extends Controller
     public function actionCreate()
     {
         $model = new Lugar();
-
+        $data =  Municipio::find()->all();
+        $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->lugar_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'municipios' => $municipios,
             ]);
         }
     }
@@ -126,7 +129,7 @@ class LugarController extends Controller
             $out['results'] = array_values($data);
         }
         elseif ($id > 0) {
-            $out['results'] = ['id' => $id, 'text' => Sindicatura::findOne($id)->sindicatura_nombre];
+            $out['results'] = ['id' => $id, 'text' => Lugar::findOne($id)->lugar_nombre];
         }
         else {
             $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];

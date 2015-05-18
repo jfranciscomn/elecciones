@@ -47,7 +47,7 @@ class Colonia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'colonia_id' => 'Colonia ID',
+            'colonia_id' => 'Colonia',
             'poblacion_id' => 'Poblacion',
             'sindicatura_id' => 'Sindicatura',
             'municipio_id' => 'Municipio',

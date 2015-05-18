@@ -68,7 +68,6 @@ class ColoniaController extends Controller
         $model = new Colonia();
         $data =  Municipio::find()->all();
         $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->colonia_id]);
         } else {

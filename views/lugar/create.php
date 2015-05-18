@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Lugar */
 
-$this->title = 'Create Lugar';
+$this->title = 'Crear Lugares';
 $this->params['breadcrumbs'][] = ['label' => 'Lugars', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'municipios' => $municipios,
     ]) ?>
 
 </div>

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Lugar */
 
 $this->title = $model->lugar_id;
-$this->params['breadcrumbs'][] = ['label' => 'Lugars', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Lugares', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lugar-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->lugar_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->lugar_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->lugar_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->lugar_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Seguro que quieres eliminar el objeto seleccionado?',
                 'method' => 'post',
             ],
         ]) ?>

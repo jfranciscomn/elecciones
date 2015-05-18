@@ -9,7 +9,6 @@ use kartik\widgets\Select2;
 /* @var $model app\models\Colonia */
 /* @var $form yii\widgets\ActiveForm */
 $url = \yii\helpers\Url::to(['sindicatura/autocompletar']);
- 
 // Script to initialize the selection based on the value of the select2 element
 $initScript = <<< SCRIPT
 function (element, callback) {
@@ -24,7 +23,6 @@ SCRIPT;
 
 
 $urlPoblacion = \yii\helpers\Url::to(['poblacion/autocompletar']);
- 
 // Script to initialize the selection based on the value of the select2 element
 $initScript = <<< SCRIPT
 function (element, callback) {
@@ -83,7 +81,7 @@ SCRIPT;
 			                            'ajax' => [
 			                            	'url' => $urlPoblacion,
 			                            	'dataType' => 'json',
-			                            	'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#colonia-municipio_id").val(),sindicatura:$("#colonia-sindicatura_id").val()}; }'),
+			                            	'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#colonia-municipio_id").val(),sindicatura:$("#colonia-sindicatura_id").val() }; }'),
 			                            	'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
 			                            ],
 			                            'initSelection' => new JsExpression($initScript),
@@ -99,7 +97,7 @@ SCRIPT;
 
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

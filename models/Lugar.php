@@ -49,13 +49,13 @@ class Lugar extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'lugar_id' => 'Lugar ID',
-            'tipo_lugar_id' => 'Tipo Lugar ID',
-            'poblacion_id' => 'Poblacion ID',
-            'sindicatura_id' => 'Sindicatura ID',
-            'municipio_id' => 'Municipio ID',
-            'lugar_nombre' => 'Lugar Nombre',
-            'colonia_id' => 'Colonia ID',
+            'lugar_id' => 'Lugar',
+            'tipo_lugar_id' => 'Tipo de Lugar',
+            'poblacion_id' => 'Poblacion',
+            'sindicatura_id' => 'Sindicatura',
+            'municipio_id' => 'Municipio',
+            'lugar_nombre' => 'Nombre del Lugar',
+            'colonia_id' => 'Colonia',
             'direccion' => 'Direccion',
         ];
     }
