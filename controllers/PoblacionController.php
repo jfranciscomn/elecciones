@@ -117,7 +117,7 @@ class PoblacionController extends Controller
             $out['results'] = array_values($data);
         }
         elseif ($id > 0) {
-            $out['results'] = ['id' => $id, 'text' => Sindicatura::findOne($id)->sindicatura_nombre];
+            $out['results'] = ['id' => $id, 'text' => Poblacion::findOne($id)->poblacion_nombre];
         }
         else {
             $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];

@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\JsExpression;
 use kartik\widgets\Select2;
+use kartik\popover\PopoverX;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Incidente */
@@ -84,9 +86,12 @@ SCRIPT;
 
 ?>
 
+
+
 <div class="incidente-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
     <div class="panel panel-primary" id='divdenunciante'>
         <div class="panel-heading">General </div>
             <div class="panel-body">
@@ -109,17 +114,7 @@ SCRIPT;
                                     'data' => $claseIncidente,
                                     
                                     'options' => ['placeholder' => 'Seleccionar Incidente ...',],
-                                    'addon' => [
-                   
-                                    'append' => [
-                                            'content' => Html::button(' <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>', [
-                                                'class' => 'btn btn-default', 
-                                                'title' => 'Mark on map', 
-                                                'data-toggle' => 'tooltip'
-                                            ]),
-                                            'asButton' => true
-                                        ]
-                                    ],
+                                    
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                     ],
@@ -161,6 +156,11 @@ SCRIPT;
                                     ],
                         ]) ?>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <?= $form->field($model, 'descripcion')->textArea() ?>
+                </div>
                 </div>
             </div>
 
@@ -267,6 +267,23 @@ SCRIPT;
             <div class="panel panel-primary" id='divdenunciante'>
                 <div class="panel-heading">Personas</div>
                 <div class="panel-body">
+                    <?php
+                    
+                    
+                    PopoverX::begin([
+                        'placement' => PopoverX::ALIGN_TOP,
+                        'toggleButton' => ['label'=>'', 'class'=>'btn btn-default glyphicon glyphicon-plus'],
+                        'header' => '<i class="glyphicon glyphicon-user"></i> ',
+                        'footer'=>Html::button('agregar', ['class'=>'btn btn-sm btn-primary']) 
+                                 
+                    ]);
+
+                       echo $this->render('_form_persona'); 
+                    
+                    
+                    PopoverX::end();
+                    
+                ?>
                 </div>
                 
             </div>

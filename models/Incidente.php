@@ -20,14 +20,15 @@ use Yii;
  * @property integer $usuario_id
  * @property string $direccion
  * @property integer $lugar_id
+ * @property string $descripcion
  *
- * @property Poblacion $poblacion
- * @property Sindicatura $sindicatura
+ * @property Colonia $colonia
  * @property Subclase2Incidente $subclase2Incidente
  * @property ClaseIncidente $claseIncidente
- * @property Colonia $colonia
  * @property Municipio $municipio
  * @property Operativo $operativo
+ * @property Poblacion $poblacion
+ * @property Sindicatura $sindicatura
  * @property SubclaseIncidente $subclaseIncidente
  * @property Usuario $usuario
  * @property IncidenteHasCorporacion[] $incidenteHasCorporacions
@@ -52,9 +53,9 @@ class Incidente extends \yii\db\ActiveRecord
     {
         return [
             [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id', 'lugar_id'], 'integer'],
-            [['municipio_id', 'operativo_id', 'clase_incidente_id', 'fecha', 'usuario_id'], 'required'],
+            [['municipio_id', 'operativo_id', 'clase_incidente_id', 'usuario_id'], 'required'],
             [['fecha'], 'safe'],
-            [['direccion'], 'string']
+            [['direccion', 'descripcion'], 'string']
         ];
     }
 
@@ -77,23 +78,16 @@ class Incidente extends \yii\db\ActiveRecord
             'usuario_id' => 'Usuario ID',
             'direccion' => 'Direccion',
             'lugar_id' => 'Lugar ID',
+            'descripcion' => 'Descripcion',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPoblacion()
+    public function getColonia()
     {
-        return $this->hasOne(Poblacion::className(), ['poblacion_id' => 'poblacion_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSindicatura()
-    {
-        return $this->hasOne(Sindicatura::className(), ['sindicatura_id' => 'sindicatura_id']);
+        return $this->hasOne(Colonia::className(), ['colonia_id' => 'colonia_id']);
     }
 
     /**
@@ -115,14 +109,6 @@ class Incidente extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getColonia()
-    {
-        return $this->hasOne(Colonia::className(), ['colonia_id' => 'colonia_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getMunicipio()
     {
         return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
@@ -134,6 +120,22 @@ class Incidente extends \yii\db\ActiveRecord
     public function getOperativo()
     {
         return $this->hasOne(Operativo::className(), ['operativo_id' => 'operativo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoblacion()
+    {
+        return $this->hasOne(Poblacion::className(), ['poblacion_id' => 'poblacion_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSindicatura()
+    {
+        return $this->hasOne(Sindicatura::className(), ['sindicatura_id' => 'sindicatura_id']);
     }
 
     /**

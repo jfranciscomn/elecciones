@@ -6,6 +6,7 @@ use Yii;
 use app\models\Incidente;
 use app\models\Municipio;
 use app\models\Operativo;
+use app\models\Persona;
 use app\models\ClaseIncidente;
 use app\models\Usuario;
 use app\models\search\IncidenteSearch;
@@ -66,6 +67,7 @@ class IncidenteController extends Controller
     public function actionCreate()
     {
         $model = new Incidente();
+        $model2 = new Persona();
         $data =  Municipio::find()->all();
         $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
 
@@ -74,12 +76,13 @@ class IncidenteController extends Controller
 
         $data =  ClaseIncidente::find()->all();
         $claseIncidente = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre'); 
-
+        $model->usuario_id =Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'model2' => $model2,
                 'municipios'=>$municipios,
                 'operativos'=>$operativos,
                 'claseIncidente'=>$claseIncidente,

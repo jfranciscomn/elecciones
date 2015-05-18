@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "operativo".
  *
  * @property integer $operativo_id
- * @property string $nombre operativo
+ * @property string $operativo_nombre
  * @property string $fecha_inicio
  * @property string $fecha_fin
  * @property integer $activo
@@ -31,10 +31,10 @@ class Operativo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre operativo', 'fecha_inicio'], 'required'],
+            [['operativo_nombre', 'fecha_inicio'], 'required'],
             [['fecha_inicio', 'fecha_fin'], 'safe'],
             [['activo'], 'integer'],
-            [['nombre operativo'], 'string', 'max' => 145]
+            [['operativo_nombre'], 'string', 'max' => 145]
         ];
     }
 
@@ -45,7 +45,7 @@ class Operativo extends \yii\db\ActiveRecord
     {
         return [
             'operativo_id' => 'Operativo ID',
-            'nombre operativo' => 'Nombre Operativo',
+            'operativo_nombre' => 'Operativo Nombre',
             'fecha_inicio' => 'Fecha Inicio',
             'fecha_fin' => 'Fecha Fin',
             'activo' => 'Activo',

@@ -3,24 +3,20 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Colonia;
-use app\models\Usuario;
-use app\models\search\ColoniaSearch;
+use app\models\Operativo;
+use app\models\search\OperativoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\db\Query;
-use yii\helpers\Json;
 
 /**
- * ColoniaController implements the CRUD actions for Colonia model.
+ * OperativoController implements the CRUD actions for Operativo model.
  */
-class ColoniaController extends Controller
+class OperativoController extends Controller
 {
     public function behaviors()
     {
         return [
-            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -31,12 +27,12 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Lists all Colonia models.
+     * Lists all Operativo models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ColoniaSearch();
+        $searchModel = new OperativoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +42,7 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Displays a single Colonia model.
+     * Displays a single Operativo model.
      * @param integer $id
      * @return mixed
      */
@@ -58,16 +54,16 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Creates a new Colonia model.
+     * Creates a new Operativo model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Colonia();
+        $model = new Operativo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->colonia_id]);
+            return $this->redirect(['view', 'id' => $model->operativo_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -76,7 +72,7 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Updates an existing Colonia model.
+     * Updates an existing Operativo model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -86,7 +82,7 @@ class ColoniaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->colonia_id]);
+            return $this->redirect(['view', 'id' => $model->operativo_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -95,7 +91,7 @@ class ColoniaController extends Controller
     }
 
     /**
-     * Deletes an existing Colonia model.
+     * Deletes an existing Operativo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,40 +103,16 @@ class ColoniaController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionAutocompletar($search = null, $municipio= null, $sindicatura=null, $poblacion=null, $id = null) {
-        $out = ['more' => false];
-        if (!is_null($search)) {
-            $query = new Query;
-            $query->select('sindicatura_id, poblacion_id, colonia_nombre AS text, poblacion_id, colonia_id as id, municipio_id')
-                ->from('colonia')
-                ->where('colonia_nombre LIKE "%' . $search .'%"'.
-                   ' and municipio_id = '.$municipio.' '.
-                    ( empty($sindicatura)? ' ' :' and sindicatura_id = '.$sindicatura).' '.
-                    ( empty($poblacion)? ' ' :' and poblacion_id = '.$poblacion)
-                    )->limit(20);
-            $command = $query->createCommand();
-            $data = $command->queryAll();
-            $out['results'] = array_values($data);
-        }
-        elseif ($id > 0) {
-            $out['results'] = ['id' => $id, 'text' => Colonia::findOne($id)->colonia_nombre];
-        }
-        else {
-            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
-        }
-        echo Json::encode($out);
-    }
-
     /**
-     * Finds the Colonia model based on its primary key value.
+     * Finds the Operativo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Colonia the loaded model
+     * @return Operativo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Colonia::findOne($id)) !== null) {
+        if (($model = Operativo::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

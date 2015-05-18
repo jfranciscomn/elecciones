@@ -64,10 +64,26 @@ class ClaseIncidenteController extends Controller
     {
         $model = new ClaseIncidente();
 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->clase_incidente_id]);
         } else {
             return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionCreateModal()
+    {
+        $model = new ClaseIncidente();
+        
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->clase_incidente_id]);
+        } else {
+            $this->layout =null;
+            return $this->renderPartial('_form_modal', [
                 'model' => $model,
             ]);
         }

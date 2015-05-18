@@ -9,6 +9,8 @@ use app\models\search\Subclase2IncidenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+use yii\helpers\Json;
 
 /**
  * Subclase2IncidenteController implements the CRUD actions for Subclase2Incidente model.
@@ -103,6 +105,28 @@ class Subclase2IncidenteController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionAutocompletar($search = null, $clase= null, $subclase = null, $id = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select('subclase_incidente_id,subclase2_incidente_id as id, subclase2_incidente_nombre AS text, clase_incidente_id')
+                ->from('subclase2_incidente')
+                ->where('subclase2_incidente_nombre LIKE "%' . $search .'%"'.' and clase_incidente_id = '.
+                    (empty($clase)? 0: $clase). ( empty($subclase)? '' :' and subclase_incidente_id = '.$subclase) )
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Subclase2Incidente::findOne($id)->subclase2_incidente_nombre];
+        }
+        else {
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
+        }
+        echo Json::encode($out);
     }
 
     /**
