@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Colonia;
+use app\models\Municipio;
 use app\models\search\ColoniaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,12 +62,15 @@ class ColoniaController extends Controller
     public function actionCreate()
     {
         $model = new Colonia();
+        $data =  Municipio::find()->all();
+        $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->colonia_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'municipios' => $municipios,
             ]);
         }
     }
@@ -81,11 +85,15 @@ class ColoniaController extends Controller
     {
         $model = $this->findModel($id);
 
+        $data =  Municipio::find()->all();
+        $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->colonia_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'municipios' => $municipios,
             ]);
         }
     }

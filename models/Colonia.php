@@ -46,9 +46,9 @@ class Colonia extends \yii\db\ActiveRecord
     {
         return [
             'colonia_id' => 'Colonia ID',
-            'poblacion_id' => 'Poblacion ID',
-            'sindicatura_id' => 'Sindicatura ID',
-            'municipio_id' => 'Municipio ID',
+            'poblacion_id' => 'Poblacion',
+            'sindicatura_id' => 'Sindicatura',
+            'municipio_id' => 'Municipio',
             'colonia_nombre' => 'Colonia Nombre',
         ];
     }

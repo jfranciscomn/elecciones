@@ -8,9 +8,6 @@ use kartik\widgets\Select2;
 /* @var $this yii\web\View */
 /* @var $model app\models\Poblacion */
 /* @var $form yii\widgets\ActiveForm */
-
-
-
 $url = \yii\helpers\Url::to(['sindicatura/autocompletar']);
  
 // Script to initialize the selection based on the value of the select2 element
@@ -30,10 +27,6 @@ SCRIPT;
 <div class="poblacion-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    
-
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
