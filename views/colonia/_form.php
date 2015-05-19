@@ -24,7 +24,7 @@ SCRIPT;
 
 $urlPoblacion = \yii\helpers\Url::to(['poblacion/autocompletar']);
 // Script to initialize the selection based on the value of the select2 element
-$initScript = <<< SCRIPT
+$initScriptPoblacion= <<< SCRIPT
 function (element, callback) {
     var id=\$(element).val();
     if (id !== "") {
@@ -42,18 +42,16 @@ SCRIPT;
 	<div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-			    <?= $form->field($model, 'municipio_id')->widget(Select2::classname(),[
-			    					
-			                        'data' => $municipios,                        
-			                        'options' => ['placeholder' => 'Seleccionar municipio ...',],
-			                        'pluginOptions' => [
-			                            'allowClear' => true,
+			    <?= $form->field($model, 'municipio_id')->widget(Select2::classname(),[			    					
+			         'data' => $municipios,                        
+			         'options' => ['placeholder' => 'Seleccionar municipio ...',],
+			         'pluginOptions' => [
+			             'allowClear' => true,
 			                        ],
 			    ]) ?>
 			</div>
             <div class="col-md-6">
             	<?= $form->field($model, 'sindicatura_id')->widget(Select2::classname(),[
-
             		'options' => ['placeholder' => 'Seleccionar una sindicatura ...',],
 			                        'pluginOptions' => [
 			                            'allowClear' => true,
@@ -73,7 +71,6 @@ SCRIPT;
         <div class="row">
         	<div class="col-md-6">
             	<?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
-
             		'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
 			                        'pluginOptions' => [
 			                            'allowClear' => true,
@@ -83,7 +80,7 @@ SCRIPT;
 			                            	'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#colonia-municipio_id").val(),sindicatura:$("#colonia-sindicatura_id").val() }; }'),
 			                            	'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
 			                            ],
-			                            'initSelection' => new JsExpression($initScript),
+			                            'initSelection' => new JsExpression($initScriptPoblacion),
 			                        ],
             		])
             	 ?>

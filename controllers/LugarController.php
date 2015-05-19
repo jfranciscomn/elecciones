@@ -87,12 +87,14 @@ class LugarController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $data =  Municipio::find()->all();
+        $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->lugar_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'municipios' => $municipios,
             ]);
         }
     }

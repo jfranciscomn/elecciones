@@ -24,7 +24,7 @@ SCRIPT;
 
 $urlPoblacion = \yii\helpers\Url::to(['poblacion/autocompletar']);
 // Script to initialize the selection based on the value of the select2 element
-$initScript = <<< SCRIPT
+$initScriptPoblacion = <<< SCRIPT
 function (element, callback) {
     var id=\$(element).val();
     if (id !== "") {
@@ -38,7 +38,7 @@ SCRIPT;
 
 $urlColonia = \yii\helpers\Url::to(['colonia/autocompletar']);
 // Script to initialize the selection based on the value of the select2 element
-$initScript = <<< SCRIPT
+$initScriptColonia = <<< SCRIPT
 function (element, callback) {
     var id=\$(element).val();
     if (id !== "") {
@@ -95,7 +95,7 @@ SCRIPT;
                                             'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#lugar-municipio_id").val(),sindicatura:$("#lugar-sindicatura_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
                                         ],
-                                        'initSelection' => new JsExpression($initScript),
+                                        'initSelection' => new JsExpression($initScriptPoblacion),
                                     ],
                             ])
                         ?>
@@ -111,7 +111,7 @@ SCRIPT;
                                             'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#lugar-municipio_id").val(),sindicatura:$("#lugar-sindicatura_id").val(), poblacion:$("#lugar-poblacion_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
                                         ],
-                                        'initSelection' => new JsExpression($initScript),
+                                        'initSelection' => new JsExpression($initScriptColonia),
                                     ],
                             ])
                         ?>

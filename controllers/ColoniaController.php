@@ -87,7 +87,6 @@ class ColoniaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         $data =  Municipio::find()->all();
         $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
 
@@ -121,7 +120,7 @@ class ColoniaController extends Controller
             $query->select('sindicatura_id, poblacion_id, colonia_nombre AS text, colonia_id as id, municipio_id')
                 ->from('colonia')
                 ->where('colonia_nombre LIKE "%' . $search .'%"'.
-                   ' and municipio_id = '.$municipio.' '.
+                    ( empty($municipio)? ' ' :' and municipio_id = '.$municipio).' '.
                     ( empty($sindicatura)? ' ' :' and sindicatura_id = '.$sindicatura).' '.
                     ( empty($poblacion)? ' ' :' and poblacion_id = '.$poblacion)
                     )->limit(20);
