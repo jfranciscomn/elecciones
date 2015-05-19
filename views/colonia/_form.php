@@ -44,8 +44,7 @@ SCRIPT;
             <div class="col-md-6">
 			    <?= $form->field($model, 'municipio_id')->widget(Select2::classname(),[
 			    					
-			                        'data' => $municipios,
-			                        
+			                        'data' => $municipios,                        
 			                        'options' => ['placeholder' => 'Seleccionar municipio ...',],
 			                        'pluginOptions' => [
 			                            'allowClear' => true,

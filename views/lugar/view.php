@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Lugar */
 
 $this->title = $model->lugar_id;
-$this->params['breadcrumbs'][] = ['label' => 'Lugares', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Lugar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lugar-view">

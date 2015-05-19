@@ -1,7 +1,8 @@
 <?php
 
 namespace app\models;
-
+use app\models\Municipio;
+use app\models\Sindicatura;
 use Yii;
 
 /**
@@ -50,7 +51,9 @@ class Poblacion extends \yii\db\ActiveRecord
             'poblacion_id' => 'Poblacion',
             'sindicatura_id' => 'Sindicatura',
             'municipio_id' => 'Municipio',
-            'poblacion_nombre' => 'Poblacion Nombre',
+            'poblacion_nombre' =>'Nombre de la Poblacion',
+            'municipioName' =>'Nombre del Municipio',
+            'sindicaturaName'=>'Nombre de la Sindicatura',
         ];
     }
 
@@ -100,5 +103,15 @@ class Poblacion extends \yii\db\ActiveRecord
     public function getMunicipio()
     {
         return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    public function getMunicipioName()
+    {
+        return $this->municipio->municipio_nombre;
+    }
+
+    public function getSindicaturaName()
+    {
+        return $this->sindicatura->sindicatura_nombre;
     }
 }

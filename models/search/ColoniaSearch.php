@@ -12,6 +12,9 @@ use app\models\Colonia;
  */
 class ColoniaSearch extends Colonia
 {
+    public $municipioName;
+    public $sindicaturaName;
+    public $poblacionName;
     /**
      * @inheritdoc
      */
@@ -20,6 +23,9 @@ class ColoniaSearch extends Colonia
         return [
             [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id'], 'integer'],
             [['colonia_nombre'], 'safe'],
+            [['municipioName'],'safe'],
+            [['sindicaturaName'],'safe'],
+            [['poblacionName'],'safe'],
         ];
     }
 
@@ -41,17 +47,44 @@ class ColoniaSearch extends Colonia
      */
     public function search($params)
     {
+        
         $query = Colonia::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'colonia_nombre', 
+                    'municipioName'=>[
+                        'asc'=>['municipio.municipio_nombre'=>SORT_ASC],
+                        'desc'=>['municipio.municipio_nombre'=>SORT_DESC],
+                        'label'=>'Municipio'
+                    ],
+                    'sindicaturaName'=>[
+                        'asc'=>['sindicatura.sindicatura_nombre'=>SORT_ASC],
+                        'desc'=>['sindicatura.sindicatura_nombre'=>SORT_DESC],
+                        'label'=>'Sindicatura'
+
+                    ],
+                    'poblacionName'=>[
+                        'asc'=>['poblacion.poblacion_nombre'=>SORT_ASC],
+                        'desc'=>['poblacion.poblacion_nombre'=>SORT_DESC],
+                        'label'=>'Poblacion'
+
+                    ]
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
+            $query->joinWith('municipio');
+            $query->joinWith('sindicatura');
+            $query->joinWith('poblacion');
             return $dataProvider;
         }
 
@@ -60,10 +93,31 @@ class ColoniaSearch extends Colonia
             'poblacion_id' => $this->poblacion_id,
             'sindicatura_id' => $this->sindicatura_id,
             'municipio_id' => $this->municipio_id,
+
         ]);
 
         $query->andFilterWhere(['like', 'colonia_nombre', $this->colonia_nombre]);
+        $query->andFilterWhere(['municipio_id' => $this->municipio_id]);
+        $query->andFilterWhere(['sindicatura_id' => $this->sindicatura_id]);
+        $query->andFilterWhere(['poblacion_id' => $this->poblacion_id]);
 
+        $query->joinWith(['municipio'=>function ($q) 
+        {
+            $q->where('municipio.municipio_nombre LIKE "%' . 
+            $this->municipioName . '%"');
+        }]);
+
+        $query->joinWith(['sindicatura'=>function ($q) 
+        {
+            $q->where('sindicatura.sindicatura_nombre LIKE "%' . 
+            $this->sindicaturaName . '%"');
+        }]);
+
+        $query->joinWith(['poblacion'=>function ($q) 
+        {
+            $q->where('poblacion.poblacion_nombre LIKE "%' . 
+            $this->poblacionName . '%"');
+        }]);
         return $dataProvider;
     }
 }

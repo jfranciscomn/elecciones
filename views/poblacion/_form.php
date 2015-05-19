@@ -9,7 +9,6 @@ use kartik\widgets\Select2;
 /* @var $model app\models\Poblacion */
 /* @var $form yii\widgets\ActiveForm */
 $url = \yii\helpers\Url::to(['sindicatura/autocompletar']);
- 
 // Script to initialize the selection based on the value of the select2 element
 $initScript = <<< SCRIPT
 function (element, callback) {
@@ -68,7 +67,7 @@ SCRIPT;
 
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

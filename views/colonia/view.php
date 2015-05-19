@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Colonia */
 
-$this->title = $model->colonia_id;
+$this->title = $model->colonia_nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Colonias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Eliminar', ['delete', 'id' => $model->colonia_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => '¿Seguro que quieres eliminar este objeto?',
+                'confirm' => '¿Seguro que quieres eliminar la colonia?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,10 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'colonia_id',
-            'poblacion_id',
-            'sindicatura_id',
-            'municipio_id',
+            //'colonia_id',
+            //'poblacion.poblacion_nombre',
+            //'sindicatura.sindicatura_nombre',
+            //'municipio.municipio_nombre',
+            'poblacionName',
+            'sindicaturaName',
+            'municipioName',
             'colonia_nombre',
         ],
     ]) ?>

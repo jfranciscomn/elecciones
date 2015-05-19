@@ -12,6 +12,8 @@ use app\models\Poblacion;
  */
 class PoblacionSearch extends Poblacion
 {
+    public $municipioName;
+    public $sindicaturaName;
     /**
      * @inheritdoc
      */
@@ -20,6 +22,8 @@ class PoblacionSearch extends Poblacion
         return [
             [['poblacion_id', 'sindicatura_id', 'municipio_id'], 'integer'],
             [['poblacion_nombre'], 'safe'],
+            [['municipioName'],'safe'],
+            [['sindicaturaName'],'safe'],
         ];
     }
 
@@ -47,13 +51,37 @@ class PoblacionSearch extends Poblacion
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'poblacion_nombre',
+                    'municipioName'=>[
+                        'asc'=>['municipio.municipio_nombre'=>SORT_ASC],
+                        'desc'=>['municipio.municipio_nombre'=>SORT_DESC],
+                        'label'=>'Nombre del Municipio'
+
+                    ],
+                    'sindicaturaName'=>[
+                        'asc'=>['sindicatura.sindicatura_nombre'=>SORT_ASC],
+                        'desc'=>['sindicatura.sindicatura_nombre'=>SORT_DESC],
+                        'label'=>'Nombre Sindicatura'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
+            $query->joinWith('municipio');
+
+            $query->joinWith('sindicatura');
             return $dataProvider;
         }
+
+
+
 
         $query->andFilterWhere([
             'poblacion_id' => $this->poblacion_id,
@@ -62,6 +90,20 @@ class PoblacionSearch extends Poblacion
         ]);
 
         $query->andFilterWhere(['like', 'poblacion_nombre', $this->poblacion_nombre]);
+        $query->andFilterWhere(['municipio_id' => $this->municipio_id]);
+        $query->andFilterWhere(['sindicatura_id' => $this->sindicatura_id]);
+
+        $query->joinWith(['municipio'=>function ($q) 
+        {
+            $q->where('municipio.municipio_nombre LIKE "%' . 
+            $this->municipioName . '%"');
+        }]);
+
+        $query->joinWith(['sindicatura'=>function ($q) 
+        {
+            $q->where('sindicatura.sindicatura_nombre LIKE "%' . 
+            $this->sindicaturaName . '%"');
+        }]);
 
         return $dataProvider;
     }

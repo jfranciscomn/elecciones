@@ -118,7 +118,7 @@ class ColoniaController extends Controller
         $out = ['more' => false];
         if (!is_null($search)) {
             $query = new Query;
-            $query->select('sindicatura_id, poblacion_id, colonia_nombre AS text, poblacion_id, colonia_id as id, municipio_id')
+            $query->select('sindicatura_id, poblacion_id, colonia_nombre AS text, colonia_id as id, municipio_id')
                 ->from('colonia')
                 ->where('colonia_nombre LIKE "%' . $search .'%"'.
                    ' and municipio_id = '.$municipio.' '.

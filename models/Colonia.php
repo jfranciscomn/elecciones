@@ -51,7 +51,11 @@ class Colonia extends \yii\db\ActiveRecord
             'poblacion_id' => 'Poblacion',
             'sindicatura_id' => 'Sindicatura',
             'municipio_id' => 'Municipio',
-            'colonia_nombre' => 'Colonia Nombre',
+            'colonia_nombre' => 'Colonia',
+            'municipioName' => 'Municipio',
+            'sindicaturaName'=> 'Sindicatura',
+            'poblacionName'=> 'Poblacion',
+
         ];
     }
 
@@ -93,5 +97,20 @@ class Colonia extends \yii\db\ActiveRecord
     public function getPersonas()
     {
         return $this->hasMany(Persona::className(), ['colonia_id' => 'colonia_id']);
+    }
+
+    public function getMunicipioName()
+    {
+        return $this->municipio->municipio_nombre;
+    }
+
+    public function getSindicaturaName()
+    {
+        return $this->sindicatura->sindicatura_nombre;
+    }
+
+    public function getPoblacionName()
+    {
+        return $this->poblacion->poblacion_nombre;
     }
 }
