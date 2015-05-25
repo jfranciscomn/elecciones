@@ -47,8 +47,9 @@ class Sindicatura extends \yii\db\ActiveRecord
     {
         return [
             'sindicatura_id' => 'Sindicatura ID',
-            'municipio_id' => 'Municipio ID',
-            'sindicatura_nombre' => 'Sindicatura Nombre',
+            'municipio_id' => 'Municipio',
+            'sindicatura_nombre' => 'Sindicatura',
+            'municipioName' =>'Municipio',
         ];
     }
 
@@ -98,5 +99,10 @@ class Sindicatura extends \yii\db\ActiveRecord
     public function getMunicipio()
     {
         return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    public function getMunicipioName()
+    {
+        return $this->municipio->municipio_nombre;
     }
 }

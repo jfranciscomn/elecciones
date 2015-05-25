@@ -12,14 +12,17 @@ use app\models\Municipio;
  */
 class MunicipioSearch extends Municipio
 {
+    public $zonaName;
     /**
      * @inheritdoc
      */
     public function rules()
     {
+        
         return [
             [['municipio_id', 'zona_id'], 'integer'],
             [['municipio_nombre'], 'safe'],
+            [['zonaName'],'safe'],
         ];
     }
 
@@ -46,10 +49,24 @@ class MunicipioSearch extends Municipio
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'municipio_nombre',
+                    'zonaName'=>[
+                        'asc'=>['zona.zona_nombre'=>SORT_ASC],
+                        'desc'=>['zona.zona_nombre'=>SORT_DESC],
+                        'label'=>'Zona'
+
+                    ],
+                ]
+            ]);
 
         $this->load($params);
 
         if (!$this->validate()) {
+
+            $query->joinWith('zona');
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
@@ -60,7 +77,15 @@ class MunicipioSearch extends Municipio
             'zona_id' => $this->zona_id,
         ]);
 
+        $query->andFilterWhere(['zona_id' => $this->zona_id]);
+
         $query->andFilterWhere(['like', 'municipio_nombre', $this->municipio_nombre]);
+
+        $query->joinWith(['zona'=>function ($q) 
+        {
+            $q->where('zona.zona_nombre LIKE "%' . 
+            $this->zonaName . '%"');
+        }]);
 
         return $dataProvider;
     }

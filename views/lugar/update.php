@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Lugar */
 
-$this->title = 'Actualizar Lugar: ' . ' ' . $model->lugar_id;
+$this->title = 'Actualizar lugar: ' . ' ' . $model->lugar_nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Lugar', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->lugar_id, 'url' => ['view', 'id' => $model->lugar_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => $model->lugar_nombre, 'url' => ['view', 'id' => $model->lugar_id]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="lugar-update">
 
@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $this->render('_form', [
         'model' => $model,
         'municipios' => $municipios,
+        'tipos' => $tipos,
     ]) ?>
 
 </div>

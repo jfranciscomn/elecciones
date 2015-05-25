@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Poblacion */
 
-$this->title = 'Actualizar Poblacion: ' . ' ' . $model->poblacion_id;
+$this->title = 'Actualizar Poblacion: ' . ' ' . $model->poblacion_nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Poblaciones', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->poblacion_id, 'url' => ['view', 'id' => $model->poblacion_id]];
+$this->params['breadcrumbs'][] = ['label' => $model->poblacion_nombre, 'url' => ['view', 'id' => $model->poblacion_id]];
 $this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="poblacion-update">

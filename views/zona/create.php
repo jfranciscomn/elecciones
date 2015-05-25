@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zona */
 
-$this->title = 'Create Zona';
+$this->title = 'Crear Zona';
 $this->params['breadcrumbs'][] = ['label' => 'Zonas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

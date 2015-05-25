@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Lugar;
+use app\models\TipoLugar;
 use app\models\Usuario;
 use app\models\Municipio;
 use app\models\search\LugarSearch;
@@ -67,13 +68,17 @@ class LugarController extends Controller
     {
         $model = new Lugar();
         $data =  Municipio::find()->all();
+        $dataTipos= TipoLugar::find()->all();
         $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
+        $tipos = (count($dataTipos)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($dataTipos, 'tipo_lugar_id','tipo_lugar_nombre'); 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->lugar_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'municipios' => $municipios,
+                'tipos'=> $tipos,
             ]);
         }
     }
@@ -88,13 +93,16 @@ class LugarController extends Controller
     {
         $model = $this->findModel($id);
         $data =  Municipio::find()->all();
+        $dataTipos= TipoLugar::find()->all();
         $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
+        $tipos = (count($dataTipos)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($dataTipos, 'tipo_lugar_id','tipo_lugar_nombre'); 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->lugar_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
                 'municipios' => $municipios,
+                'tipos'=>$tipos,
             ]);
         }
     }

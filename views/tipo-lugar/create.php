@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\TipoLugar */
 
-$this->title = 'Create Tipo Lugar';
-$this->params['breadcrumbs'][] = ['label' => 'Tipo Lugars', 'url' => ['index']];
+$this->title = 'Crear tipo de lugar';
+$this->params['breadcrumbs'][] = ['label' => 'Tipo de Lugar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tipo-lugar-create">

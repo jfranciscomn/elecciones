@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\TipoLugar;
+use app\models\Lugar;
 use app\models\Usuario;
 use app\models\search\TipoLugarSearch;
 use yii\web\Controller;

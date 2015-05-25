@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Lugar */
 
-$this->title = $model->lugar_id;
+$this->title = $model->lugar_nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Lugar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,13 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'lugar_id',
-            'tipo_lugar_id',
-            'poblacion_id',
-            'sindicatura_id',
-            'municipio_id',
+            //'lugar_id',
+            //'tipo_lugar_id',
+            //'poblacion_id',
+            //'sindicatura_id',
+            //'municipio_id',
+            'tipoName',
+            'municipioName',
+            'sindicaturaName',
+            'poblacionName',
             'lugar_nombre',
-            'colonia_id',
+            //'colonia_id',
             'direccion',
         ],
     ]) ?>

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Sindicatura */
 
-$this->title = 'Create Sindicatura';
+$this->title = 'Crear Sindicatura';
 $this->params['breadcrumbs'][] = ['label' => 'Sindicaturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

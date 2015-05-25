@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\TipoLugarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tipo Lugars';
+$this->title = 'Tipo de Lugar';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tipo-lugar-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Tipo Lugar', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear tipo de lugar', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'tipo_lugar_id',
+            //'tipo_lugar_id',
             'tipo_lugar_nombre',
 
             ['class' => 'yii\grid\ActionColumn'],

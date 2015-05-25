@@ -48,8 +48,9 @@ class Municipio extends \yii\db\ActiveRecord
     {
         return [
             'municipio_id' => 'Municipio ID',
-            'zona_id' => 'Zona ID',
-            'municipio_nombre' => 'Municipio Nombre',
+            'zona_id' => 'Zona',
+            'municipio_nombre' => 'Nombre del Municipio',
+            'zonaName'=>'Zona',
         ];
     }
 
@@ -108,4 +109,9 @@ class Municipio extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Sindicatura::className(), ['municipio_id' => 'municipio_id']);
     }
+
+    public function getzonaName()
+    {
+        return $this->zona->zona_nombre;
+    } 
 }

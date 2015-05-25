@@ -12,6 +12,10 @@ use app\models\Lugar;
  */
 class LugarSearch extends Lugar
 {
+    public $municipioName;
+    public $sindicaturaName;
+    public $poblacionName;
+    public $tipoName;
     /**
      * @inheritdoc
      */
@@ -20,6 +24,10 @@ class LugarSearch extends Lugar
         return [
             [['lugar_id', 'tipo_lugar_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'colonia_id'], 'integer'],
             [['lugar_nombre', 'direccion'], 'safe'],
+            [['municipioName'],'safe'],
+            [['sindicaturaName'],'safe'],
+            [['poblacionName'],'safe'],
+            [['tipoName'],'safe'],
         ];
     }
 
@@ -47,11 +55,43 @@ class LugarSearch extends Lugar
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'lugar_nombre', 
+                    'municipioName'=>[
+                        'asc'=>['municipio.municipio_nombre'=>SORT_ASC],
+                        'desc'=>['municipio.municipio_nombre'=>SORT_DESC],
+                        'label'=>'Municipio'
+                    ],
+                    'sindicaturaName'=>[
+                        'asc'=>['sindicatura.sindicatura_nombre'=>SORT_ASC],
+                        'desc'=>['sindicatura.sindicatura_nombre'=>SORT_DESC],
+                        'label'=>'Sindicatura'
+
+                    ],
+                    'poblacionName'=>[
+                        'asc'=>['poblacion.poblacion_nombre'=>SORT_ASC],
+                        'desc'=>['poblacion.poblacion_nombre'=>SORT_DESC],
+                        'label'=>'Poblacion'
+
+                    ],
+                    'tipoName'=>[
+                        'asc'=>['tipolugar.tipo_lugar_nombre'=>SORT_ASC],
+                        'desc'=>['tipoLugar.tipo_lugar_nombre'=>SORT_DESC],
+                        'label'=>'Tipo de Lugar'
+
+                    ]
+                ]
+            ]);
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
+            $query->joinWith('municipio');
+            $query->joinWith('sindicatura');
+            $query->joinWith('poblacion');
+            $query->joinWith('tipoLugar');
             return $dataProvider;
         }
 
@@ -63,10 +103,38 @@ class LugarSearch extends Lugar
             'municipio_id' => $this->municipio_id,
             'colonia_id' => $this->colonia_id,
         ]);
-
         $query->andFilterWhere(['like', 'lugar_nombre', $this->lugar_nombre])
             ->andFilterWhere(['like', 'direccion', $this->direccion]);
 
+
+        $query->andFilterWhere(['municipio_id' => $this->municipio_id]);
+        $query->andFilterWhere(['sindicatura_id' => $this->sindicatura_id]);
+        $query->andFilterWhere(['poblacion_id' => $this->poblacion_id]);
+        $query->andFilterWhere(['tipo_lugar_id' => $this->tipo_lugar_id]);
+        //Join Municipio
+        $query->joinWith(['municipio'=>function ($q) 
+        {
+            $q->where('municipio.municipio_nombre LIKE "%' . 
+            $this->municipioName . '%"');
+        }]);
+        //Join Sindicatura
+        $query->joinWith(['sindicatura'=>function ($q) 
+        {
+            $q->where('sindicatura.sindicatura_nombre LIKE "%' . 
+            $this->sindicaturaName . '%"');
+        }]);
+        //Join Poblacion
+        $query->joinWith(['poblacion'=>function ($q) 
+        {
+            $q->where('poblacion.poblacion_nombre LIKE "%' . 
+            $this->poblacionName . '%"');
+        }]);
+        //Join Tipo de lugar
+        $query->joinWith(['tipoLugar'=>function ($q) 
+        {
+            $q->where('tipo_lugar.tipo_lugar_nombre LIKE "%' . 
+            $this->tipoName . '%"');
+        }]);
         return $dataProvider;
     }
 }

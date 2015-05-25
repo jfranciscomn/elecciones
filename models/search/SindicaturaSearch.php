@@ -12,6 +12,8 @@ use app\models\Sindicatura;
  */
 class SindicaturaSearch extends Sindicatura
 {
+    public $municipioName;
+
     /**
      * @inheritdoc
      */
@@ -20,6 +22,8 @@ class SindicaturaSearch extends Sindicatura
         return [
             [['sindicatura_id', 'municipio_id'], 'integer'],
             [['sindicatura_nombre'], 'safe'],
+            [['municipioName'],'safe'],
+
         ];
     }
 
@@ -47,11 +51,24 @@ class SindicaturaSearch extends Sindicatura
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'sindicatura_nombre',
+                    'municipioName'=>[
+                        'asc'=>['municipio.municipio_nombre'=>SORT_ASC],
+                        'desc'=>['municipio.municipio_nombre'=>SORT_DESC],
+                        'label'=>'Nombre del Municipio'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
+            $query->joinWith('municipio');
             return $dataProvider;
         }
 
@@ -60,8 +77,14 @@ class SindicaturaSearch extends Sindicatura
             'municipio_id' => $this->municipio_id,
         ]);
 
+        $query->andFilterWhere(['municipio_id' => $this->municipio_id]);
         $query->andFilterWhere(['like', 'sindicatura_nombre', $this->sindicatura_nombre]);
 
+        $query->joinWith(['municipio'=>function ($q) 
+        {
+            $q->where('municipio.municipio_nombre LIKE "%' . 
+            $this->municipioName . '%"');
+        }]);
         return $dataProvider;
     }
 }

@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\TipoLugar */
 
-$this->title = $model->tipo_lugar_id;
-$this->params['breadcrumbs'][] = ['label' => 'Tipo Lugars', 'url' => ['index']];
+$this->title = $model->tipo_lugar_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Tipo de Lugar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tipo-lugar-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->tipo_lugar_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->tipo_lugar_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->tipo_lugar_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->tipo_lugar_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Seguro que quieres eliminar este objeto?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'tipo_lugar_id',
+            //'tipo_lugar_id',
             'tipo_lugar_nombre',
         ],
     ]) ?>

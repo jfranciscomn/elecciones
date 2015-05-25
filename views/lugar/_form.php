@@ -9,7 +9,6 @@ use kartik\widgets\Select2;
 /* @var $model app\models\Lugar */
 /* @var $form yii\widgets\ActiveForm */
 $url = \yii\helpers\Url::to(['sindicatura/autocompletar']);
-
 $initScript = <<< SCRIPT
 function (element, callback) {
     var id=\$(element).val();
@@ -20,7 +19,6 @@ function (element, callback) {
     }
 }
 SCRIPT;
-
 
 $urlPoblacion = \yii\helpers\Url::to(['poblacion/autocompletar']);
 // Script to initialize the selection based on the value of the select2 element
@@ -35,7 +33,6 @@ function (element, callback) {
 }
 SCRIPT;
 
-
 $urlColonia = \yii\helpers\Url::to(['colonia/autocompletar']);
 // Script to initialize the selection based on the value of the select2 element
 $initScriptColonia = <<< SCRIPT
@@ -49,6 +46,7 @@ function (element, callback) {
 }
 SCRIPT;
 ?>
+
 
 
 <div class="lugar-form">
@@ -119,11 +117,24 @@ SCRIPT;
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'tipo_lugar_id')->textInput() ?>
+                        <?= $form->field($model, 'tipo_lugar_id')->widget(Select2::classname(),[
+                                    
+                                    'data' => $tipos,
+                                    
+                                    'options' => ['placeholder' => 'Seleccionar un tipo de lugar ...',],
+                                    'pluginOptions' => [
+                                        'allowClear' => true,
+                                    ],
+                        ]) ?>                        
+                    </div>                                    
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <?= $form->field($model, 'lugar_nombre')->textInput(['maxlength' => 256]) ?>
                         <?= $form->field($model, 'direccion')->textInput(['maxlength' => 256]) ?>
                     </div>
                 </div>
+                 
             </div>
 
 

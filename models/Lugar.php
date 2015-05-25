@@ -57,6 +57,11 @@ class Lugar extends \yii\db\ActiveRecord
             'lugar_nombre' => 'Nombre del Lugar',
             'colonia_id' => 'Colonia',
             'direccion' => 'Direccion',
+            'municipioName' => 'Municipio',
+            'sindicaturaName'=> 'Sindicatura',
+            'poblacionName'=> 'Poblacion',
+            'tipoName'=>'Tipo de Lugar'
+
         ];
     }
 
@@ -90,5 +95,25 @@ class Lugar extends \yii\db\ActiveRecord
     public function getTipoLugar()
     {
         return $this->hasOne(TipoLugar::className(), ['tipo_lugar_id' => 'tipo_lugar_id']);
+    }
+
+    public function getMunicipioName ()
+    {
+        return $this->municipio->municipio_nombre;
+    }
+
+    public function getSindicaturaName()
+    {
+        return $this->sindicatura->sindicatura_nombre;
+    }
+
+    public function getPoblacionName()
+    {
+        return $this->poblacion->poblacion_nombre;
+    }
+
+    public function getTipoName()
+    {
+        return $this->tipoLugar->tipo_lugar_nombre;
     }
 }

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Sindicatura */
 
-$this->title = $model->sindicatura_id;
+$this->title = $model->sindicatura_nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Sindicaturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->sindicatura_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->sindicatura_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->sindicatura_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->sindicatura_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Seguro que quieres eliminar este objeto?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,8 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'sindicatura_id',
-            'municipio_id',
+            //'sindicatura_id',
+            //'municipio_id',
+            'municipioName',
             'sindicatura_nombre',
         ],
     ]) ?>

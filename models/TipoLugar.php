@@ -40,7 +40,7 @@ class TipoLugar extends \yii\db\ActiveRecord
     {
         return [
             'tipo_lugar_id' => 'Tipo Lugar ID',
-            'tipo_lugar_nombre' => 'Tipo Lugar Nombre',
+            'tipo_lugar_nombre' => 'Tipo de Lugar',
         ];
     }
 

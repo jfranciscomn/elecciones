@@ -51,9 +51,9 @@ class Poblacion extends \yii\db\ActiveRecord
             'poblacion_id' => 'Poblacion',
             'sindicatura_id' => 'Sindicatura',
             'municipio_id' => 'Municipio',
-            'poblacion_nombre' =>'Nombre de la Poblacion',
-            'municipioName' =>'Nombre del Municipio',
-            'sindicaturaName'=>'Nombre de la Sindicatura',
+            'poblacion_nombre' =>'Poblacion',
+            'municipioName' =>'Municipio',
+            'sindicaturaName'=>'Sindicatura',
         ];
     }
 
