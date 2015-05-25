@@ -47,7 +47,7 @@ class Municipio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'municipio_id' => 'Municipio ID',
+            'municipio_id' => 'ID Municipio',
             'zona_id' => 'Zona',
             'municipio_nombre' => 'Nombre del Municipio',
             'zonaName'=>'Zona',

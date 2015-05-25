@@ -132,6 +132,9 @@ SCRIPT;
                     <div class="col-md-6">
                         <?= $form->field($model, 'lugar_nombre')->textInput(['maxlength' => 256]) ?>
                         <?= $form->field($model, 'direccion')->textInput(['maxlength' => 256]) ?>
+                        <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
                     </div>
                 </div>
                  
@@ -140,9 +143,7 @@ SCRIPT;
 
     
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+    
 
     <?php ActiveForm::end(); ?>
 

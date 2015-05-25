@@ -46,7 +46,7 @@ class Sindicatura extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'sindicatura_id' => 'Sindicatura ID',
+            'sindicatura_id' => 'ID Sindicatura',
             'municipio_id' => 'Municipio',
             'sindicatura_nombre' => 'Sindicatura',
             'municipioName' =>'Municipio',

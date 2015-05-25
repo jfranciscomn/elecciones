@@ -48,7 +48,7 @@ class Poblacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'poblacion_id' => 'Poblacion',
+            'poblacion_id' => 'ID Poblacion',
             'sindicatura_id' => 'Sindicatura',
             'municipio_id' => 'Municipio',
             'poblacion_nombre' =>'Poblacion',

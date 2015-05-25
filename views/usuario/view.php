@@ -11,11 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="usuario-view">
-
-    
-
-  
-
     <table class="table table-striped table-bordered detail-view">
         <tr>
             <th>

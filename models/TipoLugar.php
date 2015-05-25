@@ -39,7 +39,7 @@ class TipoLugar extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'tipo_lugar_id' => 'Tipo Lugar ID',
+            'tipo_lugar_id' => 'ID Tipo Lugar',
             'tipo_lugar_nombre' => 'Tipo de Lugar',
         ];
     }

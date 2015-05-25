@@ -37,7 +37,7 @@ class Zona extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'zona_id' => 'Zona',
+            'zona_id' => 'ID Zona',
             'zona_nombre' => 'Zona',
         ];
     }
