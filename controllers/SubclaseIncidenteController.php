@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\SubclaseIncidente;
 use app\models\Usuario;
+use app\models\ClaseIncidente;
 use app\models\search\SubclaseIncidenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,12 +66,14 @@ class SubclaseIncidenteController extends Controller
     public function actionCreate()
     {
         $model = new SubclaseIncidente();
-
+        $data =  ClaseIncidente::find()->all();
+        $claseIncidentes = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->subclase_incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'claseIncidentes' => $claseIncidentes,
             ]);
         }
     }
@@ -107,13 +110,13 @@ class SubclaseIncidenteController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionAutocompletar($search = null, $clase= null, $id = null) {
+    public function actionAutocompletar($search = null, $claseincidente= null, $id = null) {
         $out = ['more' => false];
         if (!is_null($search)) {
             $query = new Query;
             $query->select('subclase_incidente_id as id, subclase_incidente_nombre AS text, clase_incidente_id')
                 ->from('subclase_incidente')
-                ->where('subclase_incidente_nombre LIKE "%' . $search .'%"'.' and clase_incidente_id = '.(empty($clase)? 0: $clase) )
+                ->where('subclase_incidente_nombre LIKE "%' . $search .'%"'.' and clase_incidente_id = '.(empty($claseincidente)? 0: $claseincidente) )
                 ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();

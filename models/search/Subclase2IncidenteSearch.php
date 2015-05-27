@@ -12,6 +12,9 @@ use app\models\Subclase2Incidente;
  */
 class Subclase2IncidenteSearch extends Subclase2Incidente
 {
+        public $claseName;
+        public $subclaseName;
+
     /**
      * @inheritdoc
      */
@@ -20,6 +23,8 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
         return [
             [['subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id'], 'integer'],
             [['subclase2_incidente_nombre'], 'safe'],
+            [['claseName'],'safe'],
+            [['subclaseName'],'safe'],
         ];
     }
 
@@ -47,11 +52,32 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'subclase2_incidente_nombre',
+                    'claseName'=>[
+                        'asc'=>['claseIncidente.clase_incidente_nombre'=>SORT_ASC],
+                        'desc'=>['claseIncidente.clase_incidente_nombre'=>SORT_DESC],
+                        'label'=>'Clase de incidente'
+
+                    ],
+                    'subclaseName'=>[
+                        'asc'=>['subclaseIncidente.clase_incidente_nombre'=>SORT_ASC],
+                        'desc'=>['subclaseIncidente.clase_incidente_nombre'=>SORT_DESC],
+                        'label'=>'Subclase de incidente'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
+            $query->joinWith('claseIncidente');
+            $query->joinWith('subclaseIncidente');
+
             return $dataProvider;
         }
 
@@ -62,6 +88,20 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
         ]);
 
         $query->andFilterWhere(['like', 'subclase2_incidente_nombre', $this->subclase2_incidente_nombre]);
+        $query->andFilterWhere(['clase_incidente_id' => $this->clase_incidente_id]);
+        $query->andFilterWhere(['subclase_incidente_id' => $this->subclase_incidente_id]);
+
+        $query->joinWith(['claseIncidente'=>function ($q) 
+        {
+            $q->where('clase_incidente.clase_incidente_nombre LIKE "%' . 
+            $this->claseName . '%"');
+        }]);
+
+        $query->joinWith(['subclaseIncidente'=>function ($q) 
+        {
+            $q->where('subclase_incidente.subclase_incidente_nombre LIKE "%' . 
+            $this->subclaseName . '%"');
+        }]);
 
         return $dataProvider;
     }

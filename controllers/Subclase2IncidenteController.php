@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Subclase2Incidente;
 use app\models\Usuario;
+use app\models\SubclaseIncidente;
+use app\models\ClaseIncidente;
 use app\models\search\Subclase2IncidenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,12 +67,16 @@ class Subclase2IncidenteController extends Controller
     public function actionCreate()
     {
         $model = new Subclase2Incidente();
+        $data =  ClaseIncidente::find()->all();
+        $claseIncidentes = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->subclase2_incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'claseIncidentes' => $claseIncidentes,
+
             ]);
         }
     }
@@ -84,12 +90,15 @@ class Subclase2IncidenteController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $data =  ClaseIncidente::find()->all();
+        $claseIncidentes = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->subclase2_incidente_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'claseIncidentes' => $claseIncidentes,
+
             ]);
         }
     }
@@ -114,7 +123,7 @@ class Subclase2IncidenteController extends Controller
             $query->select('subclase_incidente_id,subclase2_incidente_id as id, subclase2_incidente_nombre AS text, clase_incidente_id')
                 ->from('subclase2_incidente')
                 ->where('subclase2_incidente_nombre LIKE "%' . $search .'%"'.' and clase_incidente_id = '.
-                    (empty($clase)? 0: $clase). ( empty($subclase)? '' :' and subclase_incidente_id = '.$subclase) )
+                    (empty($clase)? 0: $clase). ( empty($subclase)? '' :' and subclase_incidente_id = '.$subclase))
                 ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();

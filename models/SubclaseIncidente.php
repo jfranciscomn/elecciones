@@ -44,8 +44,9 @@ class SubclaseIncidente extends \yii\db\ActiveRecord
     {
         return [
             'subclase_incidente_id' => 'Subclase Incidente ID',
-            'clase_incidente_id' => 'Clase Incidente ID',
-            'subclase_incidente_nombre' => 'Subclase Incidente Nombre',
+            'clase_incidente_id' => 'Clase de Incidente',
+            'subclase_incidente_nombre' => 'Nombre de subclase',
+            'claseName' => 'Incidente', 
         ];
     }
 
@@ -71,5 +72,10 @@ class SubclaseIncidente extends \yii\db\ActiveRecord
     public function getClaseIncidente()
     {
         return $this->hasOne(ClaseIncidente::className(), ['clase_incidente_id' => 'clase_incidente_id']);
+    }
+
+    public function getClaseName ()
+    {
+        return $this->claseIncidente->clase_incidente_nombre;
     }
 }

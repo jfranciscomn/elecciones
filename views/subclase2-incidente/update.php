@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Subclase2Incidente */
 
-$this->title = 'Update Subclase2 Incidente: ' . ' ' . $model->subclase2_incidente_id;
-$this->params['breadcrumbs'][] = ['label' => 'Subclase2 Incidentes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->subclase2_incidente_id, 'url' => ['view', 'id' => $model->subclase2_incidente_id]];
+$this->title = 'Actualizar incidente: ' . ' ' . $model->subclase2_incidente_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Incidente de subclase 2', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->subclase2_incidente_nombre, 'url' => ['view', 'id' => $model->subclase2_incidente_id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="subclase2-incidente-update">
@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'claseIncidentes' => $claseIncidentes,
+
     ]) ?>
 
 </div>

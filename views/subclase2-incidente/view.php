@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Subclase2Incidente */
 
-$this->title = $model->subclase2_incidente_id;
-$this->params['breadcrumbs'][] = ['label' => 'Subclase2 Incidentes', 'url' => ['index']];
+$this->title = $model->subclase2_incidente_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Incidentes de subclase 2', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subclase2-incidente-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->subclase2_incidente_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->subclase2_incidente_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->subclase2_incidente_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->subclase2_incidente_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Seguro que quieres eliminar este objeto?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,8 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'subclase2_incidente_id',
-            'subclase_incidente_id',
-            'clase_incidente_id',
+            //'subclase_incidente_id',
+            //'clase_incidente_id',
+            'claseName',
+            'subclaseName',
             'subclase2_incidente_nombre',
         ],
     ]) ?>

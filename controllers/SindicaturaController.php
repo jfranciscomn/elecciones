@@ -121,7 +121,7 @@ class SindicaturaController extends Controller
             $query = new Query;
             $query->select('sindicatura_id as id, sindicatura_nombre AS text')
                 ->from('sindicatura')
-                ->where('sindicatura_nombre LIKE "%' . $search .'%"'.' and municipio_id = '.$municipio)
+                ->where('sindicatura_nombre LIKE "%' . $search .'%"'.' and municipio_id = '.(empty($municipio)? 0:$municipio))
                 ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();
