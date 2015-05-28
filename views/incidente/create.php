@@ -10,9 +10,12 @@ $this->title = 'Crear Incidente';
 $this->params['breadcrumbs'][] = ['label' => 'Incidentes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="incidente-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="incidente-create">    
+	<p class="pull-left">
+        <?= Html::a('Cancelar', \yii\helpers\Url::to('index'), ['class' => 'colorido']) ?>
+    </p>
+    <div class="clearfix"></div>
 
     <?= $this->render('_form', [
         'model' => $model,
@@ -20,6 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'municipios'=>$municipios,
         'operativos'=>$operativos,
         'claseIncidente'=>$claseIncidente,
-    ]) ?>
+    ]); ?>
 
 </div>
