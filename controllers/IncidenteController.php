@@ -13,6 +13,7 @@ use app\models\search\IncidenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * IncidenteController implements the CRUD actions for Incidente model.
@@ -52,10 +53,11 @@ class IncidenteController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($incidente_id)
     {
+        Url::remember();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($incidente_id),
         ]);
     }
 
@@ -76,9 +78,10 @@ class IncidenteController extends Controller
 
         $data =  ClaseIncidente::find()->all();
         $claseIncidente = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre'); 
+
         $model->usuario_id =Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->incidente_id]);
+            return $this->redirect(['view', 'incidente_id' => $model->incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -133,7 +133,7 @@ SCRIPT;
                                         'ajax' => [
                                             'url' => $urlSubclase,
                                             'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,clase:$("#incidente-clase_incidente_id").val()}; }'),
+                                            'data' => new JsExpression('function(term,page) { return {search:term,claseincidente:$("#incidente-clase_incidente_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
                                         ],
                                         'initSelection' => new JsExpression($initScriptSublase),

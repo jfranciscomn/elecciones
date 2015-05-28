@@ -65,20 +65,30 @@ class Incidente extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'incidente_id' => 'Incidente ID',
-            'colonia_id' => 'Colonia ID',
-            'poblacion_id' => 'Poblacion ID',
-            'sindicatura_id' => 'Sindicatura ID',
-            'municipio_id' => 'Municipio ID',
-            'operativo_id' => 'Operativo ID',
-            'subclase2_incidente_id' => 'Subclase2 Incidente ID',
-            'subclase_incidente_id' => 'Subclase Incidente ID',
-            'clase_incidente_id' => 'Clase Incidente ID',
+            'incidente_id' => '# Incidente',
+            'colonia_id' => 'Colonia',
+            'poblacion_id' => 'Poblacion',
+            'sindicatura_id' => 'Sindicatura',
+            'municipio_id' => 'Municipio',
+            'operativo_id' => 'Operativo',
+            'subclase2_incidente_id' => 'Detalle Incidente 2',
+            'subclase_incidente_id' => 'Detalle Incidente',
+            'clase_incidente_id' => 'Incidente',
             'fecha' => 'Fecha',
-            'usuario_id' => 'Usuario ID',
+            'usuario_id' => 'Usuario',
             'direccion' => 'Direccion',
-            'lugar_id' => 'Lugar ID',
+            'lugar_id' => 'Lugar',
             'descripcion' => 'Descripcion',
+            'municipioName' => 'Municipio',
+            'sindicaturaName'=> 'Sindicatura',
+            'poblacionName'=> 'Poblacion',
+            'lugarName'=> 'Lugar',
+            'coloniaName'=>'Colonia',
+            'claseName'=>'Incidente',
+            'subclaseName'=> 'Detalle Incidente',
+            'subclase2Name'=> 'Detalle 2 Incidente',
+            'usuarioName'=> 'Usuario',
+
         ];
     }
 
@@ -185,4 +195,61 @@ class Incidente extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Vehiculo::className(), ['incidente_id' => 'incidente_id']);
     }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLugar()
+    {
+        return $this->hasOne(Lugar::className(), ['lugar_id' => 'lugar_id']);
+    }
+
+    public function getMunicipioName ()
+    {
+        return $this->municipio->municipio_nombre;
+    }
+
+    public function getSindicaturaName()
+    {
+        return $this->sindicatura->sindicatura_nombre;
+    }
+
+    public function getPoblacionName()
+    {
+        return $this->poblacion->poblacion_nombre;
+    }
+
+    public function getColoniaName()
+    {
+        return $this->colonia->colonia_nombre;
+    }
+
+    public function getClaseName()
+    {
+        return $this->claseIncidente->clase_incidente_nombre;
+    }
+
+    public function getlugarName()
+    {
+        return $this->lugar->lugar_nombre;
+    }
+
+    public function getSubclaseName()
+    {
+        return $this->subclaseIncidente->subclase_incidente_nombre;
+    }
+
+    public function getSubclase2Name()
+    {
+        return $this->subclase2Incidente->subclase2_incidente_nombre;
+    }
+
+    public function getUsuarioName()
+    {
+        return $this->usuario->usuario_nombre;
+    }
+
+
+
+
 }

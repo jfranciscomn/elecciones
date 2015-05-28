@@ -22,7 +22,6 @@ function (element, callback) {
 }
 SCRIPT;
 
-
 $urlPoblacion = \yii\helpers\Url::to(['poblacion/autocompletar']);
 // Script to initialize the selection based on the value of the select2 element
 $initScriptPoblacion= <<< SCRIPT
@@ -38,7 +37,6 @@ SCRIPT;
 ?>
 
 <div class="colonia-form">
-
 	<?php $form = ActiveForm::begin(); ?>
 	<div class="container-fluid">
         <div class="row">
