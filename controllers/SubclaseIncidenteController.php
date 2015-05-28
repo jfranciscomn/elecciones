@@ -69,7 +69,7 @@ class SubclaseIncidenteController extends Controller
         $data =  ClaseIncidente::find()->all();
         $claseIncidentes = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->subclase_incidente_id]);
+            return $this->redirect(['//subclase2-incidente/create', 'id' => $model->subclase_incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

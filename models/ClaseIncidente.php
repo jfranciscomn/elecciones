@@ -42,7 +42,7 @@ class ClaseIncidente extends \yii\db\ActiveRecord
     {
         return [
             'clase_incidente_id' => 'ID Clase Incidente',
-            'clase_incidente_nombre' => 'Clase de Incidente',
+            'clase_incidente_nombre' => 'Incidente',
         ];
     }
 

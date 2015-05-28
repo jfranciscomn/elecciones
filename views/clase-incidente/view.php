@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\ClaseIncidente */
 
 $this->title = $model->clase_incidente_nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Clase Incidentes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Incidentes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="clase-incidente-view">

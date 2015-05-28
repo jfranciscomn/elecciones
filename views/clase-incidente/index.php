@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\ClaseIncidenteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Clase de Incidentes';
+$this->title = 'Incidentes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="clase-incidente-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Crear Clase de Incidente', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Incidente', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

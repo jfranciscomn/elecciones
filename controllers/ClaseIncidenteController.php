@@ -55,6 +55,7 @@ class ClaseIncidenteController extends Controller
         ]);
     }
 
+
     /**
      * Creates a new ClaseIncidente model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -66,7 +67,7 @@ class ClaseIncidenteController extends Controller
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->clase_incidente_id]);
+            return $this->redirect(['//subclase-incidente/create']);
         } else {
             return $this->render('create', [
                 'model' => $model,
