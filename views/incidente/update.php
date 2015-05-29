@@ -11,7 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => $model->incidente_nombre, 'url' => 
 $this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="incidente-update">
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [

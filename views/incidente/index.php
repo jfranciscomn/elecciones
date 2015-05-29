@@ -125,6 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'poblacion_id',
             //'sindicatura_id',
             //'municipio_id',
+            'fecha',
             'coloniaName',
             'poblacionName',
             'sindicaturaName',
@@ -137,7 +138,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'subclase2_incidente_id',
             /*'subclase_incidente_id'*/
             //'claseIncidente.clase_incidente_nombre',
-            /*'fecha'*/
             /*'usuario_id'*/
             /*'direccion:ntext'*/
             /*'lugar_id'*/

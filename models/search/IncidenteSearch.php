@@ -68,6 +68,7 @@ class IncidenteSearch extends Incidente
         $dataProvider->setSort([
                 'attributes'=>[
                     'incidente_id', 
+                    'fecha',
                     'municipioName'=>[
                         'asc'=>['municipio.municipio_nombre'=>SORT_ASC],
                         'desc'=>['municipio.municipio_nombre'=>SORT_DESC],
@@ -201,7 +202,6 @@ class IncidenteSearch extends Incidente
             $q->where('usuario.usuario_nombre LIKE "%' . 
             $this->subclaseName . '%"');
         }]);
-
 
         return $dataProvider;
     }

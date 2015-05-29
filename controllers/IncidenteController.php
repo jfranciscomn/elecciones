@@ -9,6 +9,8 @@ use app\models\Operativo;
 use app\models\Persona;
 use app\models\ClaseIncidente;
 use app\models\Usuario;
+use app\models\Corporacion;
+use app\models\Vehiculo;
 use app\models\search\IncidenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -70,6 +72,9 @@ class IncidenteController extends Controller
     {
         $model = new Incidente();
         $model2 = new Persona();
+        $model3 = new Vehiculo();
+        $model4 = new Corporacion();
+
         $data =  Municipio::find()->all();
         $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
 
@@ -86,6 +91,8 @@ class IncidenteController extends Controller
             return $this->render('create', [
                 'model' => $model,
                 'model2' => $model2,
+                'model3' => $model3,
+                'model4' => $model4,
                 'municipios'=>$municipios,
                 'operativos'=>$operativos,
                 'claseIncidente'=>$claseIncidente,
@@ -106,9 +113,9 @@ class IncidenteController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($incidente_id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($incidente_id)->delete();
 
         return $this->redirect(['index']);
     }

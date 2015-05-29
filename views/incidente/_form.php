@@ -89,83 +89,75 @@ SCRIPT;
 
 
 <div class="incidente-form">
-
     <?php $form = ActiveForm::begin(); ?>
-
     <div class="panel panel-primary" id='divdenunciante'>
-        <div class="panel-heading">General </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <?= $form->field($model, 'operativo_id')->widget(Select2::classname(),[
-                                    
-                                    'data' => $operativos,
-                                    
-                                    'options' => ['placeholder' => 'Seleccionar Operativo ...',],
-                                    'pluginOptions' => [
-                                        'allowClear' => true,
-                                    ],
-                        ]) ?>
-                    </div>
-                    <div class="col-md-6">
-                        
-                        <?= $form->field($model, 'clase_incidente_id')->widget(Select2::classname(),[
-                                    
-                                    'data' => $claseIncidente,
-                                    
-                                    'options' => ['placeholder' => 'Seleccionar Incidente ...',],
-                                    
-                                    'pluginOptions' => [
-                                        'allowClear' => true,
-                                    ],
-
-                        ]) ?>
-                    </div>
+        <div class="panel-heading">
+            General 
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $form->field($model, 'operativo_id')->widget(Select2::classname(),[                                
+                                'data' => $operativos,                                
+                                'options' => ['placeholder' => 'Seleccionar Operativo ...',],
+                                'pluginOptions' => [
+                                    'allowClear' => true,                                    
+                                ],
+                    ]) ?>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        
-
-                        <?= $form->field($model, 'subclase_incidente_id')->widget(Select2::classname(),[
-                                    'options' => ['placeholder' => 'Seleccionar ...',],
-                                    'pluginOptions' => [
+                <div class="col-md-6">                        
+                    <?= $form->field($model, 'clase_incidente_id')->widget(Select2::classname(),[                                
+                        'data' => $claseIncidente,
+                        'options' => ['placeholder' => 'Seleccionar Incidente ...',],                                
+                                        'pluginOptions' => [
                                         'allowClear' => true,
-                                        'ajax' => [
-                                            'url' => $urlSubclase,
-                                            'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,claseincidente:$("#incidente-clase_incidente_id").val()}; }'),
-                                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-                                        ],
-                                        'initSelection' => new JsExpression($initScriptSublase),
-                                    ],
-                        ]) ?>
-                    </div>
-                    <div class="col-md-6">
-                        
-                        <?= $form->field($model, 'subclase2_incidente_id')->widget(Select2::classname(),[
-                                    'options' => ['placeholder' => 'Seleccionar ...',],
-                                    'pluginOptions' => [
-                                        'allowClear' => true,
-                                        'ajax' => [
-                                            'url' => $urlSubclase2,
-                                            'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,clase:$("#incidente-clase_incidente_id").val(),subclase:$("#incidente-subclase_incidente_id").val()}; }'),
-                                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-                                        ],
-                                        'initSelection' => new JsExpression($initScriptSublase2),
-                                    ],
-                        ]) ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                    <?= $form->field($model, 'descripcion')->textArea() ?>
-                </div>
+                        ],
+                    ]) ?>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $form->field($model, 'subclase_incidente_id')->widget(Select2::classname(),[
+                        'options' => ['placeholder' => 'Seleccionar ...',],
+                        'pluginOptions' => [
+                        'allowClear' => true,
+                        'ajax' => [
+                                    'url' => $urlSubclase,
+                                    'dataType' => 'json',
+                                    'data' => new JsExpression('function(term,page) { return {search:term,claseincidente:$("#incidente-clase_incidente_id").val()}; }'),
+                                    'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                                    ],
+                                    'initSelection' => new JsExpression($initScriptSublase),
+                                ],
+                    ]) 
 
+                    ?>
+                </div>
+                <div class="col-md-6">                        
+                    <?= $form->field($model, 'subclase2_incidente_id')->widget(Select2::classname(),[
+                        'options' => ['placeholder' => 'Seleccionar ...',],
+                        'pluginOptions' => [
+                            'allowClear' => true,
+                            'ajax' => [
+                                        'url' => $urlSubclase2,
+                                        'dataType' => 'json',
+                                        'data' => new JsExpression('function(term,page) { return {search:term,clase:$("#incidente-clase_incidente_id").val(),subclase:$("#incidente-subclase_incidente_id").val()}; }'),
+                                        'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                            ],
+                            'initSelection' => new JsExpression($initScriptSublase2),
+                        ],
+                    ]) ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $form->field($model, 'descripcion')->textArea() ?>
+                </div>
+            </div>
         </div>
     </div>
+
+
     <div class="panel panel-primary" id='divdenunciante'>
         <div class="panel-heading">Ubicacion</div>
             <div class="panel-body">
@@ -179,12 +171,16 @@ SCRIPT;
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                     ],
-                        ]) ?>
+                        ]);
+                    $cosa ->data;
+
+
+                        ?>
                     </div>
+                            <?= $cosa;  ?>
+
                     <div class="col-md-6">
-                        <?= $form->field($model, 'sindicatura_id')->widget(Select2::classname(),[
-                                    
-                                    
+                        <?= $form->field($model, 'sindicatura_id')->widget(Select2::classname(),[                                                                    
                                     'options' => ['placeholder' => 'Seleccionar una sindicatura ...',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
@@ -216,8 +212,7 @@ SCRIPT;
                         ]) ?>
                         
                     </div>
-                    <div class="col-md-6">
-                        
+                    <div class="col-md-6">                        
                         <?= $form->field($model, 'colonia_id')->widget(Select2::classname(),[
                                     'options' => ['placeholder' => 'Seleccionar una colonia ...',],
                                     'pluginOptions' => [
@@ -259,28 +254,25 @@ SCRIPT;
                 </div>
             </div>
         </div>
-    </div>
 
-    
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">Personas</div>
+                <div class="panel-heading">
+                    Personas
+                </div>
                 <div class="panel-body">
-                    <?php
-                    
-                    
+                    <?php                                        
                     PopoverX::begin([
-                        'placement' => PopoverX::ALIGN_TOP,
+                        'placement' => PopoverX::ALIGN_RIGHT,
                         'toggleButton' => ['label'=>'', 'class'=>'btn btn-default glyphicon glyphicon-plus'],
                         'header' => '<i class="glyphicon glyphicon-user"></i> ',
-                        'footer'=>Html::button('agregar', ['class'=>'btn btn-sm btn-primary']) 
-                                 
+                        //'footer'=>Html::button($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'])                                  
                     ]);
-
-                       echo $this->render('_form_persona'); 
-                    
-                    
+                    echo $this->render('_form_persona',[
+                        'model' => $model,
+                        'model2' => $model2,
+                        ]);                                  
                     PopoverX::end();
                     
                 ?>
@@ -290,23 +282,54 @@ SCRIPT;
         </div>
         <div class="col-md-6">
             <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">Vehiculos</div>
+                <div class="panel-heading">
+                    Vehiculos
+                </div>
                 <div class="panel-body">
+                    <?php                                        
+                    PopoverX::begin([
+                        'placement' => PopoverX::ALIGN_TOP,
+                        'toggleButton' => ['label'=>'', 'class'=>'btn btn-default glyphicon glyphicon-plus'],
+                        'header' => '<i class="glyphicon glyphicon-user"></i> ',
+                        'footer'=>Html::button('agregar', ['class'=>'btn btn-sm btn-primary'])                                  
+                    ]);
+                    echo $this->render('_form_vehiculo',[
+                        'model' => $model,
+                        'model3' => $model3,
+                        ]);                                     
+                    PopoverX::end();
+                    
+                ?>
                 </div>
             </div>
         </div>
     </div>
-    
-
-    
-
-    
-
-    
-
+    <div class="row">
+      <div class="col-md-6">
+            <div class="panel panel-primary" id='divdenunciante'>
+                <div class="panel-heading">Corporaciones</div>
+                <div class="panel-body">
+                    <?php                                        
+                    PopoverX::begin([
+                        'placement' => PopoverX::ALIGN_RIGHT,
+                        'toggleButton' => ['label'=>'', 'class'=>'btn btn-default glyphicon glyphicon-plus'],
+                        'header' => '<i class="glyphicon glyphicon-user"></i> ',
+                        'footer'=>Html::button('agregar', ['class'=>'btn btn-sm btn-primary'])                                  
+                    ]);
+                    echo $this->render('_form_corporacion',[
+                        'model' => $model,
+                        'model4' => $model4,
+                        ]);                                     
+                    PopoverX::end();
+                    
+                ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
