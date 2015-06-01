@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Corporacion */
 
-$this->title = 'Create Corporacion';
-$this->params['breadcrumbs'][] = ['label' => 'Corporacions', 'url' => ['index']];
+$this->title = 'Crear Corporacion';
+$this->params['breadcrumbs'][] = ['label' => 'Corporacion', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="corporacion-create">
@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'corporacionesTipos' => $corporacionesTipos,
+
     ]) ?>
 
 </div>

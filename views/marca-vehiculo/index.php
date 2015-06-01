@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\CorporacionSearch */
+/* @var $searchModel app\models\search\MarcaVehiculoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Corporaciones';
+$this->title = 'Marca Vehiculos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="corporacion-index">
+<div class="marca-vehiculo-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Crear Corporacion', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Marca Vehiculo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,10 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'corporacion_id',
-            'corporacion_nombre',
-            //'tipo_corporacion_id',
-            'tipoCorporacion.tipo_corporacion_nombre',
+            //'marca_vehiculo_id',
+            'marca_vehiculoco_nombre',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

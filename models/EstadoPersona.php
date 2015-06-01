@@ -40,7 +40,7 @@ class EstadoPersona extends \yii\db\ActiveRecord
     {
         return [
             'estado_persona_id' => 'Estado Persona ID',
-            'estado_persona_nombre' => 'Estado Persona Nombre',
+            'estado_persona_nombre' => 'Estado de la persona',
         ];
     }
 
