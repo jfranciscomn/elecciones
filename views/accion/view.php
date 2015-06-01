@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Accion */
 
-$this->title = $model->accion_id;
-$this->params['breadcrumbs'][] = ['label' => 'Accions', 'url' => ['index']];
+$this->title = $model->accion_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Accion', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="accion-view">

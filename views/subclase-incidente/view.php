@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\SubclaseIncidente */
 
 $this->title = $model->subclase_incidente_nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Subclase Incidentes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Detalle de Incidente', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subclase-incidente-view">
@@ -29,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'subclase_incidente_id',
-            'clase_incidente_id',
+            //'clase_incidente_id',
+            'claseName',
             'subclase_incidente_nombre',
         ],
     ]) ?>

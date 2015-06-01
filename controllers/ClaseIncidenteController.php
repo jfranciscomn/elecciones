@@ -67,7 +67,7 @@ class ClaseIncidenteController extends Controller
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['//subclase-incidente/create']);
+            return $this->redirect(['view', 'id' => $model->clase_incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

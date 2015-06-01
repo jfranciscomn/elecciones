@@ -62,7 +62,33 @@ AppAsset::register($this);
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar'],
-                'items' => $menu
+                'items' => [
+                                ['label'=>'Permisos', 'items'=>[
+                                                                    ['label'=>'Usuarios','url' =>['usuario/index']],
+                                                                    ['label'=>'Bitacora','url' =>['bitacora/index']],
+                                                                    ['label'=>'Grupos','url' =>['grupo/index']],
+                                                                    ['label'=>'Acciones','url' =>['accion/index']],
+                                                        ]],
+
+                                ['label'=>'Ubicaciones', 'items'=>[
+                                                                    ['label'=>'Colonias','url' =>['colonia/index']],
+                                                                    ['label'=>'Lugares','url' =>['lugar/index']],
+                                                                    ['label'=>'Municipios','url' =>['municipio/index']],
+                                                                    ['label'=>'Poblaciones','url' =>['poblacion/index']],
+                                                                    ['label'=>'Sindicaturas','url' =>['sindicatura/index']],
+                                                                    ['label'=>'Tipo de Lugar','url' =>['tipo-lugar/index']],
+                                                                    ['label'=>'Zonas','url' =>['zona/index']],
+                                                        ]],
+                                ['label'=>'Tipo de Incidente', 'items'=>[
+                                                                    ['label'=>'Tipo de Incidente','url' =>['clase-incidente/index']],
+                                                                    ['label'=>'Detalle de Incidente','url' =>['subclase-incidente/index']],
+                                                                    ['label'=>'Detalle de Incidente 2','url' =>['subclase2-incidente/index']],
+                                                        ]],  
+
+                                ['label'=>'Incidentes', 'items'=>[
+                                                                    ['label'=>'Incidentes','url' =>['incidente/index']],
+                                                        ]],                                                                                                               
+                ],
             ]);
             NavBar::end();
         ?>

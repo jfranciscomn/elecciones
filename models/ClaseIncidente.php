@@ -41,8 +41,8 @@ class ClaseIncidente extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'clase_incidente_id' => 'ID Clase Incidente',
-            'clase_incidente_nombre' => 'Incidente',
+            'clase_incidente_id' => 'Tipo de Incidente',
+            'clase_incidente_nombre' => 'Tipo de Incidente',
         ];
     }
 

@@ -172,13 +172,11 @@ SCRIPT;
                                         'allowClear' => true,
                                     ],
                         ]);
-                    $cosa ->data;
+                    
 
 
                         ?>
                     </div>
-                            <?= $cosa;  ?>
-
                     <div class="col-md-6">
                         <?= $form->field($model, 'sindicatura_id')->widget(Select2::classname(),[                                                                    
                                     'options' => ['placeholder' => 'Seleccionar una sindicatura ...',],

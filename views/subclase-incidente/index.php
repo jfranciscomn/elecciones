@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\SubclaseIncidenteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Subclase de Incidentes';
+$this->title = 'Detalle de Incidente';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subclase-incidente-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Crear Subclase', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Detalle de Incidente', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
