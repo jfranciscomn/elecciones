@@ -172,12 +172,12 @@ SCRIPT;
                                         'allowClear' => true,
                                     ],
                         ]);
-                    $cosa ->data;
+         
 
 
                         ?>
                     </div>
-                            <?= $cosa;  ?>
+             
 
                     <div class="col-md-6">
                         <?= $form->field($model, 'sindicatura_id')->widget(Select2::classname(),[                                                                    
@@ -255,81 +255,11 @@ SCRIPT;
             </div>
         </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">
-                    Personas
-                </div>
-                <div class="panel-body">
-                    <?php                                        
-                    PopoverX::begin([
-                        'placement' => PopoverX::ALIGN_RIGHT,
-                        'toggleButton' => ['label'=>'', 'class'=>'btn btn-default glyphicon glyphicon-plus'],
-                        'header' => '<i class="glyphicon glyphicon-user"></i> ',
-                        //'footer'=>Html::button($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'])                                  
-                    ]);
-                    echo $this->render('_form_persona',[
-                        'model' => $model,
-                        'model2' => $model2,
-                        ]);                                  
-                    PopoverX::end();
-                    
-                ?>
-                </div>
-                
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">
-                    Vehiculos
-                </div>
-                <div class="panel-body">
-                    <?php                                        
-                    PopoverX::begin([
-                        'placement' => PopoverX::ALIGN_TOP,
-                        'toggleButton' => ['label'=>'', 'class'=>'btn btn-default glyphicon glyphicon-plus'],
-                        'header' => '<i class="glyphicon glyphicon-user"></i> ',
-                        'footer'=>Html::button('agregar', ['class'=>'btn btn-sm btn-primary'])                                  
-                    ]);
-                    echo $this->render('_form_vehiculo',[
-                        'model' => $model,
-                        'model3' => $model3,
-                        ]);                                     
-                    PopoverX::end();
-                    
-                ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-            <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">Corporaciones</div>
-                <div class="panel-body">
-                    <?php                                        
-                    PopoverX::begin([
-                        'placement' => PopoverX::ALIGN_RIGHT,
-                        'toggleButton' => ['label'=>'', 'class'=>'btn btn-default glyphicon glyphicon-plus'],
-                        'header' => '<i class="glyphicon glyphicon-user"></i> ',
-                        'footer'=>Html::button('agregar', ['class'=>'btn btn-sm btn-primary'])                                  
-                    ]);
-                    echo $this->render('_form_corporacion',[
-                        'model' => $model,
-                        'model4' => $model4,
-                        ]);                                     
-                    PopoverX::end();
-                    
-                ?>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Siguiente' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

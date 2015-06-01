@@ -12,16 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="incidente-create">    
-	<p class="pull-left">
-        <?= Html::a('Cancelar', \yii\helpers\Url::to('index'), ['class' => 'colorido']) ?>
-    </p>
+
     <div class="clearfix"></div>
 
     <?= $this->render('_form', [
         'model' => $model,
-        'model2' => $model2,      
-        'model3' => $model3,
-        'model4' => $model4,
+
         'municipios'=>$municipios,
         'operativos'=>$operativos,
         'claseIncidente'=>$claseIncidente,
