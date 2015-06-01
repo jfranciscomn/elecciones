@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Subclase2Incidente */
 
-$this->title = 'Crear Incidente de subclase 2';
-$this->params['breadcrumbs'][] = ['label' => 'Incidentes subclase 2', 'url' => ['index']];
+$this->title = 'Crear Detalle de Incidente 2';
+$this->params['breadcrumbs'][] = ['label' => 'Detalle de Incidente 2', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subclase2-incidente-create">

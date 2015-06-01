@@ -43,10 +43,10 @@ class SubclaseIncidente extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'subclase_incidente_id' => 'Subclase Incidente ID',
-            'clase_incidente_id' => 'Clase de Incidente',
-            'subclase_incidente_nombre' => 'Nombre de subclase',
-            'claseName' => 'Incidente', 
+            'subclase_incidente_id' => 'Detalle de Incidente',
+            'clase_incidente_id' => 'Tipo de Incidente',
+            'subclase_incidente_nombre' => 'Detalle Incidente',
+            'claseName' => 'Tipo de Incidente', 
         ];
     }
 
