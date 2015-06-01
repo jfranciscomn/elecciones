@@ -79,7 +79,7 @@ AppAsset::register($this);
                                                                     ['label'=>'Tipo de Lugar','url' =>['tipo-lugar/index']],
                                                                     ['label'=>'Zonas','url' =>['zona/index']],
                                                         ]],
-                                ['label'=>'Tipo de Incidente', 'items'=>[
+                                ['label'=>'Catalogos', 'items'=>[
                                                                     ['label'=>'Tipo de Incidente','url' =>['clase-incidente/index']],
                                                                     ['label'=>'Detalle de Incidente','url' =>['subclase-incidente/index']],
                                                                     ['label'=>'Detalle de Incidente 2','url' =>['subclase2-incidente/index']],
