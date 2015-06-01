@@ -8,11 +8,16 @@ use app\models\IncidenteHasCorporacion;
 use app\models\search\IncidenteHasCorporacionSearch;
 use app\models\Municipio;
 use app\models\Operativo;
+use app\models\EstadoPersona;
 use app\models\Persona;
+use app\models\search\PersonaSearch;
 use app\models\ClaseIncidente;
 use app\models\Usuario;
 use app\models\Corporacion;
 use app\models\Vehiculo;
+use app\models\EstadoVehiculo;
+use app\models\search\VehiculoSearch;
+use app\models\MarcaVehiculo;
 use app\models\search\IncidenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -134,6 +139,7 @@ class IncidenteController extends Controller
         return $this->render('addcorp', [
            'model' => (new IncidenteHasCorporacion),
            'corporaciones'=> $corporaciones,
+           'incidente_id'=> $incidente_id,
                
            'dataProvider' => $dataProvider,
         ]);
@@ -143,40 +149,65 @@ class IncidenteController extends Controller
     public function actionAgregarPersona($incidente_id)
     {
         $model =  new Persona();
-        $data =  Corporacion::find()->all();
-        
-        $searchModel = new IncidenteHasCorporacionSearch();
+
+
+        $data =  Municipio::find()->all();
+        $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre'); 
+
+        $data =  EstadoPersona::find()->all();
+        $estados = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'estado_persona_id','estado_persona_nombre'); 
+       
+        $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
+
         if ($model->load(Yii::$app->request->post()) ) {
             $model->incidente_id=$incidente_id;
             $model->save();
-            $model = new IncidenteHasCorporacion();
+            $model = new Persona();
         }
 
-
-        $estasno=[];
-        $corporaciones =[];
-        if(count($data)==0)
-            $corporaciones = [''=>''];
-
-        $tomadas = IncidenteHasCorporacion::find()->where('incidente_id='.$incidente_id)->all();
-        foreach ($tomadas as $tomada) {
-            $estasno[$tomada->corporacion_id] = 1;
-        }
-        foreach ($data as $corp) {
-            if (!isset($estasno[$corp->corporacion_id])) {
-                $corporaciones[$corp->corporacion_id]=$corp->corporacion_nombre;
-            }
-            
-        }
-        //$corporaciones = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'corporacion_id','corporacion_nombre');
-        
-        return $this->render('addcorp', [
-           'model' => (new IncidenteHasCorporacion),
-           'corporaciones'=> $corporaciones,
-               
+        return $this->render('addPers', [
+           'model' => $model,
+           'municipios'=>$municipios,
+           'estados'=>$estados,
            'dataProvider' => $dataProvider,
+           'incidente_id'=> $incidente_id,
+
+        ]);
+      
+    }
+
+
+
+    public function actionAgregarVehiculo($incidente_id)
+    {
+        $model =  new Vehiculo();
+
+
+        
+
+        $data =  EstadoVehiculo::find()->all();
+        $estados = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'estado_vehiculo_id','estado_vehiculo_nombre'); 
+       
+        $data =  MarcaVehiculo::find()->all();
+        $marcas = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'marca_vehiculo_id','marca_vehiculoco_nombre'); 
+
+        $searchModel = new VehiculoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->incidente_id=$incidente_id;
+            $model->save();
+            $model = new Vehiculo();
+        }
+
+        return $this->render('addvehi', [
+           'model' => $model,
+           'estados'=>$estados,
+           'marcas'=>$marcas,
+           'dataProvider' => $dataProvider,
+           'incidente_id'=> $incidente_id,
+
         ]);
       
     }
@@ -203,6 +234,25 @@ class IncidenteController extends Controller
 
         return $this->redirect(Yii::$app->request->referrer);
     }
+
+    public function actionPersonaDelete($incidente_id, $persona_id)
+    {
+        $model = Persona::findOne(['incidente_id' => $incidente_id, 'persona_id' => $persona_id]);
+        $model->delete();
+        
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionVehiculoDelete($vehiculo_id)
+    {
+        $model = Vehiculo::findOne(['vehiculo_id' => $vehiculo_id]);
+        $model->delete();
+        
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
 
     public function actionDelete($incidente_id)
     {
