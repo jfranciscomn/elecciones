@@ -3,17 +3,19 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Corporacion;
-use app\models\TipoCorporacion;
-use app\models\search\CorporacionSearch;
+use app\models\GamaVehiculo;
+use app\models\MarcaVehiculo;
+use app\models\search\GamaVehiculoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+use yii\helpers\Json;
 
 /**
- * CorporacionController implements the CRUD actions for Corporacion model.
+ * GamaVehiculoController implements the CRUD actions for GamaVehiculo model.
  */
-class CorporacionController extends Controller
+class GamaVehiculoController extends Controller
 {
     public function behaviors()
     {
@@ -28,12 +30,12 @@ class CorporacionController extends Controller
     }
 
     /**
-     * Lists all Corporacion models.
+     * Lists all GamaVehiculo models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CorporacionSearch();
+        $searchModel = new GamaVehiculoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +45,7 @@ class CorporacionController extends Controller
     }
 
     /**
-     * Displays a single Corporacion model.
+     * Displays a single GamaVehiculo model.
      * @param integer $id
      * @return mixed
      */
@@ -55,28 +57,28 @@ class CorporacionController extends Controller
     }
 
     /**
-     * Creates a new Corporacion model.
+     * Creates a new GamaVehiculo model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Corporacion();
-        $data =  TipoCorporacion::find()->all();
-        $corporacionesTipos = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'tipo_corporacion_id','tipo_corporacion_nombre'); 
+        $model = new GamaVehiculo();
+        $data =  MarcaVehiculo::find()->all();
+        $marcaVehiculos = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'marca_vehiculo_id','marca_vehiculoco_nombre'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->corporacion_id]);
+            return $this->redirect(['view', 'id' => $model->gama_vehiculo_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'corporacionesTipos' => $corporacionesTipos,
+                'marcaVehiculos' => $marcaVehiculos,
             ]);
         }
     }
 
     /**
-     * Updates an existing Corporacion model.
+     * Updates an existing GamaVehiculo model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -84,21 +86,21 @@ class CorporacionController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $data =  TipoCorporacion::find()->all();
-        $corporacionesTipos = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'tipo_corporacion_id','tipo_corporacion_nombre'); 
+        $data =  MarcaVehiculo::find()->all();
+        $marcaVehiculos = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'marca_vehiculo_id','marca_vehiculoco_nombre'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->corporacion_id]);
+            return $this->redirect(['view', 'id' => $model->gama_vehiculo_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'corporacionesTipos' => $corporacionesTipos,
+                'marcaVehiculos' => $marcaVehiculos,
             ]);
         }
     }
 
     /**
-     * Deletes an existing Corporacion model.
+     * Deletes an existing GamaVehiculo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,16 +112,37 @@ class CorporacionController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionAutocompletar($search = null, $marca= null, $id = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select('gama_vehiculo_id as id, gama_vehiculo_nombre AS text')
+                ->from('gama_vehiculo')
+                ->where('gama_vehiculo_nombre LIKE "%' . $search .'%"'.' and marca_vehiculo_id = '.(empty($marca)? 0:$marca))
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => GamaVehiculo::findOne($id)->gama_vehiculo_nombre];
+        }
+        else {
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultado para gama'];
+        }
+        echo Json::encode($out);
+    }
+
     /**
-     * Finds the Corporacion model based on its primary key value.
+     * Finds the GamaVehiculo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Corporacion the loaded model
+     * @return GamaVehiculo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Corporacion::findOne($id)) !== null) {
+        if (($model = GamaVehiculo::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

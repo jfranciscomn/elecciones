@@ -40,7 +40,7 @@ class TipoCorporacion extends \yii\db\ActiveRecord
     {
         return [
             'tipo_corporacion_id' => 'Tipo Corporacion ID',
-            'tipo_corporacion_nombre' => 'Tipo Corporacion Nombre',
+            'tipo_corporacion_nombre' => 'Tipo de Corporacion',
         ];
     }
 

@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Corporacion */
+/* @var $model app\models\EstadoPersona */
 
-$this->title = $model->corporacion_nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Corporacion', 'url' => ['index']];
+$this->title = $model->estado_persona_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Estado de la Persona', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="corporacion-view">
+<div class="estado-persona-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Actualizar', ['update', 'id' => $model->corporacion_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->corporacion_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->estado_persona_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->estado_persona_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => '¿Seguro que quieres eliminar este objeto?',
@@ -28,9 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'corporacion_id',
-            'corporacion_nombre',
-            'tipo_corporacion_id',
+            'estado_persona_id',
+            'estado_persona_nombre',
         ],
     ]) ?>
 

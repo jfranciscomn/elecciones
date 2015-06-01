@@ -4,18 +4,19 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TipoCorporacion */
+/* @var $model app\models\Vehiculo */
 
-$this->title = 'Crear Tipo de Corporacion';
-$this->params['breadcrumbs'][] = ['label' => 'Tipo de Corporacion', 'url' => ['index']];
+$this->title = 'Create Vehiculo';
+$this->params['breadcrumbs'][] = ['label' => 'Vehiculos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tipo-corporacion-create">
+<div class="vehiculo-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
+                'marcaVehiculos'=> $marcaVehiculos,
     ]) ?>
 
 </div>

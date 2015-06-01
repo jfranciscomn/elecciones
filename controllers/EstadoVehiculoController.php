@@ -3,19 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Corporacion;
-use app\models\TipoCorporacion;
-use app\models\search\CorporacionSearch;
+use app\models\EstadoVehiculo;
+use app\models\search\EstadoVehiculoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * CorporacionController implements the CRUD actions for Corporacion model.
- */
-class CorporacionController extends Controller
+class EstadoVehiculoController extends \yii\web\Controller
 {
-    public function behaviors()
+
+	public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,13 +24,9 @@ class CorporacionController extends Controller
         ];
     }
 
-    /**
-     * Lists all Corporacion models.
-     * @return mixed
-     */
     public function actionIndex()
     {
-        $searchModel = new CorporacionSearch();
+        $searchModel = new EstadoVehiculoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,11 +35,7 @@ class CorporacionController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Corporacion model.
-     * @param integer $id
-     * @return mixed
-     */
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -61,21 +50,19 @@ class CorporacionController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Corporacion();
-        $data =  TipoCorporacion::find()->all();
-        $corporacionesTipos = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'tipo_corporacion_id','tipo_corporacion_nombre'); 
+        $model = new EstadoVehiculo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->corporacion_id]);
+            return $this->redirect(['view', 'id' => $model->estado_vehiculo_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'corporacionesTipos' => $corporacionesTipos,
             ]);
         }
     }
 
-    /**
+
+        /**
      * Updates an existing Corporacion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -84,15 +71,12 @@ class CorporacionController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $data =  TipoCorporacion::find()->all();
-        $corporacionesTipos = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'tipo_corporacion_id','tipo_corporacion_nombre'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->corporacion_id]);
+            return $this->redirect(['view', 'id' => $model->estado_vehiculo_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'corporacionesTipos' => $corporacionesTipos,
             ]);
         }
     }
@@ -119,10 +103,12 @@ class CorporacionController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Corporacion::findOne($id)) !== null) {
+        if (($model = EstadoVehiculo::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
+
