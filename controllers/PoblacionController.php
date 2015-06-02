@@ -119,7 +119,7 @@ class PoblacionController extends Controller
             $out['results'] = ['id' => $id, 'text' => Poblacion::findOne($id)->poblacion_nombre];
         }
         else {
-            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados para poblacion'];
         }
         echo Json::encode($out);
     }

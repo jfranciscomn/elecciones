@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\GamaVehiculo */
 
-$this->title = 'Update Gama Vehiculo: ' . ' ' . $model->gama_vehiculo_id;
-$this->params['breadcrumbs'][] = ['label' => 'Gama Vehiculos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->gama_vehiculo_id, 'url' => ['view', 'id' => $model->gama_vehiculo_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Actualizar Gama: ' . ' ' . $model->gama_vehiculo_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Gama de Vehiculo', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->gama_vehiculo_nombre, 'url' => ['view', 'id' => $model->gama_vehiculo_id]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="gama-vehiculo-update">
 

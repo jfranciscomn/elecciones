@@ -42,9 +42,10 @@ class GamaVehiculo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'gama_vehiculo_id' => 'Gama Vehiculo ID',
-            'marca_vehiculo_id' => 'Marca Vehiculo ID',
-            'gama_vehiculo_nombre' => 'Gama Vehiculo Nombre',
+            'gama_vehiculo_id' => 'Gama Vehiculo',
+            'marca_vehiculo_id' => 'Marca',
+            'gama_vehiculo_nombre' => 'Gama',
+            'marcaName' => 'Marca',
         ];
     }
 
@@ -62,5 +63,10 @@ class GamaVehiculo extends \yii\db\ActiveRecord
     public function getVehiculos()
     {
         return $this->hasMany(Vehiculo::className(), ['gama_vehiculo_id' => 'gama_vehiculo_id']);
+    }
+
+    public function getMarcaName()
+    {
+        return $this->marcaVehiculo->marca_vehiculoco_nombre;
     }
 }

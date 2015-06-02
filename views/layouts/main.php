@@ -86,7 +86,6 @@ AppAsset::register($this);
                                                                     ['label'=>'Corporaciones','url' =>['corporacion/index']],
                                                                     ['label'=>'Tipo de corporacion','url' =>['tipo-corporacion/index']],
                                                                     ['label'=>'Estado de la Persona','url' =>['estado-persona/index']],
-                                                                    
                                                                     ['label'=>'Estado del vehiculo','url' =>['estado-vehiculo/index']],
                                                                     ['label'=>'Marca del Vehiculo','url' =>['marca-vehiculo/index']],
                                                                     ['label'=>'Gama del vehiculo','url' =>['gama-vehiculo/index']],

@@ -41,7 +41,7 @@ class MarcaVehiculo extends \yii\db\ActiveRecord
     {
         return [
             'marca_vehiculo_id' => 'Marca Vehiculo ID',
-            'marca_vehiculoco_nombre' => 'Marca Vehiculoco Nombre',
+            'marca_vehiculoco_nombre' => 'Marca de Vehiculo',
         ];
     }
 

@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EstadoVehiculo */
 
-$this->title = 'Create Estado Vehiculo';
-$this->params['breadcrumbs'][] = ['label' => 'Estado Vehiculos', 'url' => ['index']];
+$this->title = 'Nuevo Estado';
+$this->params['breadcrumbs'][] = ['label' => 'Estado de Vehiculo', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="estado-vehiculo-create">

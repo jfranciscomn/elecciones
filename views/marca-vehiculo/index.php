@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\MarcaVehiculoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Marca Vehiculos';
+$this->title = 'Marca de Vehiculo';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="marca-vehiculo-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Marca Vehiculo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Nueva Marca', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

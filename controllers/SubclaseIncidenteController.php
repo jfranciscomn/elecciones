@@ -130,7 +130,7 @@ class SubclaseIncidenteController extends Controller
             $out['results'] = ['id' => $id, 'text' => SubclaseIncidente::findOne($id)->subclase_incidente_nombre];
         }
         else {
-            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados'];
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados para subclase'];
         }
         echo Json::encode($out);
     }

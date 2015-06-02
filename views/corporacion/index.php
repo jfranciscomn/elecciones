@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Crear Corporacion', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Nueva Corporacion', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -28,7 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'corporacion_id',
             'corporacion_nombre',
             //'tipo_corporacion_id',
-            'tipoCorporacion.tipo_corporacion_nombre',
+            //'tipoCorporacion.tipo_corporacion_nombre',
+            'corpoName',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
