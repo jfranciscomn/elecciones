@@ -112,6 +112,6 @@ class Municipio extends \yii\db\ActiveRecord
 
     public function getzonaName()
     {
-        return isset($this->zona->zona_nombre)?$this->zona->zona_nombre:null;
+        return isset($this->zona->zona_nombre)?$this->zona->zona_nombre:'';
     } 
 }

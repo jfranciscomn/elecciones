@@ -90,8 +90,8 @@ class IncidenteSearch extends Incidente
                         'label'=>'colonia'
                     ],
                     'claseName'=>[
-                        'asc'=>['claseName.clase_incidente_nombre'=>SORT_ASC],
-                        'desc'=>['claseName.clase_incidente_nombre'=>SORT_DESC],
+                        'asc'=>['clase_incidente.clase_incidente_nombre'=>SORT_ASC],
+                        'desc'=>['clase_incidente.clase_incidente_nombre'=>SORT_DESC],
                         'label'=>'Incidente'
                     ],
                     'lugarName'=>[
@@ -100,18 +100,18 @@ class IncidenteSearch extends Incidente
                         'label'=>'Lugar'
                     ],
                     'subclaseName'=>[
-                        'asc'=>['subclaseName.subclase_incidente_nombre'=>SORT_ASC],
-                        'desc'=>['subclaseName.subclase_incidente_nombre'=>SORT_DESC],
+                        'asc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_ASC],
+                        'desc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_DESC],
                         'label'=>'Datalle Incidente'
                     ],
                     'subclase2Name'=>[
-                        'asc'=>['subclaseName.subclase_incidente_nombre'=>SORT_ASC],
-                        'desc'=>['subclaseName.subclase_incidente_nombre'=>SORT_DESC],
+                        'asc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_ASC],
+                        'desc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_DESC],
                         'label'=>'Datalle Incidente'
                     ],
                     'usuarioName'=>[
-                        'asc'=>['usuarioName.usuario_nombre'=>SORT_ASC],
-                        'desc'=>['usuarioName.usuario_nombre'=>SORT_DESC],
+                        'asc'=>['usuario.usuario_nombre'=>SORT_ASC],
+                        'desc'=>['usuario.usuario_nombre'=>SORT_DESC],
                         'label'=>'Datalle Incidente'
                     ],
                 ]
@@ -150,56 +150,48 @@ class IncidenteSearch extends Incidente
 
         ]);
 
-        if(!empty($this->municipioName))
         $query->joinWith(['municipio'=>function ($q) 
         {
             $q->where('municipio.municipio_nombre LIKE "%' . 
             $this->municipioName . '%"');
         }]);
         //Join Sindicatura
-        if(!empty($this->sindicaturaName))
         $query->joinWith(['sindicatura'=>function ($q) 
         {
             $q->where('sindicatura.sindicatura_nombre LIKE "%' . 
             $this->sindicaturaName . '%"');
         }]);
         //Join Poblacion
-        if(!empty($this->poblacionName))
         $query->joinWith(['poblacion'=>function ($q) 
         {
             $q->where('poblacion.poblacion_nombre LIKE "%' . 
             $this->poblacionName . '%"');
         }]);
         //Join Tipo de lugar
-        if(!empty($this->coloniaName))
         $query->joinWith(['colonia'=>function ($q) 
         {
             $q->where('colonia.colonia_nombre LIKE "%' . 
             $this->coloniaName . '%"');
         }]);
 
-        if(!empty($this->claseName))
         $query->joinWith(['claseIncidente'=>function ($q) 
         {
             $q->where('clase_incidente.clase_incidente_nombre LIKE "%' . 
             $this->claseName . '%"');
         }]);
 
-        if(!empty($this->lugarName))
         $query->joinWith(['lugar'=>function ($q) 
         {
             $q->where('lugar.lugar_nombre LIKE "%' . 
             (empty($this->lugarName)? '':$this->lugarName). '%"');
         }]);
 
-        if(!empty($this->subclaseName))
         $query->joinWith(['subclaseIncidente'=>function ($q) 
         {
             $q->where('subclase_incidente.subclase_incidente_nombre LIKE "%' . 
             (empty($this->subclaseName)? '':$this->subclaseName) . '%"');
         }]);
 
-        if(!empty($this->subclase2Name))
         $query->joinWith(['subclase2Incidente'=>function ($q) 
         {
             $q->where('subclase2_incidente.subclase2_incidente_nombre LIKE "%' . 

@@ -103,6 +103,6 @@ class Sindicatura extends \yii\db\ActiveRecord
 
     public function getMunicipioName()
     {
-        return isset($this->municipio->municipio_nombre)?$this->municipio->municipio_nombre:null;
+        return isset($this->municipio->municipio_nombre)?$this->municipio->municipio_nombre:'';
     }
 }

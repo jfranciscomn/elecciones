@@ -55,8 +55,8 @@ class SubclaseIncidenteSearch extends SubclaseIncidente
                 'attributes'=>[
                     'subclase_incidente_nombre',
                     'claseName'=>[
-                        'asc'=>['claseIncidente.clase_incidente_nombre'=>SORT_ASC],
-                        'desc'=>['claseIncidente.clase_incidente_nombre'=>SORT_DESC],
+                        'asc'=>['clase_incidente.clase_incidente_nombre'=>SORT_ASC],
+                        'desc'=>['clase_incidente.clase_incidente_nombre'=>SORT_DESC],
                         'label'=>'Clase de incidente'
 
                     ],
@@ -81,8 +81,6 @@ class SubclaseIncidenteSearch extends SubclaseIncidente
         $query->andFilterWhere(['like', 'subclase_incidente_nombre', $this->subclase_incidente_nombre]);
         $query->andFilterWhere(['clase_incidente_id' => $this->clase_incidente_id]);
 
-
-        if(!empty($this->claseName))
         $query->joinWith(['claseIncidente'=>function ($q) 
         {
             $q->where('clase_incidente.clase_incidente_nombre LIKE "%' . 

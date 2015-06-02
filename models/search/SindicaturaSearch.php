@@ -80,7 +80,6 @@ class SindicaturaSearch extends Sindicatura
         $query->andFilterWhere(['municipio_id' => $this->municipio_id]);
         $query->andFilterWhere(['like', 'sindicatura_nombre', $this->sindicatura_nombre]);
 
-        if(!empty($this->municipioName))
         $query->joinWith(['municipio'=>function ($q) 
         {
             $q->where('municipio.municipio_nombre LIKE "%' . 

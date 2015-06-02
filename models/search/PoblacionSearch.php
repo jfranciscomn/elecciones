@@ -93,14 +93,12 @@ class PoblacionSearch extends Poblacion
         $query->andFilterWhere(['municipio_id' => $this->municipio_id]);
         $query->andFilterWhere(['sindicatura_id' => $this->sindicatura_id]);
 
-        if(!empty($this->municipioName))
         $query->joinWith(['municipio'=>function ($q) 
         {
             $q->where('municipio.municipio_nombre LIKE "%' . 
             $this->municipioName . '%"');
         }]);
 
-        if(!empty($this->sindicaturaName))
         $query->joinWith(['sindicatura'=>function ($q) 
         {
             $q->where('sindicatura.sindicatura_nombre LIKE "%' . 

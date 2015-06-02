@@ -80,7 +80,6 @@ class CorporacionSearch extends Corporacion
 
         $query->andFilterWhere(['like', 'corporacion_nombre', $this->corporacion_nombre]);
 
-        if(!empty($this->corpoName))
         $query->joinWith(['tipoCorporacion'=>function ($q) 
         {
             $q->where('tipo_corporacion.tipo_corporacion_nombre LIKE "%' . 

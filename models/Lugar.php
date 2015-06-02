@@ -99,21 +99,21 @@ class Lugar extends \yii\db\ActiveRecord
 
     public function getMunicipioName ()
     {
-        return isset($this->municipio->municipio_nombre)?$this->municipio->municipio_nombre:null;
+        return isset($this->municipio->municipio_nombre)?$this->municipio->municipio_nombre:'';
     }
 
     public function getSindicaturaName()
     {
-        return isset($this->sindicatura->sindicatura_nombre)?$this->sindicatura->sindicatura_nombre:null;
+        return isset($this->sindicatura->sindicatura_nombre)?$this->sindicatura->sindicatura_nombre:'';
     }
 
     public function getPoblacionName()
     {
-        return isset($this->poblacion->poblacion_nombre)?$this->poblacion->poblacion_nombre:null;
+        return isset($this->poblacion->poblacion_nombre)?$this->poblacion->poblacion_nombre:'';
     }
 
     public function getTipoName()
     {
-        return isset($this->tipoLugar->tipo_lugar_nombre)?$this->tipoLugar->tipo_lugar_nombre:null;
+        return isset($this->tipoLugar->tipo_lugar_nombre)?$this->tipoLugar->tipo_lugar_nombre:'';
     }
 }

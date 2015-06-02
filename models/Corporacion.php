@@ -44,7 +44,7 @@ class Corporacion extends \yii\db\ActiveRecord
     {
         return [
             'corporacion_id' => 'Corporacion ID',
-            'corporacion_nombre' => 'Corporacion Nombre',
+            'corporacion_nombre' => 'Corporacion',
             'tipo_corporacion_id' => 'Tipo Corporacion',
             'corpoName' => 'Tipo de Corporacion',
         ];
@@ -76,6 +76,6 @@ class Corporacion extends \yii\db\ActiveRecord
 
     public function getCorpoName()
     {
-        return isset($this->tipoCorporacion->tipo_corporacion_nombre)? $this->tipoCorporacion->tipo_corporacion_nombre:null;
+        return isset($this->tipoCorporacion->tipo_corporacion_nombre)? $this->tipoCorporacion->tipo_corporacion_nombre:'';
     }
 }

@@ -56,14 +56,14 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
                 'attributes'=>[
                     'subclase2_incidente_nombre',
                     'claseName'=>[
-                        'asc'=>['claseIncidente.clase_incidente_nombre'=>SORT_ASC],
-                        'desc'=>['claseIncidente.clase_incidente_nombre'=>SORT_DESC],
+                        'asc'=>['clase_incidente.clase_incidente_nombre'=>SORT_ASC],
+                        'desc'=>['clase_incidente.clase_incidente_nombre'=>SORT_DESC],
                         'label'=>'Clase de incidente'
 
                     ],
                     'subclaseName'=>[
-                        'asc'=>['subclaseIncidente.clase_incidente_nombre'=>SORT_ASC],
-                        'desc'=>['subclaseIncidente.clase_incidente_nombre'=>SORT_DESC],
+                        'asc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_ASC],
+                        'desc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_DESC],
                         'label'=>'Subclase de incidente'
 
                     ],
@@ -77,7 +77,6 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
             // $query->where('0=1');
             $query->joinWith('claseIncidente');
             $query->joinWith('subclaseIncidente');
-
             return $dataProvider;
         }
 
@@ -88,17 +87,15 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
         ]);
 
         $query->andFilterWhere(['like', 'subclase2_incidente_nombre', $this->subclase2_incidente_nombre]);
-        $query->andFilterWhere(['clase_incidente_id' => $this->clase_incidente_id]);
-        $query->andFilterWhere(['subclase_incidente_id' => $this->subclase_incidente_id]);
 
-        if(!empty($this->claseName))
+
         $query->joinWith(['claseIncidente'=>function ($q) 
         {
             $q->where('clase_incidente.clase_incidente_nombre LIKE "%' . 
             $this->claseName . '%"');
         }]);
 
-        if(!empty($this->subclaseName))
+
         $query->joinWith(['subclaseIncidente'=>function ($q) 
         {
             $q->where('subclase_incidente.subclase_incidente_nombre LIKE "%' . 

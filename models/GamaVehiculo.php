@@ -67,6 +67,6 @@ class GamaVehiculo extends \yii\db\ActiveRecord
 
     public function getMarcaName()
     {
-        return isset($this->marcaVehiculo->marca_vehiculoco_nombre) ?$this->marcaVehiculo->marca_vehiculoco_nombre:null;
+        return isset($this->marcaVehiculo->marca_vehiculoco_nombre) ?$this->marcaVehiculo->marca_vehiculoco_nombre:'';
     }
 }

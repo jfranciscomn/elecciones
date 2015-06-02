@@ -84,7 +84,7 @@ class Incidente extends \yii\db\ActiveRecord
             'poblacionName'=> 'Poblacion',
             'lugarName'=> 'Lugar',
             'coloniaName'=>'Colonia',
-            'claseName'=>'Incidente',
+            'claseName'=>'Tipo de Incidente',
             'subclaseName'=> 'Detalle Incidente',
             'subclase2Name'=> 'Detalle 2 Incidente',
             'usuarioName'=> 'Usuario',
@@ -206,45 +206,45 @@ class Incidente extends \yii\db\ActiveRecord
 
     public function getMunicipioName ()
     {
-        return $this->municipio->municipio_nombre;
+        return isset($this->municipio->municipio_nombre)? $this->municipio->municipio_nombre:'';
     }
 
     public function getSindicaturaName()
     {
         
-        return isset( $this->sindicatura->sindicatura_nombre)?  $this->sindicatura->sindicatura_nombre:null;
+        return isset( $this->sindicatura->sindicatura_nombre)?  $this->sindicatura->sindicatura_nombre:'';
     }
 
     public function getPoblacionName()
     {
         
-        return isset($this->poblacion->poblacion_nombre)? $this->poblacion->poblacion_nombre:null;
+        return isset($this->poblacion->poblacion_nombre)? $this->poblacion->poblacion_nombre:'';
     }
 
     public function getColoniaName()
     {
         
-        return isset($this->colonia->colonia_nombre)? $this->colonia->colonia_nombre:null;
+        return isset($this->colonia->colonia_nombre)? $this->colonia->colonia_nombre:'';
     }
 
     public function getClaseName()
     {
-        return $this->claseIncidente->clase_incidente_nombre;
+        return isset($this->claseIncidente->clase_incidente_nombre)? $this->claseIncidente->clase_incidente_nombre:'';
     }
 
     public function getlugarName()
     {
-        return isset($this->lugar->lugar_nombre)? $this->lugar->lugar_nombre:null;
+        return isset($this->lugar->lugar_nombre)? $this->lugar->lugar_nombre:'';
     }
 
     public function getSubclaseName()
     {
-        return isset($this->subclaseIncidente->subclase_incidente_nombre)? $this->subclaseIncidente->subclase_incidente_nombre:null;
+        return isset($this->subclaseIncidente->subclase_incidente_nombre)? $this->subclaseIncidente->subclase_incidente_nombre:'';
     }
 
     public function getSubclase2Name()
     {
-        return isset($this->subclase2Incidente->subclase2_incidente_nombre)? $this->subclase2Incidente->subclase2_incidente_nombre:null;
+        return isset($this->subclase2Incidente->subclase2_incidente_nombre)? $this->subclase2Incidente->subclase2_incidente_nombre:'';
     }
 
     public function getUsuarioName()
