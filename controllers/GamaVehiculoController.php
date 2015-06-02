@@ -128,7 +128,7 @@ class GamaVehiculoController extends Controller
             $out['results'] = ['id' => $id, 'text' => GamaVehiculo::findOne($id)->gama_vehiculo_nombre];
         }
         else {
-            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultado para gama'];
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultado'];
         }
         echo Json::encode($out);
     }

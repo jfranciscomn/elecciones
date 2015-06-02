@@ -12,6 +12,7 @@ use app\models\GamaVehiculo;
  */
 class GamaVehiculoSearch extends GamaVehiculo
 {
+    public $marcaName;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,7 @@ class GamaVehiculoSearch extends GamaVehiculo
         return [
             [['gama_vehiculo_id', 'marca_vehiculo_id'], 'integer'],
             [['gama_vehiculo_nombre'], 'safe'],
+            [['marcaName'], 'safe'],
         ];
     }
 
@@ -47,11 +49,24 @@ class GamaVehiculoSearch extends GamaVehiculo
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'gama_vehiculo_nombre',
+                    'marcaName'=>[
+                        'asc'=>['marca_vehiculo.marca_vehiculoco_nombre'=>SORT_ASC],
+                        'desc'=>['marca_vehiculo.marca_vehiculoco_nombre'=>SORT_DESC],
+                        'label'=>'Marca'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
+            $query->joinWith('marcaVehiculo');
             return $dataProvider;
         }
 
@@ -61,6 +76,12 @@ class GamaVehiculoSearch extends GamaVehiculo
         ]);
 
         $query->andFilterWhere(['like', 'gama_vehiculo_nombre', $this->gama_vehiculo_nombre]);
+
+        $query->joinWith(['marcaVehiculo'=>function ($q) 
+        {
+            $q->where('marca_vehiculo.marca_vehiculoco_nombre LIKE "%' . 
+            $this->marcaName . '%"');
+        }]);
 
         return $dataProvider;
     }

@@ -45,7 +45,8 @@ class Corporacion extends \yii\db\ActiveRecord
         return [
             'corporacion_id' => 'Corporacion ID',
             'corporacion_nombre' => 'Corporacion Nombre',
-            'tipo_corporacion_id' => 'Tipo Corporacion ID',
+            'tipo_corporacion_id' => 'Tipo Corporacion',
+            'corpoName' => 'Tipo de Corporacion',
         ];
     }
 
@@ -71,5 +72,10 @@ class Corporacion extends \yii\db\ActiveRecord
     public function getIncidentes()
     {
         return $this->hasMany(Incidente::className(), ['incidente_id' => 'incidente_id'])->viaTable('incidente_has_corporacion', ['corporacion_id' => 'corporacion_id']);
+    }
+
+    public function getCorpoName()
+    {
+        return $this->tipoCorporacion->tipo_corporacion_nombre;
     }
 }

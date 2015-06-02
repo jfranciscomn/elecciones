@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MarcaVehiculo */
 
-$this->title = 'Create Marca Vehiculo';
-$this->params['breadcrumbs'][] = ['label' => 'Marca Vehiculos', 'url' => ['index']];
+$this->title = 'Crear Marca';
+$this->params['breadcrumbs'][] = ['label' => 'Marca de Vehiculo', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="marca-vehiculo-create">

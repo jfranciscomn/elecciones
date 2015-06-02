@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\GamaVehiculoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Gama Vehiculos';
+$this->title = 'Gama de Vehiculos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="gama-vehiculo-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Gama Vehiculo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar nueva Gama', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,8 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'gama_vehiculo_id',
-            'marca_vehiculo_id',
+            //'gama_vehiculo_id',
+            //'marcaVehiculo.marca_vehiculoco_nombre',
+            'marcaName',
             'gama_vehiculo_nombre',
 
             ['class' => 'yii\grid\ActionColumn'],

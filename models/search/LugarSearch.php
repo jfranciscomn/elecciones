@@ -76,8 +76,8 @@ class LugarSearch extends Lugar
 
                     ],
                     'tipoName'=>[
-                        'asc'=>['tipolugar.tipo_lugar_nombre'=>SORT_ASC],
-                        'desc'=>['tipoLugar.tipo_lugar_nombre'=>SORT_DESC],
+                        'asc'=>['tipo_lugar.tipo_lugar_nombre'=>SORT_ASC],
+                        'desc'=>['tipo_lugar.tipo_lugar_nombre'=>SORT_DESC],
                         'label'=>'Tipo de Lugar'
 
                     ]

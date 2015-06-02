@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EstadoVehiculo */
 
-$this->title = 'Update Estado Vehiculo: ' . ' ' . $model->estado_vehiculo_id;
-$this->params['breadcrumbs'][] = ['label' => 'Estado Vehiculos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->estado_vehiculo_id, 'url' => ['view', 'id' => $model->estado_vehiculo_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Actualizar Estado: ' . ' ' . $model->estado_vehiculo_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Estado del Vehiculo', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->estado_vehiculo_nombre, 'url' => ['view', 'id' => $model->estado_vehiculo_id]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="estado-vehiculo-update">
 

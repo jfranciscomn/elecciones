@@ -12,7 +12,7 @@ use kartik\widgets\Select2;
 
 <div class="gama-vehiculo-form">
 
-    <?php $form = ActiveForm::begin(); ?>}
+    <?php $form = ActiveForm::begin(); ?>
 
     <div class="container-fluid">
     	<div class="row">

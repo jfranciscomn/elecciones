@@ -39,8 +39,8 @@ class EstadoVehiculo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'estado_vehiculo_id' => 'Estado Vehiculo ID',
-            'estado_vehiculo_nombre' => 'Estado Vehiculo Nombre',
+            'estado_vehiculo_id' => 'Estado Vehiculo',
+            'estado_vehiculo_nombre' => 'Estado del Vehiculo',
         ];
     }
 

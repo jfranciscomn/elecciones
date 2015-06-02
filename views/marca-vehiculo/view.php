@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\MarcaVehiculo */
 
-$this->title = $model->marca_vehiculo_id;
-$this->params['breadcrumbs'][] = ['label' => 'Marca Vehiculos', 'url' => ['index']];
+$this->title = $model->marca_vehiculoco_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Marca de Vehiculo', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="marca-vehiculo-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->marca_vehiculo_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->marca_vehiculo_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->marca_vehiculo_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->marca_vehiculo_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Estas seguro que quieres eliminar este objeto?',
                 'method' => 'post',
             ],
         ]) ?>

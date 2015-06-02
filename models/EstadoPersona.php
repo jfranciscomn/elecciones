@@ -39,7 +39,7 @@ class EstadoPersona extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'estado_persona_id' => 'Estado Persona ID',
+            'estado_persona_id' => 'Estado Persona',
             'estado_persona_nombre' => 'Estado de la persona',
         ];
     }

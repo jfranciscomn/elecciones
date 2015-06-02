@@ -12,6 +12,8 @@ use app\models\Corporacion;
  */
 class CorporacionSearch extends Corporacion
 {
+
+    public $corpoName;
     /**
      * @inheritdoc
      */
@@ -20,6 +22,7 @@ class CorporacionSearch extends Corporacion
         return [
             [['corporacion_id', 'tipo_corporacion_id'], 'integer'],
             [['corporacion_nombre'], 'safe'],
+            [['corpoName'], 'safe'],
         ];
     }
 
@@ -47,11 +50,24 @@ class CorporacionSearch extends Corporacion
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'corporacion_nombre',
+                    'corpoName'=>[
+                        'asc'=>['tipo_corporacion.tipo_corporacion_nombre'=>SORT_ASC],
+                        'desc'=>['tipo_corporacion.tipo_corporacion_nombre'=>SORT_DESC],
+                        'label'=>'Tipo de Corporacion'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
+            $query->joinWith('tipoCorporacion');
             return $dataProvider;
         }
 
@@ -61,6 +77,12 @@ class CorporacionSearch extends Corporacion
         ]);
 
         $query->andFilterWhere(['like', 'corporacion_nombre', $this->corporacion_nombre]);
+
+        $query->joinWith(['tipoCorporacion'=>function ($q) 
+        {
+            $q->where('tipo_corporacion.tipo_corporacion_nombre LIKE "%' . 
+            $this->corpoName . '%"');
+        }]);
 
         return $dataProvider;
     }
