@@ -55,6 +55,8 @@ class CorporacionSearch extends Corporacion
             return $dataProvider;
         }
 
+ 
+
         $query->andFilterWhere([
             'corporacion_id' => $this->corporacion_id,
             'tipo_corporacion_id' => $this->tipo_corporacion_id,

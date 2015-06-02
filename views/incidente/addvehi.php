@@ -16,6 +16,18 @@ use yii\grid\GridView;
 $this->title = 'Crear Incidente: Agregar Vechiculo';
 $this->params['breadcrumbs'][] = ['label' => 'Incidentes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$urlGama = \yii\helpers\Url::to(['gama-vehiculo/autocompletar']);
+$initScriptGama = <<< SCRIPT
+function (element, callback) {
+    var id=\$(element).val();
+    if (id !== "") {
+        \$.ajax("{$urlGama}?id=" + id, {
+            dataType: "json"
+        }).done(function(data) { callback(data.results);});
+    }
+}
+SCRIPT;
 ?>
 
     
@@ -52,15 +64,19 @@ $this->params['breadcrumbs'][] = $this->title;
 	                </div>
 	                <div class="row">
 	                    <div class="col-md-6">
-	                        <?= $form->field($model, 'gama_vehiculo_id')->widget(Select2::classname(),[
-	                                    
-	                                    'data' => $estados,
-	                                    
-	                                    'options' => ['placeholder' => 'Seleccionar Estado del vehiculo ...',],
-	                                    'pluginOptions' => [
-	                                        'allowClear' => true,
-	                                    ],
-	                        ]) ?>
+	                    	<?= $form->field($model, 'gama_vehiculo_id')->widget(Select2::classname(),[                                                                    
+                                    'options' => ['placeholder' => 'Seleccionar una gama de vehiculo ...',],
+                                    'pluginOptions' => [
+                                        'allowClear' => true,
+                                        'ajax' => [
+                                            'url' => $urlGama,
+                                            'dataType' => 'json',
+                                            'data' => new JsExpression('function(term,page) { return {search:term,marca:$("#vehiculo-marca_vehiculo_id").val()}; }'),
+                                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                                        ],
+                                        'initSelection' => new JsExpression($initScriptGama),
+                                    ],
+                        	]) ?>
 	                    </div>
 	                    <div class="col-md-6">
 	                    	<?= $form->field($model, 'modelo')->textInput(['maxlength' => 145]) ?>
@@ -120,5 +136,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?=
             
-            Html::a('Siguiente',['agregar-vehiculo','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) 
+            Html::a('Finalizar',['view','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) 
         ?>

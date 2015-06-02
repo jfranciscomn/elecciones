@@ -54,6 +54,8 @@ class PersonaSearch extends Persona
             // $query->where('0=1');
             return $dataProvider;
         }
+        if(isset($params['incidente_id']))
+            $this->incidente_id=$params['incidente_id'];
 
         $query->andFilterWhere([
             'persona_id' => $this->persona_id,

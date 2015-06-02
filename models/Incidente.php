@@ -211,17 +211,20 @@ class Incidente extends \yii\db\ActiveRecord
 
     public function getSindicaturaName()
     {
-        return $this->sindicatura->sindicatura_nombre;
+        
+        return isset( $this->sindicatura->sindicatura_nombre)?  $this->sindicatura->sindicatura_nombre:null;
     }
 
     public function getPoblacionName()
     {
-        return $this->poblacion->poblacion_nombre;
+        
+        return isset($this->poblacion->poblacion_nombre)? $this->poblacion->poblacion_nombre:null;
     }
 
     public function getColoniaName()
     {
-        return $this->colonia->colonia_nombre;
+        
+        return isset($this->colonia->colonia_nombre)? $this->colonia->colonia_nombre:null;
     }
 
     public function getClaseName()
@@ -231,17 +234,17 @@ class Incidente extends \yii\db\ActiveRecord
 
     public function getlugarName()
     {
-        return $this->lugar->lugar_nombre;
+        return isset($this->lugar->lugar_nombre)? $this->lugar->lugar_nombre:null;
     }
 
     public function getSubclaseName()
     {
-        return $this->subclaseIncidente->subclase_incidente_nombre;
+        return isset($this->subclaseIncidente->subclase_incidente_nombre)? $this->subclaseIncidente->subclase_incidente_nombre:null;
     }
 
     public function getSubclase2Name()
     {
-        return $this->subclase2Incidente->subclase2_incidente_nombre;
+        return isset($this->subclase2Incidente->subclase2_incidente_nombre)? $this->subclase2Incidente->subclase2_incidente_nombre:null;
     }
 
     public function getUsuarioName()

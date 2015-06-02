@@ -66,8 +66,19 @@ class IncidenteController extends Controller
     public function actionView($incidente_id)
     {
         Url::remember();
+        $searchModelCorporacion = new IncidenteHasCorporacionSearch();
+        $dataProviderCorporacion = $searchModelCorporacion->search(Yii::$app->request->queryParams);
+
+        $searchModelPersonas = new PersonaSearch();
+        $dataProviderPersonas = $searchModelPersonas->search(Yii::$app->request->queryParams);
+
+        $searchModelVehiculo = new VehiculoSearch();
+        $dataProviderVehiculo = $searchModelVehiculo->search(Yii::$app->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($incidente_id),
+            'dataProviderCorporacion'=>$dataProviderCorporacion,
+            'dataProviderPersonas'=>$dataProviderPersonas,
+            'dataProviderVehiculo'=>$dataProviderVehiculo,
         ]);
     }
 
@@ -92,7 +103,7 @@ class IncidenteController extends Controller
 
         $model->usuario_id =Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'incidente_id' => $model->incidente_id]);
+            return $this->redirect(['agregar-corporacion', 'incidente_id' => $model->incidente_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -192,6 +203,7 @@ class IncidenteController extends Controller
         $data =  MarcaVehiculo::find()->all();
         $marcas = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'marca_vehiculo_id','marca_vehiculoco_nombre'); 
 
+        $model->incidente_id=$incidente_id;
         $searchModel = new VehiculoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

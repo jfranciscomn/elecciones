@@ -42,7 +42,7 @@ class VehiculoSearch extends Vehiculo
     public function search($params)
     {
         $query = Vehiculo::find();
-
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -54,6 +54,8 @@ class VehiculoSearch extends Vehiculo
             // $query->where('0=1');
             return $dataProvider;
         }
+        if(isset($params['incidente_id']))
+            $this->incidente_id=$params['incidente_id'];
 
         $query->andFilterWhere([
             'vehiculo_id' => $this->vehiculo_id,

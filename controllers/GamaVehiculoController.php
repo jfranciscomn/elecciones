@@ -99,6 +99,8 @@ class GamaVehiculoController extends Controller
         }
     }
 
+  
+
     /**
      * Deletes an existing GamaVehiculo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

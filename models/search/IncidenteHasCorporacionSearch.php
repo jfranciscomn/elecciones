@@ -53,6 +53,8 @@ class IncidenteHasCorporacionSearch extends IncidenteHasCorporacion
             // $query->where('0=1');
             return $dataProvider;
         }
+        if(isset($params['incidente_id']))
+            $this->incidente_id=$params['incidente_id'];
 
         $query->andFilterWhere([
             'incidente_id' => $this->incidente_id,
