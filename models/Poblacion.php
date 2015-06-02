@@ -107,11 +107,11 @@ class Poblacion extends \yii\db\ActiveRecord
 
     public function getMunicipioName()
     {
-        return $this->municipio->municipio_nombre;
+        return isset($this->municipio->municipio_nombre)?$this->municipio->municipio_nombre:null;
     }
 
     public function getSindicaturaName()
     {
-        return $this->sindicatura->sindicatura_nombre;
+        return isset($this->sindicatura->sindicatura_nombre)?$this->sindicatura->sindicatura_nombre:null;
     }
 }

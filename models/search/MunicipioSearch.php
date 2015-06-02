@@ -81,6 +81,7 @@ class MunicipioSearch extends Municipio
 
         $query->andFilterWhere(['like', 'municipio_nombre', $this->municipio_nombre]);
 
+        if(!empty($this->zonaName))
         $query->joinWith(['zona'=>function ($q) 
         {
             $q->where('zona.zona_nombre LIKE "%' . 

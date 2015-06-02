@@ -81,6 +81,8 @@ class SubclaseIncidenteSearch extends SubclaseIncidente
         $query->andFilterWhere(['like', 'subclase_incidente_nombre', $this->subclase_incidente_nombre]);
         $query->andFilterWhere(['clase_incidente_id' => $this->clase_incidente_id]);
 
+
+        if(!empty($this->claseName))
         $query->joinWith(['claseIncidente'=>function ($q) 
         {
             $q->where('clase_incidente.clase_incidente_nombre LIKE "%' . 

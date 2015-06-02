@@ -80,12 +80,12 @@ class Subclase2Incidente extends \yii\db\ActiveRecord
 
     public function getClaseName ()
     {
-        return $this->claseIncidente->clase_incidente_nombre;
+        return isset($this->claseIncidente->clase_incidente_nombre)?$this->claseIncidente->clase_incidente_nombre:null;
     }
 
     public function getSubclaseName ()
     {
-        return $this->subclaseIncidente->subclase_incidente_nombre;
+        return isset($this->subclaseIncidente->subclase_incidente_nombre)?$this->subclaseIncidente->subclase_incidente_nombre:null;
     }
 
 

@@ -101,16 +101,16 @@ class Colonia extends \yii\db\ActiveRecord
 
     public function getMunicipioName()
     {
-        return $this->municipio->municipio_nombre;
+        return isset($this->municipio->municipio_nombre)?$this->municipio->municipio_nombre:null;
     }
 
     public function getSindicaturaName()
     {
-        return $this->sindicatura->sindicatura_nombre;
+        return isset($this->sindicatura->sindicatura_nombre)?$this->sindicatura->sindicatura_nombre:null;
     }
 
     public function getPoblacionName()
     {
-        return $this->poblacion->poblacion_nombre;
+        return isset($this->poblacion->poblacion_nombre)?$this->poblacion->poblacion_nombre:null;
     }
 }

@@ -77,6 +77,7 @@ class GamaVehiculoSearch extends GamaVehiculo
 
         $query->andFilterWhere(['like', 'gama_vehiculo_nombre', $this->gama_vehiculo_nombre]);
 
+        if(!empty($this->marcaName))
         $query->joinWith(['marcaVehiculo'=>function ($q) 
         {
             $q->where('marca_vehiculo.marca_vehiculoco_nombre LIKE "%' . 

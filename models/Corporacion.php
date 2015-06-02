@@ -76,6 +76,6 @@ class Corporacion extends \yii\db\ActiveRecord
 
     public function getCorpoName()
     {
-        return $this->tipoCorporacion->tipo_corporacion_nombre;
+        return isset($this->tipoCorporacion->tipo_corporacion_nombre)? $this->tipoCorporacion->tipo_corporacion_nombre:null;
     }
 }

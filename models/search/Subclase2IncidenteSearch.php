@@ -91,12 +91,14 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
         $query->andFilterWhere(['clase_incidente_id' => $this->clase_incidente_id]);
         $query->andFilterWhere(['subclase_incidente_id' => $this->subclase_incidente_id]);
 
+        if(!empty($this->claseName))
         $query->joinWith(['claseIncidente'=>function ($q) 
         {
             $q->where('clase_incidente.clase_incidente_nombre LIKE "%' . 
             $this->claseName . '%"');
         }]);
 
+        if(!empty($this->subclaseName))
         $query->joinWith(['subclaseIncidente'=>function ($q) 
         {
             $q->where('subclase_incidente.subclase_incidente_nombre LIKE "%' . 

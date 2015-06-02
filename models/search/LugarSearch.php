@@ -111,25 +111,30 @@ class LugarSearch extends Lugar
         $query->andFilterWhere(['sindicatura_id' => $this->sindicatura_id]);
         $query->andFilterWhere(['poblacion_id' => $this->poblacion_id]);
         $query->andFilterWhere(['tipo_lugar_id' => $this->tipo_lugar_id]);
-        //Join Municipio
+
+        if(!empty($this->municipioName))    
         $query->joinWith(['municipio'=>function ($q) 
         {
             $q->where('municipio.municipio_nombre LIKE "%' . 
             $this->municipioName . '%"');
         }]);
+
         //Join Sindicatura
+        if(!empty($this->sindicaturaName))
         $query->joinWith(['sindicatura'=>function ($q) 
         {
             $q->where('sindicatura.sindicatura_nombre LIKE "%' . 
             $this->sindicaturaName . '%"');
         }]);
         //Join Poblacion
+        if(!empty($this->poblacionName))
         $query->joinWith(['poblacion'=>function ($q) 
         {
             $q->where('poblacion.poblacion_nombre LIKE "%' . 
             $this->poblacionName . '%"');
         }]);
         //Join Tipo de lugar
+        if(!empty($this->tipoName))
         $query->joinWith(['tipoLugar'=>function ($q) 
         {
             $q->where('tipo_lugar.tipo_lugar_nombre LIKE "%' . 
