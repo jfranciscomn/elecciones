@@ -60,12 +60,7 @@ class PoblacionSearch extends Poblacion
                         'label'=>'Nombre del Municipio'
 
                     ],
-                    'sindicaturaName'=>[
-                        'asc'=>['sindicatura.sindicatura_nombre'=>SORT_ASC],
-                        'desc'=>['sindicatura.sindicatura_nombre'=>SORT_DESC],
-                        'label'=>'Nombre Sindicatura'
-
-                    ],
+                    
                 ]
             ]);
 
@@ -99,11 +94,7 @@ class PoblacionSearch extends Poblacion
             $this->municipioName . '%"');
         }]);
 
-        $query->joinWith(['sindicatura'=>function ($q) 
-        {
-            $q->where('sindicatura.sindicatura_nombre LIKE "%' . 
-            $this->sindicaturaName . '%"');
-        }]);
+        
 
         return $dataProvider;
     }

@@ -74,11 +74,7 @@ class IncidenteSearch extends Incidente
                         'desc'=>['municipio.municipio_nombre'=>SORT_DESC],
                         'label'=>'Municipio'
                     ],
-                    'sindicaturaName'=>[
-                        'asc'=>['sindicatura.sindicatura_nombre'=>SORT_ASC],
-                        'desc'=>['sindicatura.sindicatura_nombre'=>SORT_DESC],
-                        'label'=>'Sindicatura'
-                    ],
+                 
                     'poblacionName'=>[
                         'asc'=>['poblacion.poblacion_nombre'=>SORT_ASC],
                         'desc'=>['poblacion.poblacion_nombre'=>SORT_DESC],
@@ -104,11 +100,7 @@ class IncidenteSearch extends Incidente
                         'desc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_DESC],
                         'label'=>'Datalle Incidente'
                     ],
-                    'subclase2Name'=>[
-                        'asc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_ASC],
-                        'desc'=>['subclase_incidente.subclase_incidente_nombre'=>SORT_DESC],
-                        'label'=>'Datalle Incidente'
-                    ],
+                   
                     'usuarioName'=>[
                         'asc'=>['usuario.usuario_nombre'=>SORT_ASC],
                         'desc'=>['usuario.usuario_nombre'=>SORT_DESC],
@@ -156,51 +148,52 @@ class IncidenteSearch extends Incidente
             $this->municipioName . '%"');
         }]);
         //Join Sindicatura
-        $query->joinWith(['sindicatura'=>function ($q) 
-        {
-            $q->where('sindicatura.sindicatura_nombre LIKE "%' . 
-            $this->sindicaturaName . '%"');
-        }]);
+        
         //Join Poblacion
+
+        
         $query->joinWith(['poblacion'=>function ($q) 
         {
+            if(!empty($this->poblacionName))
             $q->where('poblacion.poblacion_nombre LIKE "%' . 
             $this->poblacionName . '%"');
         }]);
         //Join Tipo de lugar
+
+        
         $query->joinWith(['colonia'=>function ($q) 
         {
+            if(!empty($this->coloniaName))
             $q->where('colonia.colonia_nombre LIKE "%' . 
             $this->coloniaName . '%"');
         }]);
 
         $query->joinWith(['claseIncidente'=>function ($q) 
         {
+            if(!empty($this->claseName))
             $q->where('clase_incidente.clase_incidente_nombre LIKE "%' . 
             $this->claseName . '%"');
         }]);
 
         $query->joinWith(['lugar'=>function ($q) 
         {
+            if(!empty($this->lugarName))
             $q->where('lugar.lugar_nombre LIKE "%' . 
             (empty($this->lugarName)? '':$this->lugarName). '%"');
         }]);
 
         $query->joinWith(['subclaseIncidente'=>function ($q) 
-        {
+        {  
+            if(!empty($this->subclaseName))
             $q->where('subclase_incidente.subclase_incidente_nombre LIKE "%' . 
             (empty($this->subclaseName)? '':$this->subclaseName) . '%"');
         }]);
 
-        $query->joinWith(['subclase2Incidente'=>function ($q) 
-        {
-            $q->where('subclase2_incidente.subclase2_incidente_nombre LIKE "%' . 
-            (empty($this->subclase2Name)? '':$this->subclase2Name). '%"');
-        }]);
-
-        if(!empty($this->usuairoName))
+   
+        
         $query->joinWith(['usuario'=>function ($q) 
         {
+            if(!empty($this->usuairoName))
             $q->where('usuario.usuario_nombre LIKE "%' . 
             (empty($this->usuairoName)? '':$this->usuairoName). '%"');
         }]);

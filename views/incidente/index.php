@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha',
             'coloniaName',
             'poblacionName',
-            'sindicaturaName',
+            
             'municipioName',
             'lugarName',
             'claseName',

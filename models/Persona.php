@@ -57,15 +57,15 @@ class Persona extends \yii\db\ActiveRecord
         return [
             'persona_id' => 'Persona ID',
             'incidente_id' => 'Incidente ID',
-            'estado_persona_id' => 'Estado Persona ID',
+            'estado_persona_id' => 'Estado Persona',
             'persona_nombre' => 'Nombre',
             'edad' => 'Edad',
             'sexo' => 'Sexo',
             'domicilio' => 'Domicilio',
-            'colonia_id' => 'Colonia ID',
-            'poblacion_id' => 'Poblacion ID',
-            'sindicatura_id' => 'Sindicatura ID',
-            'municipio_id' => 'Municipio ID',
+            'colonia_id' => 'Colonia',
+            'poblacion_id' => 'Poblacion',
+            'sindicatura_id' => 'Sindicatura',
+            'municipio_id' => 'Municipio',
         ];
     }
 

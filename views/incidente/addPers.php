@@ -127,24 +127,7 @@ SCRIPT;
              
 
                     <div class="col-md-6">
-                        <?= $form->field($model, 'sindicatura_id')->widget(Select2::classname(),[                                                                    
-                                    'options' => ['placeholder' => 'Seleccionar una sindicatura ...',],
-                                    'pluginOptions' => [
-                                        'allowClear' => true,
-                                        'ajax' => [
-                                            'url' => $urlSindicatura,
-                                            'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#persona-municipio_id").val()}; }'),
-                                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-                                        ],
-                                        'initSelection' => new JsExpression($initScriptSindicatura),
-                                    ],
-                        ]) ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
+                      <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
                                     'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
@@ -157,9 +140,10 @@ SCRIPT;
                                         'initSelection' => new JsExpression($initScriptPoblacion),
                                     ],
                         ]) ?>
-                        
                     </div>
-                    <div class="col-md-6">                        
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <?= $form->field($model, 'colonia_id')->widget(Select2::classname(),[
                                     'options' => ['placeholder' => 'Seleccionar una colonia ...',],
                                     'pluginOptions' => [
@@ -173,14 +157,13 @@ SCRIPT;
                                         'initSelection' => new JsExpression($initScriptColonia),
                                     ],
                         ]) ?>
+                        
+                    </div>
+                    <div class="col-md-6">                        
+                         <?= $form->field($model, 'domicilio')->textArea() ?>
                     </div>
                 </div>
-                <div class="row">
-                  
-                    <div class="col-md-6">
-                        <?= $form->field($model, 'domicilio')->textArea() ?>
-                    </div>
-                </div>
+                
                 <div class="form-group">
                     <?= Html::submitButton('Agregar', ['class' =>  'btn btn-success' ]) ?>
                 </div>
