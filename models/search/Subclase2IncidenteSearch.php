@@ -91,6 +91,7 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
 
         $query->joinWith(['claseIncidente'=>function ($q) 
         {
+            if(!empty($this->claseName))
             $q->where('clase_incidente.clase_incidente_nombre LIKE "%' . 
             $this->claseName . '%"');
         }]);
@@ -98,6 +99,7 @@ class Subclase2IncidenteSearch extends Subclase2Incidente
 
         $query->joinWith(['subclaseIncidente'=>function ($q) 
         {
+            if(!empty($this->subclaseName))
             $q->where('subclase_incidente.subclase_incidente_nombre LIKE "%' . 
             $this->subclaseName . '%"');
         }]);

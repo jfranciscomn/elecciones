@@ -54,6 +54,8 @@ class SeguimientoSearch extends Seguimiento
             // $query->where('0=1');
             return $dataProvider;
         }
+        if(isset($params['incidente_id']))
+            $this->incidente_id=$params['incidente_id'];
 
         $query->andFilterWhere([
             'seguimiento_id' => $this->seguimiento_id,

@@ -110,7 +110,7 @@ class PoblacionController extends Controller
                 ->where('poblacion_nombre LIKE "%' . $search .'%"'.
                     ( empty($municipio)? '' :' and municipio_id = '.$municipio).' '.
                     ( empty($sindicatura)? '' :' and sindicatura_id = '.$sindicatura)
-                    )->limit(20);
+                    )->limit(129);
             $command = $query->createCommand();
             $data = $command->queryAll();
             $out['results'] = array_values($data);

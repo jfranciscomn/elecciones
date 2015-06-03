@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'municipio_id',
             'tipoName',
             'municipioName',
-            'sindicaturaName',
+            //'sindicaturaName',
             'poblacionName',
             'lugar_nombre',
             //'colonia_id',

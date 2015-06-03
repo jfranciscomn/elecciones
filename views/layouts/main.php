@@ -75,7 +75,6 @@ AppAsset::register($this);
                                                                     ['label'=>'Lugares','url' =>['lugar/index']],
                                                                     ['label'=>'Municipios','url' =>['municipio/index']],
                                                                     ['label'=>'Poblaciones','url' =>['poblacion/index']],
-                                                                    ['label'=>'Sindicaturas','url' =>['sindicatura/index']],
                                                                     ['label'=>'Tipo de Lugar','url' =>['tipo-lugar/index']],
                                                                     ['label'=>'Zonas','url' =>['zona/index']],
                                                         ]],

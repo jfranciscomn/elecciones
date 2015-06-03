@@ -53,7 +53,9 @@ class Incidente extends \yii\db\ActiveRecord
     {
         return [
             [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id', 'lugar_id'], 'integer'],
-            [['municipio_id', 'operativo_id', 'clase_incidente_id', 'usuario_id'], 'required'],
+            [['municipio_id','poblacion_id', 'operativo_id', 
+            'clase_incidente_id', 'usuario_id','subclase_incidente_id', 
+            'lugar_id','direccion', 'descripcion'], 'required'],
             [['fecha'], 'safe'],
             [['direccion', 'descripcion'], 'string']
         ];

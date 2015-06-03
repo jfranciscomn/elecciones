@@ -133,7 +133,7 @@ class LugarController extends Controller
                     ( empty($poblacion)? ' ' :' and poblacion_id = '.$poblacion).' '.
                     ( empty($colonia)? ' ' :' and colonia_id = '.$colonia)
 
-                    )->limit(20);
+                    )->limit(5000);
             $command = $query->createCommand();
             $data = $command->queryAll();
             $out['results'] = array_values($data);

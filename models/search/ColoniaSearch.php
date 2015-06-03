@@ -100,18 +100,21 @@ class ColoniaSearch extends Colonia
             
         $query->joinWith(['municipio'=>function ($q) 
         {
+            if(!empty($this->municipioName))
             $q->where('municipio.municipio_nombre LIKE "%' . 
             $this->municipioName . '%"');
         }]);
 
         $query->joinWith(['sindicatura'=>function ($q) 
         {
+            if(!empty($this->sindicaturaName))
             $q->where('sindicatura.sindicatura_nombre LIKE "%' . 
             $this->sindicaturaName . '%"');
         }]);
 
         $query->joinWith(['poblacion'=>function ($q) 
         {
+            if(!empty($this->poblacionName))
             $q->where('poblacion.poblacion_nombre LIKE "%' . 
             $this->poblacionName . '%"');
         }]);
