@@ -96,15 +96,6 @@ SCRIPT;
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-6">
-                    <?= $form->field($model, 'operativo_id')->widget(Select2::classname(),[                                
-                                'data' => $operativos,                                
-                                'options' => ['placeholder' => 'Seleccionar Operativo ...',],
-                                'pluginOptions' => [
-                                    'allowClear' => true,                                    
-                                ],
-                    ]) ?>
-                </div>
                 <div class="col-md-6">                        
                     <?= $form->field($model, 'clase_incidente_id')->widget(Select2::classname(),[                                
                         'data' => $claseIncidente,
@@ -114,8 +105,6 @@ SCRIPT;
                         ],
                     ]) ?>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($model, 'subclase_incidente_id')->widget(Select2::classname(),[
                         'options' => ['placeholder' => 'Seleccionar ...',],
@@ -131,22 +120,14 @@ SCRIPT;
                                 ],
                     ]) 
 
-                    ?>
+                    ?>                
                 </div>
-                <div class="col-md-6">                        
-                    <?= $form->field($model, 'subclase2_incidente_id')->widget(Select2::classname(),[
-                        'options' => ['placeholder' => 'Seleccionar ...',],
-                        'pluginOptions' => [
-                            'allowClear' => true,
-                            'ajax' => [
-                                        'url' => $urlSubclase2,
-                                        'dataType' => 'json',
-                                        'data' => new JsExpression('function(term,page) { return {search:term,clase:$("#incidente-clase_incidente_id").val(),subclase:$("#incidente-subclase_incidente_id").val()}; }'),
-                                        'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-                            ],
-                            'initSelection' => new JsExpression($initScriptSublase2),
-                        ],
-                    ]) ?>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    
+                               <?=$form->field($model,'operativo_id')->label(false)->hiddenInput(['value'=>'1']);?>
+
                 </div>
             </div>
             <div class="row">

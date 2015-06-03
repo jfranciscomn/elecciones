@@ -102,6 +102,14 @@ class IncidenteController extends Controller
         $claseIncidente = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre'); 
 
         $model->usuario_id =Yii::$app->user->identity->id;
+
+        $sql= 'Select * FROM operativo where operativo_id =1';
+
+        $modela = Operativo::findBySql($sql)->one(); 
+
+
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['agregar-corporacion', 'incidente_id' => $model->incidente_id]);
         } else {
