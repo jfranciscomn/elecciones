@@ -153,4 +153,26 @@ class PoblacionController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionRellenar() {
+    $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $id = end($_POST['depdrop_parents']);
+        $list = Poblacion::find()->andWhere(['colonia_id'=>$id])->asArray()->all();
+        $selected  = null;
+        if ($id != null && count($list) > 0) {
+            $selected = '';
+            foreach ($list as $i => $model) {
+                $out[] = ['poblacion_id' => $model['poblacion_id'], 'poblacion_nombre' => $model['poblacion_nombre']];
+                if ($i == 0) {
+                    $selected = $model['poblacion_id'];
+                }
+            }
+            // Shows how you can preselect a value
+            echo Json::encode(['output' => $out, 'selected'=>$selected]);
+            return;
+        }
+    }
+    echo Json::encode(['output' => '', 'selected'=>'']);
+}
 }

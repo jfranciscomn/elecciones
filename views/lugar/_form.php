@@ -4,6 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\JsExpression;
 use kartik\widgets\Select2;
+use kartik\widgets\DepDrop;
+use app\models\Colonia;
+use app\models\poblacion;
+
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Lugar */
@@ -66,7 +71,20 @@ SCRIPT;
                     </div>   
 
                     <div class="col-md-6">
-                        <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
+                        <?= 
+                            /*$form->field($model, 'poblacion_id')->widget(DepDrop::classname(), [
+                                'data' => \yii\helpers\ArrayHelper::map(poblacion::find()->asArray()->all(), 'poblacion_id', 'poblacion_nombre'),
+                                'options' => ['placeholder' => 'Select ...'],
+                                'type' => DepDrop::TYPE_SELECT2,
+                                'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                                    'pluginOptions'=>[
+                                    'depends'=>['colonia_id'],
+                                    'url' => \yii\helpers\Url::to(['/poblacion/rellenar']),
+                                    'loadingText' => 'Loading child level 1 ...',
+                                ]
+                            ]);*/
+
+                        $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
                             'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
@@ -84,7 +102,15 @@ SCRIPT;
                 </div>
                 <div class="row">                    
                     <div class="col-md-6">
-                        <?= $form->field($model, 'colonia_id')->widget(Select2::classname(),[
+                        <?=
+
+                        /*$form->field($model, 'colonia_id')->widget(Select2::classname(),[
+                                'data' => \yii\helpers\ArrayHelper::map(Colonia::find()->asArray()->all(), 'colonia_id', 'colonia_nombre'),
+                                'pluginOptions' => [
+                                    'allowClear'=> true,
+                                ],
+                        ]);*/
+                        $form->field($model, 'colonia_id')->widget(Select2::classname(),[
                             'options' => ['placeholder' => 'Seleccionar una colonia ...',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
