@@ -137,6 +137,15 @@ class PoblacionController extends Controller
 
         return $this->redirect(['index']);
     }
+    
+    public function actionDatosPoblacion($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model=$this->findModel($id);
+
+        return $model->attributes;
+
+    }
 
     /**
      * Finds the Poblacion model based on its primary key value.

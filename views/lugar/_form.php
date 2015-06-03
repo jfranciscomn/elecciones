@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\web\JsExpression;
 use kartik\widgets\Select2;
@@ -63,7 +64,7 @@ SCRIPT;
                                     
                                     'data' => $municipios,
                                     
-                                    'options' => ['placeholder' => 'Seleccionar municipio ...',],
+                                    'options' => ['id'=>'municipios' ,'placeholder' => 'Seleccionar municipio ...',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                     ],
@@ -86,6 +87,15 @@ SCRIPT;
 
                         $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
                             'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
+                        <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
+                            'options' => ['placeholder' => 'Seleccionar una poblacion ...','onchange' => '$.ajax({
+                                                                                            url: "'.Url::to(['poblacion/datos-poblacion']).'",
+                                                                                            context: document.body,
+                                                                                            data: {id: this.value},
+                                                                                            success: function(data){
+                                                                                              $("#municipios").val(data["municipio_id"]).trigger("change");
+                                                                                            }
+                                                                                        })'],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'ajax' => [
@@ -93,6 +103,7 @@ SCRIPT;
                                             'dataType' => 'json',
                                             'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#lugar-municipio_id").val(),sindicatura:$("#lugar-sindicatura_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                                            
                                         ],
                                         'initSelection' => new JsExpression($initScriptPoblacion),
                                     ],
@@ -119,6 +130,7 @@ SCRIPT;
                                             'dataType' => 'json',
                                             'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#lugar-municipio_id").val(),sindicatura:$("#lugar-sindicatura_id").val(), poblacion:$("#lugar-poblacion_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                                            
                                         ],
                                         'initSelection' => new JsExpression($initScriptColonia),
                                     ],
@@ -157,5 +169,7 @@ SCRIPT;
     
 
     <?php ActiveForm::end(); ?>
+
+
 
 </div>
