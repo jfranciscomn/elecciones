@@ -37,7 +37,7 @@ class Vehiculo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['incidente_id', 'estado_vehiculo_id'], 'required'],
+            [['incidente_id', 'estado_vehiculo_id','gama_vehiculo_id','marca_vehiculo_id','modelo','placas'], 'required'],
             [['incidente_id', 'estado_vehiculo_id', 'gama_vehiculo_id', 'marca_vehiculo_id'], 'integer'],
             [['placas', 'modelo', 'numero_serie'], 'string', 'max' => 145]
         ];
