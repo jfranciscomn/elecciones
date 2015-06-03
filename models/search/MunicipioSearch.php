@@ -83,6 +83,7 @@ class MunicipioSearch extends Municipio
 
         $query->joinWith(['zona'=>function ($q) 
         {
+            if(!empty($this->zonaName))
             $q->where('zona.zona_nombre LIKE "%' . 
             $this->zonaName . '%"');
         }]);

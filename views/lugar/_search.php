@@ -21,8 +21,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'poblacion_id') ?>
 
-    <?= $form->field($model, 'sindicatura_id') ?>
-
     <?= $form->field($model, 'municipio_id') ?>
 
     <?php // echo $form->field($model, 'lugar_nombre') ?>

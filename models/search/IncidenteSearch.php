@@ -144,6 +144,7 @@ class IncidenteSearch extends Incidente
 
         $query->joinWith(['municipio'=>function ($q) 
         {
+            if(!empty($this->municipioName))
             $q->where('municipio.municipio_nombre LIKE "%' . 
             $this->municipioName . '%"');
         }]);

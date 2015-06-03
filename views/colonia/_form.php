@@ -48,42 +48,25 @@ SCRIPT;
 			             'allowClear' => true,
 			                        ],
 			    ]) ?>
-			</div>
+			</div>  
             <div class="col-md-6">
-            	<?= $form->field($model, 'sindicatura_id')->widget(Select2::classname(),[
-            		'options' => ['placeholder' => 'Seleccionar una sindicatura ...',],
-			                        'pluginOptions' => [
-			                            'allowClear' => true,
-			                            'ajax' => [
-			                            	'url' => $url,
-			                            	'dataType' => 'json',
-			                            	'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#colonia-municipio_id").val()}; }'),
-			                            	'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-			                            ],
-			                            'initSelection' => new JsExpression($initScript),
-			                        ],
-            		])
-            	 ?>
-            </div>
-            
+                <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
+                    'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
+                                    'pluginOptions' => [
+                                        'allowClear' => true,
+                                        'ajax' => [
+                                            'url' => $urlPoblacion,
+                                            'dataType' => 'json',
+                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#colonia-municipio_id").val()}; }'),
+                                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                                        ],
+                                        'initSelection' => new JsExpression($initScriptPoblacion),
+                                    ],
+                    ])
+                ?>
+            </div>          
         </div>
         <div class="row">
-        	<div class="col-md-6">
-            	<?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
-            		'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
-			                        'pluginOptions' => [
-			                            'allowClear' => true,
-			                            'ajax' => [
-			                            	'url' => $urlPoblacion,
-			                            	'dataType' => 'json',
-			                            	'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#colonia-municipio_id").val(),sindicatura:$("#colonia-sindicatura_id").val() }; }'),
-			                            	'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-			                            ],
-			                            'initSelection' => new JsExpression($initScriptPoblacion),
-			                        ],
-            		])
-            	 ?>
-            </div>
         	<div class="col-md-6">
             		<?= $form->field($model, 'colonia_nombre')->textInput(['maxlength' => 145]) ?>
         	</div>

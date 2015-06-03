@@ -82,6 +82,7 @@ class CorporacionSearch extends Corporacion
 
         $query->joinWith(['tipoCorporacion'=>function ($q) 
         {
+            if(!empty($this->corporacionName))
             $q->where('tipo_corporacion.tipo_corporacion_nombre LIKE "%' . 
             $this->corpoName . '%"');
         }]);

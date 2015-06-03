@@ -79,6 +79,7 @@ class GamaVehiculoSearch extends GamaVehiculo
 
         $query->joinWith(['marcaVehiculo'=>function ($q) 
         {
+            if(!empty($this->marcaName))
             $q->where('marca_vehiculo.marca_vehiculoco_nombre LIKE "%' . 
             $this->marcaName . '%"');
         }]);

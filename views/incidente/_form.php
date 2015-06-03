@@ -144,18 +144,13 @@ SCRIPT;
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'municipio_id')->widget(Select2::classname(),[
-                                    
-                                    'data' => $municipios,
-                                    
+                        <?= $form->field($model, 'municipio_id')->widget(Select2::classname(),[                                    
+                                    'data' => $municipios,                                    
                                     'options' => ['placeholder' => 'Seleccionar municipio ...',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                     ],
-                        ]);
-         
-
-
+                        ]);        
                         ?>
                     </div>
              
@@ -168,7 +163,7 @@ SCRIPT;
                                         'ajax' => [
                                             'url' => $urlPoblacion,
                                             'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#incidente-municipio_id").val(),sindicatura:$("#incidente-sindicatura_id").val()}; }'),
+                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#incidente-municipio_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
                                         ],
                                         'initSelection' => new JsExpression($initScriptPoblacion),
@@ -186,7 +181,7 @@ SCRIPT;
                                         'ajax' => [
                                             'url' => $urlColonia,
                                             'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#incidente-municipio_id").val(),poblacion:$("#incidente-poblacion_id").val(),sindicatura:$("#incidente-sindicatura_id").val()}; }'),
+                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#incidente-municipio_id").val(),poblacion:$("#incidente-poblacion_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
                                         ],
                                         'initSelection' => new JsExpression($initScriptColonia),
@@ -204,7 +199,7 @@ SCRIPT;
                                         'ajax' => [
                                             'url' => $urlLugar,
                                             'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#incidente-municipio_id").val(),poblacion:$("#incidente-poblacion_id").val(),sindicatura:$("#incidente-sindicatura_id").val()}; }'),
+                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#incidente-municipio_id").val(),poblacion:$("#incidente-poblacion_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
                                         ],
                                         'initSelection' => new JsExpression($initScriptLugar),
