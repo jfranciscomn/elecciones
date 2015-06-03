@@ -221,6 +221,50 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
     <?php $this->endBlock() ?>
 
 
+    <?php $this->beginBlock('Seguimientos'); ?>
+        <p class='pull-right'>
+            
+            <?= \yii\helpers\Html::a(
+                    '<span class="glyphicon glyphicon-plus"></span> Agregar Seguimiento',
+                    ['agregar-seguimiento', 'incidente_id'=>$model->incidente_id],
+                    ['class'=>'btn btn-success btn-xs']
+                )
+             ?>
+        </p><div class='clearfix'></div>
+        <div class="panel panel-primary" id='divdenunciante'>
+                <div class="panel-heading">Seguimientos </div>
+                <div class="panel-body">
+
+                        <?= GridView::widget([
+                        'dataProvider' => $dataProviderSeguimiento,
+                        
+                        'columns' => [
+                            ['class' => 'yii\grid\SerialColumn'],
+
+                            'corporacion.corporacion_nombre',
+                            'descripcion',
+                            
+                            
+        
+
+                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}',
+                                 'urlCreator' => function ($action, $model, $key, $index) {
+                                        if ($action === 'delete') {
+                                            return Url::to(['seguimiento-delete','seguimiento_id'=>$key]);
+                                        }
+                                    }
+                            ],
+                        ],
+                    ]); ?>
+                    
+    
+                </div>
+        </div>
+
+
+    <?php $this->endBlock() ?>
+
+
     <?= \yii\bootstrap\Tabs::widget([
                 'id' => 'relation-tabs',
                     'encodeLabels' => false,
@@ -246,8 +290,8 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                                     'active'  => false,
                                     ],
                                     [
-                                    'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Razonamiento</small>',
-                                    'content' => '',
+                                    'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Seguimientos</small>',
+                                    'content' => $this->blocks['Seguimientos'],
                                     'active'  => false,
                                     ], 
                                 ]

@@ -10,6 +10,8 @@ use app\models\Municipio;
 use app\models\Operativo;
 use app\models\EstadoPersona;
 use app\models\Persona;
+use app\models\Seguimiento;
+use app\models\search\SeguimientoSearch;
 use app\models\search\PersonaSearch;
 use app\models\ClaseIncidente;
 use app\models\Usuario;
@@ -74,11 +76,16 @@ class IncidenteController extends Controller
 
         $searchModelVehiculo = new VehiculoSearch();
         $dataProviderVehiculo = $searchModelVehiculo->search(Yii::$app->request->queryParams);
+
+        $searchModelSeguimiento = new SeguimientoSearch();
+        $dataProviderSeguimiento = $searchModelSeguimiento->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModel($incidente_id),
             'dataProviderCorporacion'=>$dataProviderCorporacion,
             'dataProviderPersonas'=>$dataProviderPersonas,
             'dataProviderVehiculo'=>$dataProviderVehiculo,
+            'dataProviderSeguimiento'=>$dataProviderSeguimiento,
         ]);
     }
 
@@ -164,10 +171,44 @@ class IncidenteController extends Controller
         ]);
       
     }
+    public function actionAgregarSeguimiento($incidente_id)
+    {
+        $model =  new Seguimiento();
 
-    public function actionAgregarPersona($incidente_id)
+        $data =  Corporacion::find()->all();
+        $corporaciones = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'corporacion_id','corporacion_nombre');
+        
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->incidente_id=$incidente_id;
+            if($model->save())
+            {
+                $modela = IncidenteHasCorporacion::find()->where(['incidente_id'=>$model->incidente_id,'corporacion_id'=>$model->corporacion_id])->one(); 
+                if(empty($modela))
+                {
+                    $modela= new IncidenteHasCorporacion;
+                    $modela->incidente_id=$model->incidente_id;
+                    $modela->corporacion_id=$model->corporacion_id;
+                    $modela->save();
+                }
+                
+                return $this->redirect(['agregar-persona', 'incidente_id' => $model->incidente_id]);
+            }
+
+        }
+        return $this->render('addSeg', [
+           'model' => $model,
+           'corporaciones'=> $corporaciones,
+           'incidente_id'=> $incidente_id,
+        ]);
+      
+    }
+
+    public function actionAgregarPersona($incidente_id,$persona_id=null)
     {
         $model =  new Persona();
+        if(isset($persona_id))
+            $model = Persona::findOne($persona_id);
 
 
         $data =  Municipio::find()->all();
@@ -178,6 +219,7 @@ class IncidenteController extends Controller
        
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
 
         if ($model->load(Yii::$app->request->post()) ) {
             $model->incidente_id=$incidente_id;
@@ -267,6 +309,15 @@ class IncidenteController extends Controller
     public function actionVehiculoDelete($vehiculo_id)
     {
         $model = Vehiculo::findOne(['vehiculo_id' => $vehiculo_id]);
+        $model->delete();
+        
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSeguimientoDelete($seguimiento_id)
+    {
+        $model = Seguimiento::findOne(['seguimiento_id' => $seguimiento_id]);
         $model->delete();
         
 
