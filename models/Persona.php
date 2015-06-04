@@ -57,7 +57,7 @@ class Persona extends \yii\db\ActiveRecord
         return [
             'persona_id' => 'Persona ID',
             'incidente_id' => 'Incidente ID',
-            'estado_persona_id' => 'Estado Persona',
+            'estado_persona_id' => 'Situacion de la Persona',
             'persona_nombre' => 'Nombre',
             'edad' => 'Edad',
             'sexo' => 'Sexo',
