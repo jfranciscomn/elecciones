@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\EstadoVehiculo;
+use app\models\Usuario;
 use app\models\search\EstadoVehiculoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -15,6 +16,7 @@ class EstadoVehiculoController extends \yii\web\Controller
 	public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

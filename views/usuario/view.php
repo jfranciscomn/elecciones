@@ -30,6 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         </tr>
         <tr>
             <th>
+                Ejecutivo
+            </th>
+            <td>
+                <?= $model->ejecutivo? 'Si':'No' ?>
+            </td>
+        </tr>
+        <tr>
+            <th>
                 Nombre
             </th>
             <td>
@@ -55,6 +63,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         
                     }
                 ?>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Activo
+            </th>
+            <td>
+                <?= $model->activo? 'Si':'No' ?>
             </td>
         </tr>
     </table>

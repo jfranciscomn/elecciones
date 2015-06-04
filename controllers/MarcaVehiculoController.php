@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\MarcaVehiculo;
+use app\models\Usuario;
 use app\models\search\MarcaVehiculoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -17,6 +18,7 @@ class MarcaVehiculoController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

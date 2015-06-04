@@ -32,6 +32,7 @@ return array(
     'kartik\\plugins\\popover\\' => array($vendorDir . '/kartik-v/bootstrap-popover-x'),
     'kartik\\plugins\\fileinput\\' => array($vendorDir . '/kartik-v/bootstrap-fileinput'),
     'kartik\\plugins\\depdrop\\' => array($vendorDir . '/kartik-v/dependent-dropdown'),
+    'kartik\\mpdf\\' => array($vendorDir . '/kartik-v/yii2-mpdf'),
     'kartik\\label\\' => array($vendorDir . '/kartik-v/yii2-label-inplace'),
     'kartik\\icons\\' => array($vendorDir . '/kartik-v/yii2-icons'),
     'kartik\\helpers\\' => array($vendorDir . '/kartik-v/yii2-helpers'),

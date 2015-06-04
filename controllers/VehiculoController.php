@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Vehiculo;
+use app\models\Usuario;
 use app\models\MarcaVehiculo;
 use app\models\search\VehiculoSearch;
 use yii\web\Controller;
@@ -18,6 +19,7 @@ class VehiculoController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

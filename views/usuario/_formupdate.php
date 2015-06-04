@@ -51,6 +51,13 @@ use app\models\Grupo;
                 <?= $form->field($model, 'activo')->checkBox() ?>
             </div>
         </div>
+        <div class="row">
+            
+            
+            <div class="col-md-6">
+                <?= $form->field($model, 'ejecutivo ')->checkBox() ?>
+            </div>
+        </div>
     </div>
     <br/>
     

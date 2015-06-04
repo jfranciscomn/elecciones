@@ -51,9 +51,9 @@ class Vehiculo extends \yii\db\ActiveRecord
         return [
             'vehiculo_id' => 'Vehiculo ID',
             'incidente_id' => 'Incidente ID',
-            'estado_vehiculo_id' => 'Estado Vehiculo ID',
-            'gama_vehiculo_id' => 'Gama Vehiculo ID',
-            'marca_vehiculo_id' => 'Marca Vehiculo ID',
+            'estado_vehiculo_id' => 'Situacion del Vehiculo',
+            'gama_vehiculo_id' => 'Linea',
+            'marca_vehiculo_id' => 'Marca de Vehiculo',
             'placas' => 'Placas',
             'modelo' => 'Modelo',
             'numero_serie' => 'Numero Serie',

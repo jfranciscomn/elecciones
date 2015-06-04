@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\Usuario;
 use app\models\TipoControlador;
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -62,37 +63,7 @@ AppAsset::register($this);
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar'],
-                'items' => [
-                                ['label'=>'Permisos', 'items'=>[
-                                                                    ['label'=>'Usuarios','url' =>['usuario/index']],
-                                                                    ['label'=>'Bitacora','url' =>['bitacora/index']],
-                                                                    ['label'=>'Grupos','url' =>['grupo/index']],
-                                                                    ['label'=>'Acciones','url' =>['accion/index']],
-                                                        ]],
-
-                                ['label'=>'Ubicaciones', 'items'=>[
-                                                                    ['label'=>'Colonias','url' =>['colonia/index']],
-                                                                    ['label'=>'Lugares','url' =>['lugar/index']],
-                                                                    ['label'=>'Municipios','url' =>['municipio/index']],
-                                                                    ['label'=>'Poblaciones','url' =>['poblacion/index']],
-                                                                    ['label'=>'Tipo de Lugar','url' =>['tipo-lugar/index']],
-                                                                    ['label'=>'Zonas','url' =>['zona/index']],
-                                                        ]],
-                                ['label'=>'Catalogos', 'items'=>[
-                                                                    ['label'=>'Tipo de Incidente','url' =>['clase-incidente/index']],
-                                                                    ['label'=>'Detalle de Incidente','url' =>['subclase-incidente/index']],
-                                                                    ['label'=>'Corporaciones','url' =>['corporacion/index']],
-                                                                    ['label'=>'Tipo de corporacion','url' =>['tipo-corporacion/index']],
-                                                                    ['label'=>'Estado de la Persona','url' =>['estado-persona/index']],
-                                                                    ['label'=>'Estado del vehiculo','url' =>['estado-vehiculo/index']],
-                                                                    ['label'=>'Marca del Vehiculo','url' =>['marca-vehiculo/index']],
-                                                                    ['label'=>'Gama del vehiculo','url' =>['gama-vehiculo/index']],                                                                    
-                                                        ]],  
-
-                                ['label'=>'Incidentes', 'items'=>[
-                                                                    ['label'=>'Incidentes','url' =>['incidente/index']],
-                                                        ]],                                                                                                               
-                ],
+                'items' =>Usuario::crearMenu(),
             ]);
             NavBar::end();
         ?>

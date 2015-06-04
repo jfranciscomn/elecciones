@@ -148,7 +148,9 @@ class BitacoraController extends Controller
         $registro->REQUEST_METHOD = $_SERVER['REQUEST_METHOD'];
         $registro->REQUEST_URI = $_SERVER['REQUEST_URI'];
         $registro->datos_enviados =\yii\helpers\Json::encode( $datos);
-    
+   
+        if(!Yii::$app->user->isGuest)
+            $registro->usuario_id=Yii::$app->user->identity->id;
       //  $registro->fecha = str(new \DateTime('now'));
         //$registro->REQUEST_URI = $_SERVER['REQUEST_URI'];
         //$registro->accion_id f09e:630f:493b  7945 Penal de mochis

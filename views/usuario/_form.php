@@ -49,6 +49,7 @@ use app\models\Grupo;
                 
                 <?= $form->field($model, 'activo')->checkBox() ?>
                 <?= $form->field($model, 'superuser')->checkBox() ?>
+                <?= $form->field($model, 'ejecutivo')->checkBox() ?>
             </div>
         </div>
     </div>
