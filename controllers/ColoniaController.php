@@ -120,7 +120,7 @@ class ColoniaController extends Controller
             $query->select('sindicatura_id, poblacion_id, colonia_nombre AS text, colonia_id as id, municipio_id')
                 ->from('colonia')
                 ->where('colonia_nombre LIKE "%' . $search .'%"'.
-                    ( empty($municipio)? ' and municipio_id =0' :' and municipio_id = '.$municipio).' '.
+                    ( empty($municipio)? '' :' and municipio_id = '.$municipio).' '.
                     ( empty($sindicatura)? ' ' :' and sindicatura_id = '.$sindicatura).' '.
                     ( empty($poblacion)? ' ' :' and poblacion_id = '.$poblacion)
                     )->limit(20);
@@ -141,9 +141,7 @@ class ColoniaController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $model=$this->findModel($id);
-
         return $model->attributes;
-
     }
 
     /**

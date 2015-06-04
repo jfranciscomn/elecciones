@@ -6,6 +6,7 @@ use yii\web\JsExpression;
 use kartik\widgets\Select2;
 use kartik\popover\PopoverX;
 use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Incidente */
@@ -157,7 +158,15 @@ SCRIPT;
 
                     <div class="col-md-6">
                         <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
-                                    'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
+                                    'options' => ['placeholder' => 'Seleccionar una poblacion ...',
+                                              'onchange' => '$.ajax({
+                                                                        url: "'.Url::to(['poblacion/datos-poblacion']).'",
+                                                                        context: document.body,
+                                                                        data: {id: this.value},
+                                                                        success: function(data){
+                                                                            $("#incidente-municipio_id").val(data["municipio_id"]).trigger("change");
+                                                                        }
+                                                                })',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'ajax' => [
@@ -175,7 +184,15 @@ SCRIPT;
                     <div class="col-md-6">
                         
                         <?= $form->field($model, 'colonia_id')->widget(Select2::classname(),[
-                                    'options' => ['placeholder' => 'Seleccionar una colonia ...',],
+                                    'options' => ['placeholder' => 'Seleccionar una colonia ...',
+                                              'onchange' => '$.ajax({
+                                                                        url: "'.Url::to(['colonia/datos-colonia']).'",
+                                                                        context: document.body,
+                                                                        data: {id: this.value},
+                                                                        success: function(data){
+                                                                            $("#incidente-poblacion_id").val(data["poblacion_id"]).trigger("change");
+                                                                        }
+                                                                })',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'ajax' => [
@@ -190,7 +207,17 @@ SCRIPT;
                     </div>
                     <div class="col-md-6">                        
                         <?= $form->field($model, 'lugar_id')->widget(Select2::classname(),[
-                                    'options' => ['placeholder' => 'Seleccionar un lugar ...',],
+                                    'options' => ['placeholder' => 'Seleccionar un lugar ...',
+                                              'onchange' => '$.ajax({
+                                                                        url: "'.Url::to(['lugar/datos-lugar']).'",
+                                                                        context: document.body,
+                                                                        data: {id: this.value},
+                                                                        success: function(data){
+                                                                            $("#incidente-colonia_id").val(data["colonia_id"]).trigger("change");
+                                                                            $("#incidente-distrito_id").val(data["distrito"]).trigger("change");
+
+                                                                        }
+                                                                })',],
                                     'pluginOptions' => [
                                         'allowClear' => true,                                        
                                         'tag'=>true,

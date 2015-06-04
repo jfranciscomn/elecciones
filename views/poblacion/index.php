@@ -24,12 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            //'poblacion_id',
-            //'sindicatura_id',
-            //'municipio_id',
             'poblacion_nombre',
-            //'sindicaturaName',
             'municipioName',
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -337,6 +337,13 @@ class IncidenteController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionDatosIncidente($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model=$this->findModel($id);
+        return $model->attributes;
+    }
+
     /**
      * Finds the Incidente model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

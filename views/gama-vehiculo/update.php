@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\GamaVehiculo */
 
-$this->title = 'Actualizar Gama: ' . ' ' . $model->gama_vehiculo_nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Gama de Vehiculo', 'url' => ['index']];
+$this->title = 'Actualizar Linea: ' . ' ' . $model->gama_vehiculo_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Linea de Vehiculo', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->gama_vehiculo_nombre, 'url' => ['view', 'id' => $model->gama_vehiculo_id]];
 $this->params['breadcrumbs'][] = 'Actualizar';
 ?>

@@ -128,7 +128,15 @@ SCRIPT;
 
                     <div class="col-md-6">
                       <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
-                                    'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
+                                    'options' => ['placeholder' => 'Seleccionar una poblacion ...',
+                                              'onchange' => '$.ajax({
+                                                                        url: "'.Url::to(['poblacion/datos-poblacion']).'",
+                                                                        context: document.body,
+                                                                        data: {id: this.value},
+                                                                        success: function(data){
+                                                                            $("#persona-municipio_id").val(data["municipio_id"]).trigger("change");
+                                                                        }
+                                                                })',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'ajax' => [
@@ -145,7 +153,15 @@ SCRIPT;
                 <div class="row">
                     <div class="col-md-6">
                         <?= $form->field($model, 'colonia_id')->widget(Select2::classname(),[
-                                    'options' => ['placeholder' => 'Seleccionar una colonia ...',],
+                                    'options' => ['placeholder' => 'Seleccionar una colonia ...',
+                                              'onchange' => '$.ajax({
+                                                                        url: "'.Url::to(['colonia/datos-colonia']).'",
+                                                                        context: document.body,
+                                                                        data: {id: this.value},
+                                                                        success: function(data){
+                                                                            $("#persona-poblacion_id").val(data["poblacion_id"]).trigger("change");
+                                                                        }
+                                                                })',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'ajax' => [

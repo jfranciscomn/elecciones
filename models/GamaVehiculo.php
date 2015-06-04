@@ -42,9 +42,9 @@ class GamaVehiculo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'gama_vehiculo_id' => 'Gama Vehiculo',
+            'gama_vehiculo_id' => 'Linea Vehiculo',
             'marca_vehiculo_id' => 'Marca',
-            'gama_vehiculo_nombre' => 'Gama',
+            'gama_vehiculo_nombre' => 'Linea',
             'marcaName' => 'Marca',
         ];
     }

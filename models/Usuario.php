@@ -189,7 +189,7 @@ class Usuario extends \yii\db\ActiveRecord
                                                                     ['label'=>'Estado de la Persona','url' =>['estado-persona/index']],
                                                                     ['label'=>'Estado del vehiculo','url' =>['estado-vehiculo/index']],
                                                                     ['label'=>'Marca del Vehiculo','url' =>['marca-vehiculo/index']],
-                                                                    ['label'=>'Gama del vehiculo','url' =>['gama-vehiculo/index']],                                                                    
+                                                                    ['label'=>'Linea del vehiculo','url' =>['gama-vehiculo/index']],                                                                    
                                                         ]],  
 
                                 ['label'=>'Incidentes', 'items'=>[

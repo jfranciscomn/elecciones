@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\GamaVehiculo */
 
 $this->title = $model->gama_vehiculo_nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Gama de Vehiculos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Linea de Vehiculos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="gama-vehiculo-view">

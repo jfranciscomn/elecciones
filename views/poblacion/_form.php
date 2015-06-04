@@ -39,26 +39,7 @@ SCRIPT;
 			                        ],
 			    ]) ?>
 			</div>
-			<div class="col-md-6">
-				<?= $form->field($model, 'sindicatura_id')->widget(Select2::classname(),[
-			    					
-			                        
-			                        'options' => ['placeholder' => 'Seleccionar una sindicatura ...',],
-			                        'pluginOptions' => [
-			                            'allowClear' => true,
-			                            'ajax' => [
-			                            	'url' => $url,
-			                            	'dataType' => 'json',
-			                            	'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#poblacion-municipio_id").val()}; }'),
-			                            	'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-			                            ],
-			                            'initSelection' => new JsExpression($initScript),
-			                        ],
-			    ]) ?>
-    			
-    		</div>
-    	</div>
-    	<div class="row">
+
             <div class="col-md-6">
             	<?= $form->field($model, 'poblacion_nombre')->textInput(['maxlength' => 145]) ?>
             </div>
