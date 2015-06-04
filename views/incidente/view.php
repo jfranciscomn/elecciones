@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                 //'municipio_id',
                 'coloniaName',
                 'poblacionName',
-                'sindicaturaName',
+                //'sindicaturaName',
                 'municipioName',
                 'lugarName',
                 'claseName',
