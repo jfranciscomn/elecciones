@@ -6,8 +6,24 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Incidente;
+use app\models\search\IncidenteSearch;
+use app\models\Usuario;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+
+
 class EjecutivoController extends \yii\web\Controller
 {
+	public function behaviors()
+    {
+        return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
+            'verbs' => [
+                'class' => VerbFilter::className(),
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
     	
@@ -31,10 +47,20 @@ class EjecutivoController extends \yii\web\Controller
     	$distrit = $model->queryAll();
 		$tipos=[];
 		foreach ($distrit as $value) {
-			$tipos[]= [ $value['tipo'],(int)$value['cantidad']] ;
+			$tipos[]= [ trim($value['tipo']),(int)$value['cantidad']] ;
 		}
 
 	    return $this->render('index',['distritos'=>$distritos,'tipos'=>$tipos]);
+	}
+
+	public function actionIncidenteDistritoModal($nombre_distrito)
+	{
+		$searchModel = new IncidenteSearch(['municipio_id'=>1]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		return $this->renderAjax("incidente-distrito-modal",[
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
 	}
 
 }

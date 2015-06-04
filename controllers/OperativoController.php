@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Operativo;
+use app\models\Usuario;
 use app\models\search\OperativoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -17,6 +18,7 @@ class OperativoController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

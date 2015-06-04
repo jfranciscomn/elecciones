@@ -2,6 +2,9 @@
 <?php
 	/* @var $this yii\web\View */
 	use miloschuman\highcharts\Highcharts;
+	use yii\web\JsExpression;
+	use yii\bootstrap\Modal;
+	use yii\helpers\Url;
 
 ?>
 <div style='text-align:center'>
@@ -25,8 +28,24 @@
 						                'type' => 'pie',
 						                'name' => 'Incidentes',
 						                'data' => $distritos,
+						                'events'=> [
+						                		'click'=>new JsExpression(' function(e)  {
+						                				$("#distrito_label").html("DISTRITO "+e.point.name);
+						                				$("#distrito_modal").modal("show");
+						                				$.ajax({
+                                                                url: "'.Url::to(['ejecutivo/incidente-distrito-modal']).'",
+                                                                
+                                                                data: {nombre_distrito: e.point.name},
+                                                                success: function(data){
+                                                                  $("#distrito_contenido").html(data);
+                                                                }
+                                                            });
+
+						                			}')
+						                	]
 						            ] // new closing bracket
 						        ],
+						     
 						    ],
 						]); ?>
 					</div>
@@ -52,3 +71,21 @@
 					</div>
 				</div>
 			</div>
+
+
+
+<?php
+Modal::begin([	
+	'id'=>'distrito_modal',
+    'header' => '<strong id="distrito_label">Hello world</strong>',
+    'size'=>Modal::SIZE_LARGE
+   
+]);
+\yii\widgets\Pjax::begin([
+        'enablePushState'=>FALSE
+    ]); 
+echo '<div id="distrito_contenido"></div>';
+\yii\widgets\Pjax::end();
+Modal::end();
+
+?>

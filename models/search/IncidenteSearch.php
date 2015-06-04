@@ -127,18 +127,18 @@ class IncidenteSearch extends Incidente
         }
 
         $query->andFilterWhere([
-            'incidente_id' => $this->incidente_id,
-            'colonia_id' => $this->colonia_id,
-            'poblacion_id' => $this->poblacion_id,
-            'sindicatura_id' => $this->sindicatura_id,
-            'municipio_id' => $this->municipio_id,
-            'operativo_id' => $this->operativo_id,
-            'subclase2_incidente_id' => $this->subclase2_incidente_id,
-            'subclase_incidente_id' => $this->subclase_incidente_id,
-            'clase_incidente_id' => $this->clase_incidente_id,
-            'fecha' => $this->fecha,
-            'usuario_id' => $this->usuario_id,            
-            'lugar_id' => $this->lugar_id,
+            'municipio.incidente_id' => $this->incidente_id,
+            'municipio.colonia_id' => $this->colonia_id,
+            'municipio.poblacion_id' => $this->poblacion_id,
+            'municipio.sindicatura_id' => $this->sindicatura_id,
+            'municipio.municipio_id' => $this->municipio_id,
+            'municipio.operativo_id' => $this->operativo_id,
+            'municipio.subclase2_incidente_id' => $this->subclase2_incidente_id,
+            'municipio.subclase_incidente_id' => $this->subclase_incidente_id,
+            'municipio.clase_incidente_id' => $this->clase_incidente_id,
+            'municipio.fecha' => $this->fecha,
+            'municipio.usuario_id' => $this->usuario_id,            
+            'municipio.lugar_id' => $this->lugar_id,
 
         ]);
 

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\GamaVehiculo;
+use app\models\Usuario;
 use app\models\MarcaVehiculo;
 use app\models\search\GamaVehiculoSearch;
 use yii\web\Controller;
@@ -20,6 +21,7 @@ class GamaVehiculoController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

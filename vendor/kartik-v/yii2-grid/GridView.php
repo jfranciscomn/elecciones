@@ -4,7 +4,7 @@
  * @package   yii2-grid
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   3.0.1
+ * @version   3.0.2
  */
 
 namespace kartik\grid;
@@ -394,6 +394,12 @@ HTML;
      * Applicable only if `bootstrap` is `true`. Defaults to `true`.
      */
     public $responsive = true;
+
+    /**
+     * @var boolean whether the grid table will automatically wrap to fit
+     * columns for smaller display sizes.
+     */
+    public $responsiveWrap = true;
 
     /**
      * @var boolean whether the grid table will highlight row on `hover`.
@@ -1158,6 +1164,9 @@ HTML;
         if ($this->responsive) {
             Html::addCssClass($this->containerOptions, 'table-responsive');
         }
+        if ($this->responsiveWrap) {
+            Html::addCssClass($this->tableOptions, 'kv-table-wrap');
+        } 
     }
 
     /**

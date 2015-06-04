@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\filters\AccessControl;
 
+
 /**
  * This is the model class for table "usuario".
  *
@@ -37,7 +38,7 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return [
             [['superuser', 'usuario_nombre'], 'required'],
-            [['superuser','activo'], 'integer'],
+            [['superuser','activo','ejecutivo'], 'integer'],
             [['username', 'password', 'usuario_nombre', 'correo'], 'string', 'max' => 145],
             [['username'], 'unique']
         ];
@@ -49,10 +50,12 @@ class Usuario extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'usuario_id' => 'Usuario ID',
+            'usuario_id' => 'Usuario',
             'username' => 'Usuario',
             'password' => 'Password',
             'superuser' => 'Super Usuario',
+            'ejecutivo' => 'Ejecutivo',
+
             'gruposActuales' => 'Grupos',
             'usuario_nombre' => 'Nombre',
             'correo' => 'Correo',
@@ -116,7 +119,7 @@ class Usuario extends \yii\db\ActiveRecord
                                     select distinct a.accion_id,lower(substring(a.accion_nombre,7)) as accion_nombre 
                                     from accion a
                                     inner join accion_has_grupo ag on a.accion_id = ag.accion_id
-                                    inner join Grupo g on g.grupo_id = ag.grupo_id
+                                    inner join grupo g on g.grupo_id = ag.grupo_id
                                     inner join usuario_has_grupo ug on ug.grupo_id = g.grupo_id
                                     inner join usuario u on u.usuario_id = ug.usuario_id
                                     where u.username = '$usuario_id ' and a.controlador_id=".$controlador->controlador_id);
@@ -158,5 +161,46 @@ class Usuario extends \yii\db\ActiveRecord
             ];
     
         return $ret;
+    }
+
+    public static function crearMenu()
+    {
+        $menu=[
+                                ['label'=>'Permisos', 'items'=>[
+                                                                    ['label'=>'Usuarios','url' =>['usuario/index']],
+                                                                    ['label'=>'Bitacora','url' =>['bitacora/index']],
+                                                                    ['label'=>'Grupos','url' =>['grupo/index']],
+                                                                    ['label'=>'Acciones','url' =>['accion/index']],
+                                                        ]],
+
+                                ['label'=>'Ubicaciones', 'items'=>[
+                                                                    ['label'=>'Colonias','url' =>['colonia/index']],
+                                                                    ['label'=>'Lugares','url' =>['lugar/index']],
+                                                                    ['label'=>'Municipios','url' =>['municipio/index']],
+                                                                    ['label'=>'Poblaciones','url' =>['poblacion/index']],
+                                                                    ['label'=>'Tipo de Lugar','url' =>['tipo-lugar/index']],
+                                                                    ['label'=>'Zonas','url' =>['zona/index']],
+                                                        ]],
+                                ['label'=>'Catalogos', 'items'=>[
+                                                                    ['label'=>'Tipo de Incidente','url' =>['clase-incidente/index']],
+                                                                    ['label'=>'Detalle de Incidente','url' =>['subclase-incidente/index']],
+                                                                    ['label'=>'Corporaciones','url' =>['corporacion/index']],
+                                                                    ['label'=>'Tipo de corporacion','url' =>['tipo-corporacion/index']],
+                                                                    ['label'=>'Estado de la Persona','url' =>['estado-persona/index']],
+                                                                    ['label'=>'Estado del vehiculo','url' =>['estado-vehiculo/index']],
+                                                                    ['label'=>'Marca del Vehiculo','url' =>['marca-vehiculo/index']],
+                                                                    ['label'=>'Gama del vehiculo','url' =>['gama-vehiculo/index']],                                                                    
+                                                        ]],  
+
+                                ['label'=>'Incidentes', 'items'=>[
+                                                                    ['label'=>'Incidentes','url' =>['incidente/index']],
+                                                        ]]                                                                                                               
+                ];
+
+        if(Yii::$app->user->isGuest)
+            return [];
+        if(Yii::$app->user->identity->ejecutivo)
+            return [];
+        return $menu;
     }
 }
