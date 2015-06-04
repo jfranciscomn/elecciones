@@ -64,71 +64,56 @@ SCRIPT;
                                     
                                     'data' => $municipios,
                                     
-                                    'options' => ['id'=>'municipios' ,'placeholder' => 'Seleccionar municipio ...',],
+                                    'options' => ['placeholder' => 'Seleccionar municipio ...',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                     ],
                         ]) ?>
                     </div>   
 
-                    <div class="col-md-6">
-                        <?= 
-                            /*$form->field($model, 'poblacion_id')->widget(DepDrop::classname(), [
-                                'data' => \yii\helpers\ArrayHelper::map(poblacion::find()->asArray()->all(), 'poblacion_id', 'poblacion_nombre'),
-                                'options' => ['placeholder' => 'Select ...'],
-                                'type' => DepDrop::TYPE_SELECT2,
-                                'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
-                                    'pluginOptions'=>[
-                                    'depends'=>['colonia_id'],
-                                    'url' => \yii\helpers\Url::to(['/poblacion/rellenar']),
-                                    'loadingText' => 'Loading child level 1 ...',
-                                ]
-                            ]);*/
-
-                        $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
-                            'options' => ['placeholder' => 'Seleccionar una poblacion ...',],
+                    <div class="col-md-6">                        
                         <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
-                            'options' => ['placeholder' => 'Seleccionar una poblacion ...','onchange' => '$.ajax({
-                                                                                            url: "'.Url::to(['poblacion/datos-poblacion']).'",
-                                                                                            context: document.body,
-                                                                                            data: {id: this.value},
-                                                                                            success: function(data){
-                                                                                              $("#municipios").val(data["municipio_id"]).trigger("change");
-                                                                                            }
-                                                                                        })'],
-                                    'pluginOptions' => [
-                                        'allowClear' => true,
-                                        'ajax' => [
-                                            'url' => $urlPoblacion,
-                                            'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#lugar-municipio_id").val(),sindicatura:$("#lugar-sindicatura_id").val()}; }'),
-                                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-                                            
-                                        ],
-                                        'initSelection' => new JsExpression($initScriptPoblacion),
+                                'options' => ['id'=>'poblaciones' ,'placeholder' => 'Seleccionar una poblacion ...',
+                                              'onchange' => '$.ajax({
+                                                                        url: "'.Url::to(['poblacion/datos-poblacion']).'",
+                                                                        context: document.body,
+                                                                        data: {id: this.value},
+                                                                        success: function(data){
+                                                                            $("#lugar-municipio_id").val(data["municipio_id"]).trigger("change");
+                                                                        }
+                                                                })',],
+                                'pluginOptions' => [
+                                    'allowClear' => true,
+                                    'ajax' => [
+                                                'url' => $urlPoblacion,
+                                                'dataType' => 'json',
+                                                'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#lugar-municipio_id").val()}; }'),
+                                                'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),                        
                                     ],
-                            ])
-                        ?>
-                    </div>                
+                                            'initSelection' => new JsExpression($initScriptPoblacion),
+                                ],
+                            ])?>
+                    </div>  
                 </div>
+
                 <div class="row">                    
                     <div class="col-md-6">
-                        <?=
-
-                        /*$form->field($model, 'colonia_id')->widget(Select2::classname(),[
-                                'data' => \yii\helpers\ArrayHelper::map(Colonia::find()->asArray()->all(), 'colonia_id', 'colonia_nombre'),
-                                'pluginOptions' => [
-                                    'allowClear'=> true,
-                                ],
-                        ]);*/
-                        $form->field($model, 'colonia_id')->widget(Select2::classname(),[
-                            'options' => ['placeholder' => 'Seleccionar una colonia ...',],
+                        <?=$form->field($model, 'colonia_id')->widget(Select2::classname(),[
+                            'options' => ['placeholder' => 'Seleccionar una colonia ...',
+                                              'onchange' => '$.ajax({
+                                                                        url: "'.Url::to(['colonia/datos-colonia']).'",
+                                                                        context: document.body,
+                                                                        data: {id: this.value},
+                                                                        success: function(data){
+                                                                            $("#poblacion").val(data["poblacion_id"]).trigger("change");
+                                                                        }
+                                                                })',],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'ajax' => [
                                             'url' => $urlColonia,
                                             'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#lugar-municipio_id").val(),sindicatura:$("#lugar-sindicatura_id").val(), poblacion:$("#lugar-poblacion_id").val()}; }'),
+                                            'data' => new JsExpression('function(term,page) { return {search:term,municipio:$("#lugar-municipio_id").val(), poblacion:$("#lugar-poblacion_id").val()}; }'),
                                             'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
                                             
                                         ],

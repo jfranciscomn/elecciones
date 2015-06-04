@@ -137,6 +137,15 @@ class ColoniaController extends Controller
         echo Json::encode($out);
     }
 
+    public function actionDatosColonia($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model=$this->findModel($id);
+
+        return $model->attributes;
+
+    }
+
     /**
      * Finds the Colonia model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
