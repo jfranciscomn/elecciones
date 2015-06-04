@@ -30,7 +30,7 @@
 						                'data' => $distritos,
 						                'events'=> [
 						                		'click'=>new JsExpression(' function(e)  {
-						                				$("#distrito_label").html("DISTRITO "+e.point.name);
+						                				$("#distrito_label").html(e.point.name);
 						                				$("#distrito_modal").modal("show");
 						                				$.ajax({
                                                                 url: "'.Url::to(['ejecutivo/incidente-distrito-modal']).'",
@@ -64,6 +64,21 @@
 						                'type' => 'pie',
 						                'name' => 'Incidentes',
 						                'data' => $tipos,
+						                'events'=> [
+						                		'click'=>new JsExpression(' function(e)  {
+						                				$("#distrito_label").html(e.point.name);
+						                				$("#distrito_modal").modal("show");
+						                				$.ajax({
+                                                                url: "'.Url::to(['ejecutivo/incidente-tipo-modal']).'",
+                                                                
+                                                                data: {subclase_nombre: e.point.name},
+                                                                success: function(data){
+                                                                  $("#distrito_contenido").html(data);
+                                                                }
+                                                            });
+
+						                			}')
+						                	]
 						            ] // new closing bracket
 						        ],
 						    ],
