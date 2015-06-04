@@ -52,10 +52,10 @@ class Incidente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id', 'lugar_id'], 'integer'],
+            [['colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id', 'lugar_id','distrito_id'], 'integer'],
             [['municipio_id','poblacion_id', 'operativo_id', 
             'clase_incidente_id', 'usuario_id','subclase_incidente_id', 
-            'lugar_id','direccion', 'descripcion'], 'required'],
+            'lugar_id','direccion', 'descripcion','distrito_id'], 'required'],
             [['fecha'], 'safe'],
             [['direccion', 'descripcion'], 'string']
         ];
@@ -69,6 +69,7 @@ class Incidente extends \yii\db\ActiveRecord
         return [
             'incidente_id' => '# Incidente',
             'colonia_id' => 'Colonia',
+            'distrito_id' => 'Distrito',
             'poblacion_id' => 'Poblacion',
             'sindicatura_id' => 'Sindicatura',
             'municipio_id' => 'Municipio',
@@ -79,12 +80,12 @@ class Incidente extends \yii\db\ActiveRecord
             'fecha' => 'Fecha',
             'usuario_id' => 'Usuario',
             'direccion' => 'Direccion',
-            'lugar_id' => 'Lugar',
+            'lugar_id' => 'Casilla',
             'descripcion' => 'Descripcion',
             'municipioName' => 'Municipio',
             'sindicaturaName'=> 'Sindicatura',
             'poblacionName'=> 'Poblacion',
-            'lugarName'=> 'Lugar',
+            'lugarName'=> 'Casilla',
             'coloniaName'=>'Colonia',
             'claseName'=>'Tipo de Incidente',
             'subclaseName'=> 'Detalle Incidente',
@@ -97,6 +98,12 @@ class Incidente extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+
+    public function getDistrito() 
+    { 
+       return $this->hasOne(Distrito::className(), ['distrito_id' => 'distrito_id']); 
+    }
+
     public function getColonia()
     {
         return $this->hasOne(Colonia::className(), ['colonia_id' => 'colonia_id']);

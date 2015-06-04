@@ -11,6 +11,7 @@ use app\models\Operativo;
 use app\models\EstadoPersona;
 use app\models\Persona;
 use app\models\Seguimiento;
+use app\models\Distrito;
 use app\models\search\SeguimientoSearch;
 use app\models\search\PersonaSearch;
 use app\models\ClaseIncidente;
@@ -108,6 +109,9 @@ class IncidenteController extends Controller
         $data =  ClaseIncidente::find()->all();
         $claseIncidente = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'clase_incidente_id','clase_incidente_nombre'); 
 
+        $data =  Distrito::find()->all();
+        $distritos = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'distrito_id','distrito_nombre'); 
+
         $model->usuario_id =Yii::$app->user->identity->id;
 
         $sql= 'Select * FROM operativo where operativo_id =1';
@@ -126,6 +130,7 @@ class IncidenteController extends Controller
                 'municipios'=>$municipios,
                 'operativos'=>$operativos,
                 'claseIncidente'=>$claseIncidente,
+                'distritos'=>$distritos,
             ]);
         }
     }

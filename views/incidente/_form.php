@@ -207,7 +207,15 @@ SCRIPT;
                     </div>
                 </div>
                 <div class="row">
-                    
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'distrito_id')->widget(Select2::classname(),[                                
+                            'data' => $distritos,
+                            'options' => ['placeholder' => 'Seleccionar Distrito ...',],                                
+                                            'pluginOptions' => [
+                                            'allowClear' => true,
+                            ],
+                        ]) ?>   
+                    </div>
                     <div class="col-md-6">
                         <?= $form->field($model, 'direccion')->textArea() ?>
                     </div>

@@ -130,6 +130,7 @@ class IncidenteSearch extends Incidente
             'incidente.incidente_id' => $this->incidente_id,
             'incidente.colonia_id' => $this->colonia_id,
             'incidente.poblacion_id' => $this->poblacion_id,
+            'incidente.distrito_id' => $this->distrito_id,
             'incidente.sindicatura_id' => $this->sindicatura_id,
             'incidente.municipio_id' => $this->municipio_id,
             'incidente.operativo_id' => $this->operativo_id,

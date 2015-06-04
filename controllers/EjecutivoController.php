@@ -55,7 +55,7 @@ class EjecutivoController extends \yii\web\Controller
 
 	public function actionIncidenteDistritoModal($nombre_distrito)
 	{
-		$searchModel = new IncidenteSearch(['municipio_id'=>1]);
+		$searchModel = new IncidenteSearch(['distrito_id'=>$nombre_distrito]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		return $this->renderAjax("incidente-distrito-modal",[
             'searchModel' => $searchModel,
