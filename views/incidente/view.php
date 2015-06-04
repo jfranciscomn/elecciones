@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
@@ -17,7 +16,8 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
 
 <div class="incidente-view">
     <p class='pull-left'>
-        
+        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Editar', ['update', 'incidente_id' => $model->incidente_id],
+        ['class' => 'btn btn-info']) ?>
         <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Nuevo Incidente', ['create'], ['class' => 'btn
         btn-success']) ?>
     </p>
@@ -31,38 +31,28 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
     </h3>
 
     <?php $this->beginBlock('app\models\Incidente'); ?>
-    <div class='clearfix'></div>    
-        <br/>
-        <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">Corporaciones Agregadas </div>
-                <div class="panel-body">
         <?php echo DetailView::widget([
             'model' => $model,
             'attributes' => [
                 'incidente_id',
-                'fecha',
-                'claseName',
-                'subclaseName',
-                //'subclase2Name',
+                'operativo.operativo_nombre',
                 //'colonia_id',
                 //'poblacion_id',
                 //'sindicatura_id',
                 //'municipio_id',
-                'municipioName',
-                'sindicaturaName',
-                'poblacionName',
                 'coloniaName',
-                
-                
-                
+                'poblacionName',
+                'sindicaturaName',
+                'municipioName',
                 'lugarName',
-                'lugar.distrito',
-                
-                
+                'claseName',
+                'subclaseName',
+                'subclase2Name',
+                'usuarioName',
                 //'subclase2Incidente.subclase2_incidente_nombre',
                 //'subclase_incidente_id',
                 //'clase_incidente_id',
-                
+                'fecha',
                 //'usuario.usuario_nombre',
                 'direccion:ntext',
                 //'lugar_id',
@@ -70,12 +60,8 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
             ],
         ]);
         ?>
-
-
-            
-        </div>
-    </div>
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Eliminar', ['delete', 'incidente_id' => $model->incidente_id],
+        <hr/>
+            <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Eliminar', ['delete', 'incidente_id' => $model->incidente_id],
                 [
                     'class' => 'btn btn-danger',
                     'data-confirm' => Yii::t('app', '¿Seguro que quieres eliminar el objeto?'),
@@ -94,174 +80,55 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                 ) 
             ?>
             <?= \yii\helpers\Html::a(
-                    '<span class="glyphicon glyphicon-plus"></span> Agregar Corporacion',
-                    ['agregar-corporacion', 'incidente_id'=>$model->incidente_id],
+                    '<span class="glyphicon glyphicon-plus"></span> Crear Corporacion',
+                    ['corporacion/create', 'Corporacion'=>['corporacion_id'=>$model->incidente_id]],
                     ['class'=>'btn btn-success btn-xs']
                 ) 
             ?>
-          
+            <?= \yii\helpers\Html::a(
+                    '<span class="glyphicon glyphicon-link"></span> Agregar Corporacion', 
+                    ['incidente-has-corporacion/create', 'IncidenteHasCorporacion'=>['$n'=>['incidente_id'=>$model->incidente_id]]],
+                    ['class'=>'btn btn-info btn-xs']
+                ) 
+            ?>
         </p>
-
         <div class='clearfix'></div>    
-        <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">Corporaciones Agregadas </div>
-                <div class="panel-body">
-
-                        <?= GridView::widget([
-                        'dataProvider' => $dataProviderCorporacion,
-                        
-                        'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
-
-                            'corporacion.corporacion_nombre',
-        
-
-                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}',
-                                 'urlCreator' => function ($action, $model, $key, $index) {
-                                        if ($action === 'delete') {
-                                            return Url::to(['corporacion-delete','incidente_id'=>$key['incidente_id'],'corporacion_id'=>$key['corporacion_id']]);
-                                        }
-                                    }
-                            ],
-                        ],
-                    ]); ?>
-                    
-    
-                </div>
-        </div>
     <?php $this->endBlock() ?>
 
 
     <?php $this->beginBlock('Personas'); ?>
         <p class='pull-right'>
-        
             <?= \yii\helpers\Html::a(
-                    '<span class="glyphicon glyphicon-plus"></span> Agregar Persona',
-                    ['agregar-persona', 'incidente_id'=>$model->incidente_id],
+                    '<span class="glyphicon glyphicon-list"></span> Listar Todas las Personas',
+                    ['persona/index'],
+                    ['class'=>'btn text-muted btn-xs']                                                                              
+                ) 
+            ?>
+            <?= \yii\helpers\Html::a(
+                    '<span class="glyphicon glyphicon-plus"></span> Crear Persona',
+                    ['persona/create', 'Persona'=>['incidente_id'=>$model->incidente_id]],
                     ['class'=>'btn btn-success btn-xs']
                 ) 
             ?>
         </p><div class='clearfix'></div>
-
-        <div class="panel panel-primary" id='divpersonas'>
-                <div class="panel-heading">Personas Agregadas </div>
-                <div class="panel-body">
-
-                        <?= GridView::widget([
-                        'dataProvider' => $dataProviderPersonas,
-                        
-                        'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
-
-                            'estadoPersona.estado_persona_nombre',
-                            'persona_nombre',
-                            'sexo',
-        
-
-                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{view}{delete}',
-                                 'urlCreator' => function ($action, $model, $key, $index) {
-                                        if ($action === 'delete') {
-                                            return Url::to(['persona-delete','persona_id'=>$key]);
-                                        }
-                                        
-                                    }
-                            ],
-                        ],
-                    ]); ?>
-                    
-    
-                </div>
-        </div>
     <?php $this->endBlock() ?>
 
 
     <?php $this->beginBlock('Vehiculos'); ?>
         <p class='pull-right'>
-            
             <?= \yii\helpers\Html::a(
-                    '<span class="glyphicon glyphicon-plus"></span> Agregar Vehiculo',
-                    ['agregar-vehiculo', 'incidente_id'=>$model->incidente_id],
+                    '<span class="glyphicon glyphicon-list"></span> Listar Todos los Vehiculos',
+                    ['vehiculo/index'],
+                    ['class'=>'btn text-muted btn-xs']
+                ) 
+            ?>
+            <?= \yii\helpers\Html::a(
+                    '<span class="glyphicon glyphicon-plus"></span> Crear Vehiculo',
+                    ['vehiculo/create', 'Vehiculo'=>['incidente_id'=>$model->incidente_id]],
                     ['class'=>'btn btn-success btn-xs']
                 )
              ?>
         </p><div class='clearfix'></div>
-        <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">Vehiculos Agregados </div>
-                <div class="panel-body">
-
-                        <?= GridView::widget([
-                        'dataProvider' => $dataProviderVehiculo,
-                        
-                        'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
-
-                            'estadoVehiculo.estado_vehiculo_nombre',
-                            'marcaVehiculo.marca_vehiculoco_nombre',
-                            'gamaVehiculo.gama_vehiculo_nombre',
-                            'placas',
-                            
-                            
-        
-
-                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}',
-                                 'urlCreator' => function ($action, $model, $key, $index) {
-                                        if ($action === 'delete') {
-                                            return Url::to(['vehiculo-delete','vehiculo_id'=>$key]);
-                                        }
-                                    }
-                            ],
-                        ],
-                    ]); ?>
-                    
-    
-                </div>
-        </div>
-
-
-    <?php $this->endBlock() ?>
-
-
-    <?php $this->beginBlock('Seguimientos'); ?>
-        <p class='pull-right'>
-            
-            <?= \yii\helpers\Html::a(
-                    '<span class="glyphicon glyphicon-plus"></span> Agregar Seguimiento',
-                    ['agregar-seguimiento', 'incidente_id'=>$model->incidente_id],
-                    ['class'=>'btn btn-success btn-xs']
-                )
-             ?>
-        </p><div class='clearfix'></div>
-        <div class="panel panel-primary" id='divdenunciante'>
-                <div class="panel-heading">Seguimientos </div>
-                <div class="panel-body">
-
-                        <?= GridView::widget([
-                        'dataProvider' => $dataProviderSeguimiento,
-                        
-                        'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
-
-                            'corporacion.corporacion_nombre',
-                            'descripcion',
-                            
-                            
-        
-
-                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}',
-                                 'urlCreator' => function ($action, $model, $key, $index) {
-                                        if ($action === 'delete') {
-                                            return Url::to(['seguimiento-delete','seguimiento_id'=>$key]);
-                                        }
-                                    }
-                            ],
-                        ],
-                    ]); ?>
-                    
-    
-                </div>
-        </div>
-
-
     <?php $this->endBlock() ?>
 
 
@@ -288,19 +155,10 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                                     'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Vehiculos</small>',
                                     'content' => $this->blocks['Vehiculos'],
                                     'active'  => false,
-                                    ],
-                                    [
-                                    'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Seguimientos</small>',
-                                    'content' => $this->blocks['Seguimientos'],
-                                    'active'  => false,
                                     ], 
                                 ]
                             ]
                         );
     ?>
 </div>
-
-
-    
-
 </div>

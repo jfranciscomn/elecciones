@@ -192,8 +192,7 @@ SCRIPT;
                         <?= $form->field($model, 'lugar_id')->widget(Select2::classname(),[
                                     'options' => ['placeholder' => 'Seleccionar un lugar ...',],
                                     'pluginOptions' => [
-                                        'allowClear' => true,
-                                        
+                                        'allowClear' => true,                                        
                                         'tag'=>true,
                                         'tokenSeparators'=>['?'],
                                         'ajax' => [

@@ -73,7 +73,7 @@ SCRIPT;
 
                     <div class="col-md-6">                        
                         <?= $form->field($model, 'poblacion_id')->widget(Select2::classname(),[
-                                'options' => ['id'=>'poblaciones' ,'placeholder' => 'Seleccionar una poblacion ...',
+                                'options' => ['placeholder' => 'Seleccionar una poblacion ...',
                                               'onchange' => '$.ajax({
                                                                         url: "'.Url::to(['poblacion/datos-poblacion']).'",
                                                                         context: document.body,
@@ -105,7 +105,7 @@ SCRIPT;
                                                                         context: document.body,
                                                                         data: {id: this.value},
                                                                         success: function(data){
-                                                                            $("#poblacion").val(data["poblacion_id"]).trigger("change");
+                                                                            $("#lugar-poblacion_id").val(data["poblacion_id"]).trigger("change");
                                                                         }
                                                                 })',],
                                     'pluginOptions' => [
