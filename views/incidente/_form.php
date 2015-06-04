@@ -215,6 +215,7 @@ SCRIPT;
                                                                         success: function(data){
                                                                             $("#incidente-colonia_id").val(data["colonia_id"]).trigger("change");
                                                                             $("#incidente-distrito_id").val(data["distrito"]).trigger("change");
+                                                                            $("#incidente-direccion").val(data["direccion"]);
 
                                                                         }
                                                                 })',],
