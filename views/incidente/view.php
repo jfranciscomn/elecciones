@@ -140,22 +140,27 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
 
                         <?= GridView::widget([
                         'dataProvider' => $dataProviderPersonas,
-                        
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
-
                             'estadoPersona.estado_persona_nombre',
                             'persona_nombre',
-                            'sexo',
+                            [
+                                'attribute'=>'sexo',
+                                'label'=>'Sexo',
+                                'format'=>'text',//raw, html
+                                'content'=>function($data){
+                                    return ($data->sexo==1 ? 'Masculino':'Femenino');
+                                }
+                            ],
         
 
                             ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}',
                                  'urlCreator' => function ($action, $model, $key, $index) {
                                         if ($action === 'delete') {
-                                            return Url::to(['persona-delete','persona_id'=>$key]);
+                                            return Url::to(['persona-delete','incidente_id'=>$model->incidente_id,'persona_id'=>$key]);
                                         }
                                         if ($action === 'update') {
-                                            return Url::to(['agregar-persona','incidente_id'=>$model->incidente_id,'persona_id'=>$model->persona_id]);
+                                            return Url::to(['agregar-persona','incidente_id'=>$model->incidente_id,'persona_id'=>$model->persona_id,'bandera'=>1]);
                                         }
                                         
                                     }

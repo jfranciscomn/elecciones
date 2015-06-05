@@ -180,8 +180,7 @@ SCRIPT;
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    
+                <div class="form-group">                    
                     <?= Html::submitButton($model->isNewRecord ? 'Agregar' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                 </div>
 
@@ -217,7 +216,7 @@ SCRIPT;
                                             return Url::to(['persona-delete','incidente_id'=>$model->incidente_id,'persona_id'=>$model->persona_id]);
                                         }
                                         if ($action === 'update') {
-                                            return Url::to(['agregar-persona','incidente_id'=>$model->incidente_id,'persona_id'=>$model->persona_id]);
+                                            return Url::to(['agregar-persona','incidente_id'=>$model->incidente_id,'persona_id'=>$model->persona_id,'bandera'=>1]);
                                         }
                                     }
                             ],

@@ -81,6 +81,7 @@ class IncidenteController extends Controller
         $searchModelSeguimiento = new SeguimientoSearch();
         $dataProviderSeguimiento = $searchModelSeguimiento->search(Yii::$app->request->queryParams);
 
+       
         return $this->render('view', [
             'model' => $this->findModel($incidente_id),
             'dataProviderCorporacion'=>$dataProviderCorporacion,
