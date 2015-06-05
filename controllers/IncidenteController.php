@@ -211,6 +211,7 @@ class IncidenteController extends Controller
 
     public function actionAgregarPersona($incidente_id,$persona_id=null)
     {
+
         $model =  new Persona();
         if(isset($persona_id))
             $model = Persona::findOne($persona_id);
@@ -230,6 +231,8 @@ class IncidenteController extends Controller
             $model->incidente_id=$incidente_id;
             $model->save();
             $model = new Persona();
+            $this->redirect(['view', 'incidente_id' => $incidente_id]);
+
         }
 
         return $this->render('addPers', [
@@ -245,12 +248,11 @@ class IncidenteController extends Controller
 
 
 
-    public function actionAgregarVehiculo($incidente_id)
+    public function actionAgregarVehiculo($incidente_id,$vehiculo_id=null)
     {
         $model =  new Vehiculo();
-
-
-        
+        if(isset($vehiculo_id))
+            $model = Vehiculo::findOne($vehiculo_id);
 
         $data =  EstadoVehiculo::find()->all();
         $estados = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'estado_vehiculo_id','estado_vehiculo_nombre'); 
@@ -266,7 +268,10 @@ class IncidenteController extends Controller
             $model->incidente_id=$incidente_id;
             $model->save();
             $model = new Vehiculo();
+            $this->redirect(['view', 'incidente_id' => $incidente_id]);
         }
+
+
 
         return $this->render('addvehi', [
            'model' => $model,

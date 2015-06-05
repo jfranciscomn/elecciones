@@ -120,10 +120,13 @@ SCRIPT;
                             
         
 
-                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}',
+                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}',
                                  'urlCreator' => function ($action, $model, $key, $index) {
                                         if ($action === 'delete') {
                                             return Url::to(['vehiculo-delete','vehiculo_id'=>$model->vehiculo_id]);
+                                        }
+                                        if ($action === 'update') {
+                                            return Url::to(['agregar-vehiculo','incidente_id'=>$model->incidente_id,'vehiculo_id'=>$model->vehiculo_id]);
                                         }
                                     }
                             ],
@@ -134,7 +137,4 @@ SCRIPT;
                 </div>
         </div>
 
-        <?=
-            
-            Html::a('Finalizar',['view','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) 
-        ?>
+        <?=Html::a('Finalizar',['view','incidente_id'=>$incidente_id], ['class' =>'btn btn-success'])?>

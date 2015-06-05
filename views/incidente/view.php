@@ -149,10 +149,13 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                             'sexo',
         
 
-                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{view}{delete}',
+                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}',
                                  'urlCreator' => function ($action, $model, $key, $index) {
                                         if ($action === 'delete') {
                                             return Url::to(['persona-delete','persona_id'=>$key]);
+                                        }
+                                        if ($action === 'update') {
+                                            return Url::to(['agregar-persona','incidente_id'=>$model->incidente_id,'persona_id'=>$model->persona_id]);
                                         }
                                         
                                     }
@@ -194,10 +197,13 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                             
         
 
-                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}',
+                            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}',
                                  'urlCreator' => function ($action, $model, $key, $index) {
                                         if ($action === 'delete') {
                                             return Url::to(['vehiculo-delete','vehiculo_id'=>$key]);
+                                        }
+                                        if ($action === 'update') {
+                                            return Url::to(['agregar-vehiculo','incidente_id'=>$model->incidente_id,'vehiculo_id'=>$model->vehiculo_id]);
                                         }
                                     }
                             ],
