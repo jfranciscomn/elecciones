@@ -210,7 +210,7 @@ class IncidenteController extends Controller
       
     }
 
-    public function actionAgregarPersona($incidente_id,$persona_id=null)
+    public function actionAgregarPersona($incidente_id,$persona_id=null,$bandera=null)
     {
 
         $model =  new Persona();
@@ -231,13 +231,14 @@ class IncidenteController extends Controller
         if ($model->load(Yii::$app->request->post()) ) {
             $model->incidente_id=$incidente_id;
             $model->save();
-            if(isset($persona_id))
+            if(isset($persona_id ))
                 $this->redirect(['view', 'incidente_id' => $incidente_id]);
             $model = new Persona();
         }
   
 
         return $this->render('addPers', [
+            'bandera'=>$bandera,
             'model' => $model,
             'municipios'=>$municipios,
             'estados'=>$estados,
@@ -250,7 +251,7 @@ class IncidenteController extends Controller
 
 
 
-    public function actionAgregarVehiculo($incidente_id,$vehiculo_id=null)
+    public function actionAgregarVehiculo($incidente_id,$vehiculo_id=null,$bandera=null)
     {
         $model =  new Vehiculo();
         if(isset($vehiculo_id))
@@ -269,11 +270,10 @@ class IncidenteController extends Controller
         if ($model->load(Yii::$app->request->post()) ) {
             $model->incidente_id=$incidente_id;
             $model->save();
+            if (isset($vehiculo_id)) 
+                $this->redirect(['view','incidente_id'=> $incidente_id]);
             $model = new Vehiculo();
         }
-
-
-
         return $this->render('addvehi', [
            'model' => $model,
            'estados'=>$estados,

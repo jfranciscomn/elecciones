@@ -40,8 +40,8 @@ class IncidenteHasCorporacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'incidente_id' => 'Incidente ID',
-            'corporacion_id' => 'Corporacion ID',
+            'incidente_id' => 'Incidente',
+            'corporacion_id' => 'Corporacion',
         ];
     }
 

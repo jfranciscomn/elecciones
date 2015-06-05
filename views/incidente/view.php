@@ -128,7 +128,7 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
         
             <?= \yii\helpers\Html::a(
                     '<span class="glyphicon glyphicon-plus"></span> Agregar Persona',
-                    ['agregar-persona', 'incidente_id'=>$model->incidente_id],
+                    ['agregar-persona', 'incidente_id'=>$model->incidente_id,'bandera'=>1],
                     ['class'=>'btn btn-success btn-xs']
                 ) 
             ?>
@@ -174,7 +174,7 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
             
             <?= \yii\helpers\Html::a(
                     '<span class="glyphicon glyphicon-plus"></span> Agregar Vehiculo',
-                    ['agregar-vehiculo', 'incidente_id'=>$model->incidente_id],
+                    ['agregar-vehiculo', 'incidente_id'=>$model->incidente_id,'bandera'=>1],
                     ['class'=>'btn btn-success btn-xs']
                 )
              ?>
