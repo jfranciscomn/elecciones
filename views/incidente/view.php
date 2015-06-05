@@ -147,7 +147,7 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                             [
                                 'attribute'=>'sexo',
                                 'label'=>'Sexo',
-                                'format'=>'text',//raw, html
+                                'format'=>'text',
                                 'content'=>function($data){
                                     return ($data->sexo==1 ? 'Masculino':'Femenino');
                                 }

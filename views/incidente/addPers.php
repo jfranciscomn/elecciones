@@ -207,7 +207,14 @@ SCRIPT;
 
                             'estadoPersona.estado_persona_nombre',
                             'persona_nombre',
-                            'sexo',
+                            [
+                                'attribute'=>'sexo',
+                                'label'=>'Sexo',
+                                'format'=>'text',
+                                'content'=>function($data){
+                                    return ($data->sexo==1 ? 'Masculino':'Femenino');
+                                }
+                            ],
         
 
                             ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}',
