@@ -67,6 +67,7 @@ class EjecutivoController extends \yii\web\Controller
 		return $this->renderAjax("incidente-distrito-modal",[
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'tipo'=>'distrito'
         ]);
 	}
 
@@ -79,9 +80,10 @@ class EjecutivoController extends \yii\web\Controller
 		return $this->renderAjax("incidente-distrito-modal",[
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'tipo'=>'tipo'
         ]);
 	}
-	public function actionDetalleIncidente($incidente_id,$distrito_id=null)
+	public function actionDetalleIncidente($incidente_id,$distrito_id=null,$tipo=null)
 	{
 		$incidente = Incidente::findOne($incidente_id);
 		$distrito = Distrito::findOne($incidente_id);
@@ -105,7 +107,7 @@ class EjecutivoController extends \yii\web\Controller
             'dataProviderVehiculo'=>$dataProviderVehiculo,
             'dataProviderSeguimiento'=>$dataProviderSeguimiento,
 
-            'distrito' => $distrito,
+            'tipo' => $tipo,
         ]);
 	}
 

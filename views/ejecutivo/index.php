@@ -11,6 +11,8 @@
 	<h1>Elecciones 2015</h1>
 </div>
 
+
+
  			<div class="container-fluid">
                 <div class="row">
                     <div class="col-md-5">
@@ -35,7 +37,7 @@
 						                				$.ajax({
                                                                 url: "'.Url::to(['ejecutivo/incidente-distrito-modal']).'",
                                                                 
-                                                                data: {nombre_distrito: e.point.name},
+                                                                data: {nombre_distrito: e.point.name,tipo:"distrito"},
                                                                 success: function(data){
                                                                   $("#distrito_contenido").html(data);
                                                                 }
@@ -71,7 +73,7 @@
 						                				$.ajax({
                                                                 url: "'.Url::to(['ejecutivo/incidente-tipo-modal']).'",
                                                                 
-                                                                data: {subclase_nombre: e.point.name},
+                                                                data: {subclase_nombre: e.point.name,tipo:"tipo"},
                                                                 success: function(data){
                                                                   $("#distrito_contenido").html(data);
                                                                 }
@@ -104,3 +106,14 @@ echo '<div id="distrito_contenido"></div>';
 Modal::end();
 
 ?>
+
+
+
+<div class="row" style='text-align:center;' >
+  <div class="col-xs-12">
+    	<h3> Mapa de Distritos Electorales </h3>
+    	<br/>
+      <img src="http://10.10.1.182/elecciones/img/mapa.jpg" alt="Mapa">
+    
+  </div>
+</div>

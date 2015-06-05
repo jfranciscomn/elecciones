@@ -220,27 +220,53 @@ use yii\widgets\Pjax;
                         );
     ?>
 <?php
-  echo Html::a('Regresar','#', [
+    if($tipo=="distrito")
+    {
+        echo Html::a('Regresar','#', [
             'class'=>'btn btn-primary', 
             'onclick'=>"regresardistrito($model->incidente_id,'{$model->distrito->distrito_nombre}')"
             ]); 
 
-$this->registerJs('
-    function regresardistrito(incidente_id,distrito_nombre){
-        $("#distrito_label").html(distrito_nombre);
-        $.ajax({
-            url: "'.Url::to(['ejecutivo/incidente-distrito-modal']).'",
-            
-            data: {nombre_distrito:distrito_nombre},
-            success: function(data){
 
-                 
-                  $("#distrito_contenido").html(data);
-                }
-        });
+        $this->registerJs('
+            function regresardistrito(incidente_id,distrito_nombre){
+                $("#distrito_label").html(distrito_nombre);
+                $.ajax({
+                    url: "'.Url::to(['ejecutivo/incidente-distrito-modal']).'",
+                    
+                    data: {nombre_distrito:distrito_nombre},
+                    success: function(data){
+
+                         
+                          $("#distrito_contenido").html(data);
+                        }
+                });
+            }'); 
+    } 
+    else if($tipo=="tipo")
+    {
+        echo Html::a('Regresar','#', [
+            'class'=>'btn btn-primary', 
+            'onclick'=>"regresardistrito($model->incidente_id,'{$model->subclaseIncidente->subclase_incidente_nombre}')"
+            ]); 
+
+
+        $this->registerJs('
+            function regresardistrito(incidente_id,subclase_nombre){
+                $("#distrito_label").html(subclase_nombre);
+                $.ajax({
+                    url: "'.Url::to(['ejecutivo/incidente-tipo-modal']).'",
+                    
+                    data: {subclase_nombre:subclase_nombre},
+                    success: function(data){
+
+                         
+                          $("#distrito_contenido").html(data);
+                        }
+                });
+            }'); 
+
     }
-
-    ');  
 ?>
 </div>
 

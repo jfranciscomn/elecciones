@@ -77,7 +77,9 @@ $this->params['breadcrumbs'][] = $this->title;
 				</div>
 		</div>
 
-		<?=
-			
-			Html::a('Siguiente',['agregar-persona','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) 
+		<?php
+			if(isset($bandera))
+				echo Html::a('Finalizar',['view','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) ;
+			else
+				echo Html::a('Siguiente',['agregar-persona','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) ;
 		?>

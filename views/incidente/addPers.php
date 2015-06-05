@@ -228,7 +228,8 @@ SCRIPT;
                 </div>
         </div>
 
-        <?=
-            
-            Html::a($model->isNewRecord ?'Siguiente':'Finalizar',$model->isNewRecord ?['agregar-vehiculo','incidente_id'=>$incidente_id]:['view','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) 
+        <?php
+           if($model->isNewRecord)
+            echo Html::a($model->isNewRecord ?'Siguiente':'Finalizar',$model->isNewRecord ?[
+                'agregar-vehiculo','incidente_id'=>$incidente_id]:['view','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) 
         ?>

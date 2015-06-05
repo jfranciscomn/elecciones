@@ -135,7 +135,7 @@ class IncidenteController extends Controller
         }
     }
 
-    public function actionAgregarCorporacion($incidente_id)
+    public function actionAgregarCorporacion($incidente_id,$bandera=null)
     {
         $model =  new IncidenteHasCorporacion();
         $data =  Corporacion::find()->all();
@@ -171,6 +171,7 @@ class IncidenteController extends Controller
            'model' => (new IncidenteHasCorporacion),
            'corporaciones'=> $corporaciones,
            'incidente_id'=> $incidente_id,
+           'bandera'=>$bandera,
                
            'dataProvider' => $dataProvider,
         ]);
@@ -230,6 +231,8 @@ class IncidenteController extends Controller
         if ($model->load(Yii::$app->request->post()) ) {
             $model->incidente_id=$incidente_id;
             $model->save();
+            if(isset($persona_id))
+                $this->redirect(['view', 'incidente_id' => $incidente_id]);
             $model = new Persona();
         }
   
