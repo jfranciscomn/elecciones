@@ -230,5 +230,5 @@ SCRIPT;
 
         <?=
             
-            Html::a('Siguiente',['agregar-vehiculo','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) 
+            Html::a($model->isNewRecord ?'Siguiente':'Finalizar',$model->isNewRecord ?['agregar-vehiculo','incidente_id'=>$incidente_id]:['view','incidente_id'=>$incidente_id], ['class' =>'btn btn-success']) 
         ?>

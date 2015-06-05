@@ -231,19 +231,18 @@ class IncidenteController extends Controller
             $model->incidente_id=$incidente_id;
             $model->save();
             $model = new Persona();
-            $this->redirect(['view', 'incidente_id' => $incidente_id]);
-
         }
+  
 
         return $this->render('addPers', [
-           'model' => $model,
-           'municipios'=>$municipios,
-           'estados'=>$estados,
-           'dataProvider' => $dataProvider,
-           'incidente_id'=> $incidente_id,
+            'model' => $model,
+            'municipios'=>$municipios,
+            'estados'=>$estados,
+            'dataProvider' => $dataProvider,
+               'incidente_id'=> $incidente_id,
 
-        ]);
-      
+            ]);
+             
     }
 
 
@@ -268,7 +267,6 @@ class IncidenteController extends Controller
             $model->incidente_id=$incidente_id;
             $model->save();
             $model = new Vehiculo();
-            $this->redirect(['view', 'incidente_id' => $incidente_id]);
         }
 
 
