@@ -28,7 +28,7 @@
         "kartik-v/yii2-icons": "*",
         "kartik-v/yii2-popover-x": "*",
         "miloschuman/yii2-highcharts-widget": "dev-master",
-        "kartik-v/yii2-mpdf": "@dev"
+        "kartik-v/yii2-mpdf": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

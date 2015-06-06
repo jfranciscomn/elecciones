@@ -5,15 +5,31 @@
 	use yii\web\JsExpression;
 	use yii\bootstrap\Modal;
 	use yii\helpers\Url;
+	use yii\widgets\Pjax;
+	use yii\web\View;
 	use yii\helpers\Html;
 	$this->title = 'Incidentes';
 ?>
+
+
+<div class="row"  >
+            <div class="col-xs-12" >
+            	<?php echo Html::img('@web/img/arriba2.png',[
+            		'class'=>"img-responsive center-block" 
+            	]); ?>
+            
+            </div>
+            </div>
+<br/>
+<br/>
 <div style='text-align:center'>
-	<h1>Elecciones 2015</h1>
+
+	
 	<?= Html::a('Listado',['lista']); ?>
 </div>
 
 
+<?php Pjax::begin(['id' => 'countries']) ?>
 
  			<div class="container-fluid">
                 <div class="row">
@@ -21,7 +37,9 @@
                     	<?=
 						   Highcharts::widget([
 						    'options' => [
+						    	'credits'=>['enabled'=>false],
 						        'title' => ['text' => 'Incidencia por Distrito'],
+
 						        'plotOptions' => [
 						            'pie' => [
 						                'cursor' => 'pointer',
@@ -60,6 +78,7 @@
                     	<?=
 						   Highcharts::widget([
 						    'options' => [
+						    	'credits'=>['enabled'=>false],
 						        'title' => ['text' => 'Incidencia por Catalogo'],
 						        'plotOptions' => [
 						            'pie' => [
@@ -97,11 +116,12 @@
 					
 				</div>
 
-<div class="row" style='text-align:center;' >
-  <div class="col-md-6">
+				<div class="row" style='text-align:center;' >
+  					<div class="col-md-6">
                     	<?=
 						   Highcharts::widget([
 						    'options' => [
+						    	'credits'=>['enabled'=>false],
 						        'title' => ['text' => 'Incidencia por Estatus'],
 						        'plotOptions' => [
 						            'pie' => [
@@ -138,14 +158,29 @@
 						    ],
 						]); ?>
 					</div>
-  <div class="col-xs-6">
-    	<h3> Mapa de Distritos Electorales </h3>
-    	<br/>
-      <img src="http://10.10.1.182/elecciones/img/mapa.jpg" alt="Mapa">
-    
-  </div>
-</div>
+					<div class="col-xs-6">
+				    	<h3> Mapa de Distritos Electorales </h3>
+				    	<br/>
+				      <?php echo Html::img('@web/img/mapa.jpg',[
+				                    'class'=>"img-responsive center-block" 
+				                ]); ?>
+				    
+				  </div>
+					</div>
 			</div>
+  
+
+<?php    Pjax::end() ; 
+ $this->registerJs('
+    setInterval(function(){$.pjax.reload({container:"#countries"});}, 60000);
+   
+
+    ', View::POS_END);
+
+?>
+
+
+  
 
 
 
@@ -164,5 +199,4 @@ echo '<div id="distrito_contenido"></div>';
 Modal::end();
 
 ?>
-
 

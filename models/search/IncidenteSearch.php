@@ -28,7 +28,7 @@ class IncidenteSearch extends Incidente
     public function rules()
     {
         return [
-            [['incidente_id', 'colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id'], 'integer'],
+            [['incidente_id', 'colonia_id', 'poblacion_id', 'sindicatura_id', 'municipio_id', 'operativo_id', 'subclase2_incidente_id', 'subclase_incidente_id', 'clase_incidente_id', 'usuario_id','distrito_id'], 'integer'],
             [['fecha'], 'safe'],
             [['municipioName'],'safe'],
             [['sindicaturaName'],'safe'],
@@ -70,6 +70,7 @@ class IncidenteSearch extends Incidente
                 'attributes'=>[
                     'incidente_id', 
                     'fecha',
+                    'distrito_id',
                     'municipioName'=>[
                         'asc'=>['municipio.municipio_nombre'=>SORT_ASC],
                         'desc'=>['municipio.municipio_nombre'=>SORT_DESC],

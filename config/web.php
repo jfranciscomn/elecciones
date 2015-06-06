@@ -13,11 +13,12 @@ $config = [
             // enter optional module parameters below - only if you need to  
             // use your own export download action or custom translation 
             // message source
-            'downloadAction' => 'gridview/export/download',
+            //'downloadAction' => 'gridview/export/download',
             // 'i18n' => []
         ]
     ],
     'components' => [
+        
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
     

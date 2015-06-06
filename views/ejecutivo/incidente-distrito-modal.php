@@ -1,7 +1,7 @@
 <?php 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use kartik\popover\PopoverX;
 use yii\web\JsExpression;
 
@@ -11,6 +11,8 @@ use yii\web\JsExpression;
 echo GridView::widget([
         'dataProvider' => $dataProvider,        
         //'filterModel' => $searchModel,
+        'export'=>false,                                                                  
+        'responsive'=>true,
                                                                          
         'columns' => [     
             'fecha',  

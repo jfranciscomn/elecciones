@@ -2,9 +2,10 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\web\View;
+use yii\widgets\Pjax;
 
 /**
 * @var yii\web\View $this
@@ -14,25 +15,40 @@ use yii\web\View;
 
 $this->title = 'Incidentes';
 ?>
+<div class="row"  >
+            <div class="col-xs-12" >
+                <?php echo Html::img('@web/img/arriba.png',[
+                    'class'=>"img-responsive center-block" 
+                ]); ?>
+            
+            </div>
+            </div>
+<br/>
+<br/>
 <div style='text-align:center'>
-    <h1>Elecciones 2015</h1>
+
     <?= Html::a('ir a Graficas',['index']); ?>
 </div>
 
 <div class="incidente-index">
     <?php //     echo $this->render('_search', ['model' =>$searchModel]);?>
+
+<?php Pjax::begin(['id' => 'countries']) ?>
     
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,        
-        'filterModel' => $searchModel,                                                                     
+        'filterModel' => $searchModel,   
+        'export'=>false,                                                                  
+        'responsive'=>true,
         'columns' => [     
             ['class' => 'yii\grid\SerialColumn'],   
 
             'fecha',
-            'coloniaName',
-            'poblacionName',
-            
             'municipioName',
+            'poblacionName',
+            'distrito_id',
+            
+            
             'lugarName',
             'claseName',
             'subclaseName',
@@ -48,8 +64,10 @@ $this->title = 'Incidentes';
             ],
         ],
     ]);
+    Pjax::end() ;
 
     $this->registerJs('
+    setInterval(function(){$.pjax.reload({container:"#countries"});}, 10000);
     function clickDetalle(incidente_id){
         var tipo ="";
 

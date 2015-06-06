@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 /**
@@ -81,7 +81,8 @@ use yii\widgets\Pjax;
 
                         <?= GridView::widget([
                         'dataProvider' => $dataProviderCorporacion,
-                        
+                        'export'=>false,                                                                  
+                       'responsive'=>true,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
@@ -108,6 +109,9 @@ use yii\widgets\Pjax;
 
                         <?= GridView::widget([
                         'dataProvider' => $dataProviderPersonas,
+                        'export'=>false,                                                                  
+                       'responsive'=>true,
+                                         
                         
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
@@ -136,7 +140,8 @@ use yii\widgets\Pjax;
 
                         <?= GridView::widget([
                         'dataProvider' => $dataProviderVehiculo,
-                        
+                        'export'=>false,                                                                  
+                       'responsive'=>true,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
@@ -167,7 +172,8 @@ use yii\widgets\Pjax;
 
                         <?= GridView::widget([
                         'dataProvider' => $dataProviderSeguimiento,
-                        
+                        'export'=>false,                                                                  
+                       'responsive'=>true,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
