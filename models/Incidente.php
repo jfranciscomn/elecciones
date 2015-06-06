@@ -57,7 +57,7 @@ class Incidente extends \yii\db\ActiveRecord
             'clase_incidente_id', 'usuario_id','subclase_incidente_id', 
             'lugar_id','direccion', 'descripcion','distrito_id'], 'required'],
             [['fecha'], 'safe'],
-            [['direccion', 'descripcion'], 'string']
+            [['direccion', 'descripcion','incidente_estado'], 'string']
         ];
     }
 
@@ -91,6 +91,7 @@ class Incidente extends \yii\db\ActiveRecord
             'subclaseName'=> 'Detalle Incidente',
             'subclase2Name'=> 'Detalle 2 Incidente',
             'usuarioName'=> 'Usuario',
+            'incidente_estado'=> 'Estatus del Inidente',
 
         ];
     }

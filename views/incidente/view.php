@@ -58,6 +58,7 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                 'direccion:ntext',
                 
                 'descripcion:ntext',
+                'incidente_estado'
             ],
         ]);
         ?>
@@ -244,6 +245,7 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                             ['class' => 'yii\grid\SerialColumn'],
 
                             'corporacion.corporacion_nombre',
+                            'unidad',
                             'descripcion',
                             
                             

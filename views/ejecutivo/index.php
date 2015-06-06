@@ -37,7 +37,7 @@
 						                				$.ajax({
                                                                 url: "'.Url::to(['ejecutivo/incidente-distrito-modal']).'",
                                                                 
-                                                                data: {nombre_distrito: e.point.name,tipo:"distrito"},
+                                                                data: {nombre_distrito: e.point.name,tipo:"distrito",incidente_estado:"POSITIVO"},
                                                                 success: function(data){
                                                                   $("#distrito_contenido").html(data);
                                                                 }
@@ -73,7 +73,7 @@
 						                				$.ajax({
                                                                 url: "'.Url::to(['ejecutivo/incidente-tipo-modal']).'",
                                                                 
-                                                                data: {subclase_nombre: e.point.name,tipo:"tipo"},
+                                                                data: {subclase_nombre: e.point.name,tipo:"tipo",incidente_estado:"POSITIVO"},
                                                                 success: function(data){
                                                                   $("#distrito_contenido").html(data);
                                                                 }
@@ -86,7 +86,52 @@
 						    ],
 						]); ?>
 					</div>
+					
 				</div>
+
+<div class="row" style='text-align:center;' >
+  <div class="col-md-6">
+                    	<?=
+						   Highcharts::widget([
+						    'options' => [
+						        'title' => ['text' => 'Incidencia por Estatus'],
+						        'plotOptions' => [
+						            'pie' => [
+						                'cursor' => 'pointer',
+						            ],
+						        ],
+						        'series' => [
+						            [ // new opening bracket
+						                'type' => 'pie',
+						                'name' => 'Incidentes',
+						                'data' => $estados,
+						                'events'=> [
+						                		'click'=>new JsExpression(' function(e)  {
+						                				$("#distrito_label").html(e.point.name);
+						                				$("#distrito_modal").modal("show");
+						                				$.ajax({
+                                                                url: "'.Url::to(['ejecutivo/incidente-estado-modal']).'",
+                                                                
+                                                                data: {incidente_estado: e.point.name},
+                                                                success: function(data){
+                                                                  $("#distrito_contenido").html(data);
+                                                                }
+                                                            });
+
+						                			}')
+						                	]
+						            ] // new closing bracket
+						        ],
+						    ],
+						]); ?>
+					</div>
+  <div class="col-xs-6">
+    	<h3> Mapa de Distritos Electorales </h3>
+    	<br/>
+      <img src="http://10.10.1.182/elecciones/img/mapa.jpg" alt="Mapa">
+    
+  </div>
+</div>
 			</div>
 
 
@@ -108,12 +153,3 @@ Modal::end();
 ?>
 
 
-
-<div class="row" style='text-align:center;' >
-  <div class="col-xs-12">
-    	<h3> Mapa de Distritos Electorales </h3>
-    	<br/>
-      <img src="http://10.10.1.182/elecciones/img/mapa.jpg" alt="Mapa">
-    
-  </div>
-</div>

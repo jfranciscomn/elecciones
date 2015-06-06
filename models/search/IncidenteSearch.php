@@ -140,6 +140,7 @@ class IncidenteSearch extends Incidente
             'incidente.fecha' => $this->fecha,
             'incidente.usuario_id' => $this->usuario_id,            
             'incidente.lugar_id' => $this->lugar_id,
+            'incidente.incidente_estado' => $this->incidente_estado,
 
         ]);
 

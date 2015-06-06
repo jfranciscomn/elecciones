@@ -33,8 +33,8 @@ class Seguimiento extends \yii\db\ActiveRecord
     {
         return [
             [['fecha'], 'safe'],
-            [['descripcion', 'corporacion_id', 'incidente_id'], 'required'],
-            [['descripcion'], 'string'],
+            [['descripcion', 'corporacion_id', 'incidente_id','unidad'], 'required'],
+            [['descripcion','unidad'], 'string'],
             [['corporacion_id', 'incidente_id'], 'integer']
         ];
     }
@@ -45,11 +45,12 @@ class Seguimiento extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'seguimiento_id' => 'Seguimiento ID',
+            'seguimiento_id' => 'Seguimiento',
             'fecha' => 'Fecha',
             'descripcion' => 'Descripcion',
-            'corporacion_id' => 'Corporacion ID',
-            'incidente_id' => 'Incidente ID',
+            'corporacion_id' => 'Corporacion',
+            'incidente_id' => 'Incidente',
+            'unidad' => 'Unidad',
         ];
     }
 

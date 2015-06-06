@@ -181,6 +181,9 @@ class IncidenteController extends Controller
     public function actionAgregarSeguimiento($incidente_id)
     {
         $model =  new Seguimiento();
+        $incidente = $this->findModel($incidente_id);
+
+
 
         $data =  Corporacion::find()->all();
         $corporaciones = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'corporacion_id','corporacion_nombre');
@@ -188,8 +191,11 @@ class IncidenteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) ) {
             $model->incidente_id=$incidente_id;
+           
             if($model->save())
             {
+                 $incidente->incidente_estado=Yii::$app->request->post()['Incidente']['incidente_estado'];
+                $incidente->save();
                 $modela = IncidenteHasCorporacion::find()->where(['incidente_id'=>$model->incidente_id,'corporacion_id'=>$model->corporacion_id])->one(); 
                 if(empty($modela))
                 {
@@ -197,16 +203,20 @@ class IncidenteController extends Controller
                     $modela->incidente_id=$model->incidente_id;
                     $modela->corporacion_id=$model->corporacion_id;
                     $modela->save();
+                    
                 }
                 
-                return $this->redirect(['agregar-persona', 'incidente_id' => $model->incidente_id]);
+                
+                return $this->redirect(['view', 'incidente_id' => $model->incidente_id]);
             }
 
         }
         return $this->render('addSeg', [
            'model' => $model,
+           
            'corporaciones'=> $corporaciones,
            'incidente_id'=> $incidente_id,
+           'incidente'=>$incidente
         ]);
       
     }

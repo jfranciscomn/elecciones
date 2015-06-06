@@ -39,11 +39,21 @@ $this->params['breadcrumbs'][] = $this->title;
 	                        ]) ?>
 	                    </div>
 	                    <div class="col-md-6">
+		                    <?= $form->field($model, 'unidad') ?>
+		                </div>
+	                </div>
+
+	                <div class="row">
+	                	<div class="col-md-6">
+		                    <?= $form->field($incidente, 'incidente_estado')->dropDownList(['SIN CONFIRMAR'=>'SIN CONFIRMAR','POSITIVO'=>'POSITIVO','NEGATIVO'=>'NEGATIVO'])
+		                    ?>
+		                </div>
+	                	<div class="col-md-6">
 		                    <?= $form->field($model, 'descripcion')->textArea() ?>
 		                </div>
 	                </div>
 	                <div class="form-group">
-			        	<?= Html::submitButton('Siguiente', ['class' =>  'btn btn-success']) ?>
+			        	<?= Html::submitButton('Finalizar', ['class' =>  'btn btn-success']) ?>
 			    	</div>
 	            </div>
 	            

@@ -171,6 +171,7 @@ use yii\widgets\Pjax;
                             ['class' => 'yii\grid\SerialColumn'],
 
                             'corporacion.corporacion_nombre',
+                            'unidad',
                             'descripcion',
                             
                             
