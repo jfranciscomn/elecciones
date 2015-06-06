@@ -79,7 +79,8 @@ class EjecutivoController extends \yii\web\Controller
 		return $this->renderAjax("incidente-distrito-modal",[
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'tipo'=>'distrito'
+            'tipo'=>'distrito',
+            'incidente_estado'=>$incidente_estado
         ]);
 	}
 
@@ -92,7 +93,8 @@ class EjecutivoController extends \yii\web\Controller
 		return $this->renderAjax("incidente-distrito-modal",[
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'tipo'=>'tipo'
+            'tipo'=>'tipo',
+            'incidente_estado'=>$incidente_estado
         ]);
 	}
 
@@ -104,10 +106,11 @@ class EjecutivoController extends \yii\web\Controller
         return $this->renderAjax("incidente-distrito-modal",[
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'tipo'=>'estado'
+            'tipo'=>'estado',
+            'incidente_estado'=>$incidente_estado
         ]);
     }
-	public function actionDetalleIncidente($incidente_id,$distrito_id=null,$tipo=null)
+	public function actionDetalleIncidente($incidente_id,$distrito_id=null,$tipo=null,$incidente_estado=null)
 	{
 		$incidente = Incidente::findOne($incidente_id);
 		$distrito = Distrito::findOne($incidente_id);
@@ -132,8 +135,21 @@ class EjecutivoController extends \yii\web\Controller
             'dataProviderSeguimiento'=>$dataProviderSeguimiento,
 
             'tipo' => $tipo,
+            'incidente_estado'=>$incidente_estado
         ]);
 	}
+
+
+    public function actionLista()
+    {
+        $searchModel = new IncidenteSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('lista', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
 }
 

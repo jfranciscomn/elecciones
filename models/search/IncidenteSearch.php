@@ -66,6 +66,7 @@ class IncidenteSearch extends Incidente
             'query' => $query,
         ]);
         $dataProvider->setSort([
+               'defaultOrder' => ['fecha'=>SORT_DESC],
                 'attributes'=>[
                     'incidente_id', 
                     'fecha',

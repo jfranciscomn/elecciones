@@ -57,6 +57,7 @@ use yii\widgets\Pjax;
                 'direccion:ntext',
                 //'lugar_id',
                 'descripcion:ntext',
+                'incidente_estado'
             ],
         ]);
         ?>
@@ -232,10 +233,11 @@ use yii\widgets\Pjax;
         $this->registerJs('
             function regresardistrito(incidente_id,distrito_nombre){
                 $("#distrito_label").html(distrito_nombre);
+                $("#distrito_contenido").html(\'<div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div>\');
                 $.ajax({
                     url: "'.Url::to(['ejecutivo/incidente-distrito-modal']).'",
                     
-                    data: {nombre_distrito:distrito_nombre},
+                    data: {nombre_distrito:distrito_nombre, incidente_estado:"'.$incidente_estado.'"},
                     success: function(data){
 
                          
@@ -255,10 +257,37 @@ use yii\widgets\Pjax;
         $this->registerJs('
             function regresardistrito(incidente_id,subclase_nombre){
                 $("#distrito_label").html(subclase_nombre);
+                $("#distrito_contenido").html(\'<div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div>\');
                 $.ajax({
                     url: "'.Url::to(['ejecutivo/incidente-tipo-modal']).'",
                     
-                    data: {subclase_nombre:subclase_nombre},
+                    data: {subclase_nombre:subclase_nombre, incidente_estado:"'.$incidente_estado.'"},
+                    success: function(data){
+
+                         
+                          $("#distrito_contenido").html(data);
+                        }
+                });
+            }'); 
+
+    }
+    else if($tipo=="estado")
+    {
+        echo Html::a('Regresar','#', [
+            'class'=>'btn btn-primary', 
+            'onclick'=>"regresardistrito('$incidente_estado')"
+            ]); 
+
+
+        $this->registerJs('
+            function regresardistrito(incidente_estado){
+                $("#distrito_label").html(incidente_estado);
+                $("#distrito_contenido").html(\'<div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div>\');
+                                                        
+                $.ajax({
+                    url: "'.Url::to(['ejecutivo/incidente-estado-modal']).'",
+                    
+                    data: {incidente_estado:incidente_estado},
                     success: function(data){
 
                          

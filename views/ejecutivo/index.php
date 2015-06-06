@@ -5,10 +5,12 @@
 	use yii\web\JsExpression;
 	use yii\bootstrap\Modal;
 	use yii\helpers\Url;
-
+	use yii\helpers\Html;
+	$this->title = 'Incidentes';
 ?>
 <div style='text-align:center'>
 	<h1>Elecciones 2015</h1>
+	<?= Html::a('Listado',['lista']); ?>
 </div>
 
 
@@ -32,8 +34,11 @@
 						                'data' => $distritos,
 						                'events'=> [
 						                		'click'=>new JsExpression(' function(e)  {
-						                				$("#distrito_label").html(e.point.name);
 						                				$("#distrito_modal").modal("show");
+						                				$("#distrito_label").html("Cargando");
+        												$("#distrito_contenido").html(\'<div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div>\');
+						                				$("#distrito_label").html(e.point.name);
+						                				
 						                				$.ajax({
                                                                 url: "'.Url::to(['ejecutivo/incidente-distrito-modal']).'",
                                                                 
@@ -68,8 +73,11 @@
 						                'data' => $tipos,
 						                'events'=> [
 						                		'click'=>new JsExpression(' function(e)  {
-						                				$("#distrito_label").html(e.point.name);
 						                				$("#distrito_modal").modal("show");
+						                				$("#distrito_label").html("Cargando");
+        												$("#distrito_contenido").html(\'<div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div>\');
+						                				$("#distrito_label").html(e.point.name);
+						                				
 						                				$.ajax({
                                                                 url: "'.Url::to(['ejecutivo/incidente-tipo-modal']).'",
                                                                 
@@ -107,8 +115,13 @@
 						                'data' => $estados,
 						                'events'=> [
 						                		'click'=>new JsExpression(' function(e)  {
-						                				$("#distrito_label").html(e.point.name);
+						                				
+						                				
+
 						                				$("#distrito_modal").modal("show");
+						                				$("#distrito_label").html("Cargando");
+        												$("#distrito_contenido").html(\'<div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div>\');
+						                				$("#distrito_label").html(e.point.name);
 						                				$.ajax({
                                                                 url: "'.Url::to(['ejecutivo/incidente-estado-modal']).'",
                                                                 
