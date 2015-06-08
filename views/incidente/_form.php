@@ -213,6 +213,7 @@ SCRIPT;
                                                                         context: document.body,
                                                                         data: {id: this.value},
                                                                         success: function(data){
+                                                                            $("#incidente-poblacion_id").val(data["poblacion_id"]).trigger("change");
                                                                             $("#incidente-colonia_id").val(data["colonia_id"]).trigger("change");
                                                                             $("#incidente-distrito_id").val(data["distrito"]).trigger("change");
                                                                             $("#incidente-direccion").val(data["direccion"]);

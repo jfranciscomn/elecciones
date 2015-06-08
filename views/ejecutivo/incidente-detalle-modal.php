@@ -46,7 +46,8 @@ use yii\widgets\Pjax;
                 
                 
                 'lugarName',
-                'lugar.distrito',
+                //'lugar.distrito',
+                'distrito_id',
                 
                 
                 //'subclase2Incidente.subclase2_incidente_nombre',

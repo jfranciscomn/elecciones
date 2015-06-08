@@ -43,6 +43,11 @@
 						        'plotOptions' => [
 						            'pie' => [
 						                'cursor' => 'pointer',
+						                'dataLabels'=> [
+						                    'enabled'=> true,
+						                    'format'=> '<b>{point.name}</b><br/> Procentaje: {point.percentage:.1f} % <br/> Incidentes: {point.y}',
+						                    
+						                ]
 						            ],
 						        ],
 						        'series' => [
@@ -83,6 +88,11 @@
 						        'plotOptions' => [
 						            'pie' => [
 						                'cursor' => 'pointer',
+						                'dataLabels'=> [
+						                    'enabled'=> true,
+						                    'format'=> '<b>{point.name}</b><br/> Procentaje: {point.percentage:.1f} % <br/> Incidentes: {point.y}',
+						                    
+						                ]
 						            ],
 						        ],
 						        'series' => [
@@ -126,6 +136,11 @@
 						        'plotOptions' => [
 						            'pie' => [
 						                'cursor' => 'pointer',
+						                'dataLabels'=> [
+						                    'enabled'=> true,
+						                    'format'=> '<b>{point.name}</b><br/> Procentaje: {point.percentage:.1f} % <br/> Incidentes: {point.y}',
+						                    
+						                ]
 						            ],
 						        ],
 						        'series' => [

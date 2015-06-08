@@ -51,7 +51,8 @@ $this->params['breadcrumbs'][] = 'Detalle Incidente';
                 
                 
                 'lugarName',
-                'lugar.distrito',
+                'distrito_id',
+                //'lugar.distrito',
                 
                 
          
